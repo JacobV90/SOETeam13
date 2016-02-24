@@ -5,33 +5,14 @@
     Created on : Feb 23, 2016, 11:20:53 PM
     Author     : jvtal
 --%>
-<sql:query var="result" dataSource="softwareproject">
-    SELECT Email FROM user
-</sql:query>
-    
-<table border="1">
-    <!-- column headers -->
-    <tr>
-    <c:forEach var="columnName" items="${result.columnNames}">
-        <th><c:out value="${columnName}"/></th>
-    </c:forEach>
-</tr>
-<!-- column data -->
-<c:forEach var="row" items="${result.rowsByIndex}">
-    <tr>
-    <c:forEach var="column" items="${row}">
-        <td><c:out value="${column}"/></td>
-    </c:forEach>
-    </tr>
-</c:forEach>
-</table>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Form</title>   
-        <link rel="stylesheet" href="css/style1.css">
+        <link rel="stylesheet" href="css/index_style.css">
     </head>
     
     <body>
@@ -52,7 +33,7 @@
                     </div>
                     <a class="btn btn-primary btn-large btn-block" href="#">login</a>
                     <a class="login-link" href="resetpasswd.html">Forget your password?</a>
-                    <a class="registration-link" href = "signup.html"> Sign up here</a>
+                    <a class="registration-link" href = "signup.jsp"> Sign up here</a>
                 </div>
             </div>
         </div>
