@@ -5,9 +5,14 @@
     Author     : jacobveal
 --%>
 
+<%@page import="source.Users" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE html>
-<html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
 <head>
 <title>Registration Form</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
@@ -19,12 +24,14 @@
 </head>
 <body>
       <div  class="form">
-    		<form id="contactform"> 
+    		<form id="contactform" actionListener = "Users.actionListener">
+                    
     			<p class="contact"><label for="firstname">First Name</label></p> 
     			<input id="firstname" name="firstname" placeholder="First name" required="required" tabindex="1" type="text"> 
-
+                         
+                         
     			<p class="contact"><label for="lastname">Last Name</label></p> 
-    			<input id="firstname" name="firstname" placeholder="last name" required="required" tabindex="1" type="text"> 
+    			<input id="lastName" name="lastName" placeholder="last name" required="required" tabindex="1" type="text"> 
     			 
     			<p class="contact"><label for="email">Email</label></p> 
     			<input id="email" name="email" placeholder="example@domain.com" required="required" type="email"> 
@@ -70,11 +77,31 @@
             <p class="pin"><label for="pin">Pin Code</label></p> 
             <input id="pin" name="pin" placeholder="pin code" required="" type="text"> <br>
             <input class="button" name="submit" id="submit" tabindex="5" value="Sign me up!" type="submit"> 
-            <%!
-                Users user = new Users("email");
-             
+            
+           
+            
+           <%
+          
+                String firstName = request.getParameter("firstname");
+                String lastName = request.getParameter("lastname");
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                String repassword = request.getParameter("repassword");
+                String birthMonth = request.getParameter("BirthMonth");
+                String birthDay = request.getParameter("BirthDay");
+                String birthYear = request.getParameter("BirthYear");
+                String gender = request.getParameter("gender");
+                String phoneNumber = request.getParameter("phone");
+                String pinCode = request.getParameter("pinCode");
                 
-             %>
+                Users user = new Users(email,password, firstName, lastName, 
+                    birthMonth, birthDay, birthYear, gender, phoneNumber,
+                    pinCode);
+                
+                user.printUserAccountInfo();
+                             
+            %>
+            
    </form> 
   </div>       
 
