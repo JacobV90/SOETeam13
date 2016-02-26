@@ -1,11 +1,5 @@
 package source;
 
-import java.io.Serializable;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.ActionEvent;
-import javax.faces.event.ActionListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,9 +11,7 @@ import javax.faces.event.ActionListener;
  *
  * @author jacobveal
  */
-@ManagedBean(name = "userData", eager = true)
-@SessionScoped
-public class Users implements Serializable{
+public class Users{
     
     private String email = null;
     private String password = null;
@@ -34,8 +26,8 @@ public class Users implements Serializable{
     private Boolean verified = false;
    
     
-    public Users(String email, String pw, String fN, String lN, String bM, 
-            String bD, String bY, String pC, String number, String gender){
+    public Users(  String fN, String lN, String email,String pw, String bM, 
+            String bD, String bY , String gender , String number, String pC ){
         this.email = email;
         this.birthDay = bD;
         this.birthMonth = bM;
@@ -46,6 +38,8 @@ public class Users implements Serializable{
         this.pinCode = pC;
         this.phoneNumber = number;
         this.gender = gender;
+        
+        this.validate();
     }
     
     public Users(String email){
@@ -57,19 +51,41 @@ public class Users implements Serializable{
     private void setAccount(){verified = true;}
     
     public void printUserAccountInfo(){
-        System.out.println(this.email + "\n" + this.firstName + "\n" + 
-                this.lastName + "\n" + this.birthMonth + "\n" + this.birthMonth
-                + "\n" + this.birthDay + "\n" +this.birthYear + "\n" + this.pinCode
-                + "\n" + this.phoneNumber + "\n" + this.gender);
+        System.out.println(this.firstName + "\n" + 
+                this.lastName + "\n" + this.email + "\n" +
+                "\n" + this.password + "\n" + this.birthMonth
+                + "\n" + this.birthDay + "\n" +this.birthYear + "\n" + this.gender
+                 + "\n" + this.phoneNumber+ "\n" + this.pinCode );
     }
     
+   private void validate(){
+       
+       this.parseStringForNumbers(this.phoneNumber);
+       this.parseStringForNumbers(this.phoneNumber);
+       this.parseStringForNumbers(this.pinCode);
+       
+       if(verified){
+            System.out.println("passed number validation");
+       }
+       else{
+           System.out.println("failed number validation");
+       }
+   }
 
-    @Override
-    public void processAction(ActionEvent event) throws AbortProcessingException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        System.out.println("Test");
-    
-    }
+   private void encrypPassword(){};
+   
+   private void parseStringForNumbers(String obj){
+       
+       try{
+            double number = Double.parseDouble(obj);
+            verified = true;
+       }catch(NumberFormatException e){
+           System.out.println("Number could not be converted to a double");
+           verified = false;
+       }
+       
+       
+      
+   }
     
 }

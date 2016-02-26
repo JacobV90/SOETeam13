@@ -20,7 +20,7 @@
         <div class="login">
             <div class="login-screen">
                 <div class="app-title">
-                    <h1>Login</h1>
+                    <h1>Just IN Time!</h1>
                 </div>
                 <div class="login-form">
                     <div class="control-group">
