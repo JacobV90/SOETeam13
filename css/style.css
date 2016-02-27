@@ -54,7 +54,7 @@
   transition: 0.25s;
   display: block;
   width: 100px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .btn:hover {
