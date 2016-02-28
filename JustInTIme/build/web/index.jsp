@@ -25,14 +25,14 @@
                 <div class ="login-form">
                     <form id ="login" action="LoginServlet" method="post">
                     <div class="control-group">
-                        <input type="email" class="login-field" value="" placeholder="email" id="login-name">
+                        <input type="email" class="login-field" value="" placeholder="email" id="login-name" name = "Email">
                         <label class="login-field-icon fui-user" for="login-name"></label>
                     </div>
                     <div class="control-group">
-                        <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
+                        <input type="password" class="login-field" value="" placeholder="password" id="login-pass" name = "Password">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
-                    <a class="btn btn-primary btn-large btn-block" >login</a>
+                    <input class="button" name="submit" id="submit" tabindex="5" value="Sign me up!" type="submit"> 
                     <a class="login-link" href="resetpasswd.html">Forget your password?</a>
                     <a class="registration-link" href = "signup.jsp"> Sign up here</a>
                     </form>

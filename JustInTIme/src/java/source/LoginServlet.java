@@ -96,14 +96,25 @@ public class LoginServlet extends HttpServlet {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //Grab email and passwords from database
-            String query = "Select Email, Password FROM user";
+            String query = "Select Email, Password FROM user WHERE Email = '"+email+"'"+
+                      "AND Password = '"+password+"'";
 
             // Execute SQL query
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-
+            
             Boolean found = false;
-            while (rs.next() || !found) {
+            if(rs.first()){
+                found = true;
+                System.out.println("Found user");
+            }
+            else{
+                System.out.println("User not found");
+            }
+            
+
+            
+            /*while (rs.next() || !found) {
                 String em = rs.getString("Email");
                 String pw = rs.getString("Password");
 
@@ -112,7 +123,7 @@ public class LoginServlet extends HttpServlet {
                     System.out.println("\nFound user \n");
                 }
                
-            }
+            }*/
 
             // Clean-up environment
             stmt.close();

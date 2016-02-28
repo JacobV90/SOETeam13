@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>JITServlet</servlet-name>
+        <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>source.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
@@ -9,8 +9,8 @@
         <servlet-class>source.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>JITServlet</servlet-name>
-        <url-pattern>/JITServlet</url-pattern>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet JITServlet</title>");
+            out.println("<title>Servlet + RegisterServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet JITServlet at " + request.getContextPath() + "</h1>");
@@ -150,8 +150,6 @@ public class RegisterServlet extends HttpServlet {
                 // Execute SQL query
                 stmt = conn.prepareStatement(queryScript);
                 
-                //stmt.setString(1, userData.remove(0));
-                
                 //Extract data from result set
                 int i = 1;
                 while(i <= userData.size())
@@ -163,7 +161,7 @@ public class RegisterServlet extends HttpServlet {
                     
                 }
                 //execute query scnript
-                //stmt.executeUpdate();
+                stmt.executeUpdate();
              
                 rs = stmt.executeQuery("SELECT FirstName, LastName,"
                         + "Email, BirthMonth, BirthYear, BirthDay, Code,"
@@ -183,7 +181,8 @@ public class RegisterServlet extends HttpServlet {
                     String gend = rs.getString("Gender");
                     
                     System.out.println("Hello from the data base: \n" + fname
-                            + "\n "+ lname +"\n" + pw + "\n" + birthM + "-"+ birthD + "-"
+                            + "\n "+ lname +"\n" + mail +"\n" +  pw + "\n" 
+                            + birthM + "-"+ birthD + "-"
                             + birthY + "\n" + num + "\n" + code + "\n" + gend);
                     
                 }
