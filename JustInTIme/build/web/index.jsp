@@ -32,7 +32,7 @@
                         <input type="password" class="login-field" value="" placeholder="password" id="login-pass" name = "Password">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
-                    <input class="button" name="submit" id="submit" tabindex="5" value="Sign me up!" type="submit"> 
+                    <input class="button" name="submit" id="submit" tabindex="5" value="Login" type="submit"> 
                     <a class="login-link" href="resetpasswd.html">Forget your password?</a>
                     <a class="registration-link" href = "signup.jsp"> Sign up here</a>
                     </form>

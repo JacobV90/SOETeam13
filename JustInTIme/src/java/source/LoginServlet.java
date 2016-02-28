@@ -107,6 +107,7 @@ public class LoginServlet extends HttpServlet {
             if(rs.first()){
                 found = true;
                 System.out.println("Found user");
+                
             }
             else{
                 System.out.println("User not found");

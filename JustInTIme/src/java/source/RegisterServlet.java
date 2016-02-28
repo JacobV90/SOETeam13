@@ -36,8 +36,8 @@ public class RegisterServlet extends HttpServlet {
     static final String PASS = "Hondas2k";
 
     private ArrayList<String> userData = new ArrayList<String>();
-    private int numOfUsers = 0;
-    
+   
+
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -101,9 +101,6 @@ public class RegisterServlet extends HttpServlet {
         String queryScript = "INSERT INTO user (Email, FirstName, LastName, Password,"
                 + "BirthMonth, BirthDay, BirthYear, Gender, Phone, Code)"
                 + " values (?,?,?,?,?,?,?,?,?,?)";
-        
-        String sqlScript = "INSERT INTO user (Email) Values (?)";
-                
 
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastName");
@@ -117,7 +114,6 @@ public class RegisterServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phone");
         String pinCode = request.getParameter("pin");
 
-     
         userData.add(email);
         userData.add(firstName);
         userData.add(lastName);
@@ -128,7 +124,7 @@ public class RegisterServlet extends HttpServlet {
         userData.add(gender);
         userData.add(phoneNumber);
         userData.add(pinCode);
-        
+
         Users user = new Users(firstName, lastName, email, password,
                 birthMonth, birthDay, birthYear, gender, phoneNumber,
                 pinCode);
@@ -138,8 +134,7 @@ public class RegisterServlet extends HttpServlet {
         if (user.validate()) {
             System.out.println("User account data validated");
             System.out.println("Pushing user to database");
-           
-            
+
             try {
                 // Register JDBC driver
                 Class.forName("com.mysql.jdbc.Driver");
@@ -149,46 +144,18 @@ public class RegisterServlet extends HttpServlet {
 
                 // Execute SQL query
                 stmt = conn.prepareStatement(queryScript);
-                
+
                 //Extract data from result set
                 int i = 1;
-                while(i <= userData.size())
-                {
-                    if(i<11){
-                    stmt.setString(i, userData.get(i-1));
-                    ++i;
+                while (i <= userData.size()) {
+                    if (i < 11) {
+                        stmt.setString(i, userData.get(i - 1));
+                        ++i;
                     }
-                    
-                }
-                //execute query scnript
-                stmt.executeUpdate();
-             
-                rs = stmt.executeQuery("SELECT FirstName, LastName,"
-                        + "Email, BirthMonth, BirthYear, BirthDay, Code,"
-                        + "Phone, Gender, Password FROM user");
-                
-                while(rs.next()){
-                  
-                    String mail = rs.getString("Email");
-                    String pw = rs.getString("Password");
-                    String fname = rs.getString("FirstName");
-                    String lname = rs.getString("LastName");
-                    String birthM = rs.getString("BirthMonth");
-                    String birthD = rs.getString("BirthDay");
-                    String birthY = rs.getString("BirthYear");
-                    String num = rs.getString("Phone");
-                    String code = rs.getString("Code");
-                    String gend = rs.getString("Gender");
-                    
-                    System.out.println("Hello from the data base: \n" + fname
-                            + "\n "+ lname +"\n" + mail +"\n" +  pw + "\n" 
-                            + birthM + "-"+ birthD + "-"
-                            + birthY + "\n" + num + "\n" + code + "\n" + gend);
-                    
+
                 }
 
                 // Clean-up environment
-                
                 stmt.close();
                 conn.close();
             } catch (SQLException se) {
@@ -206,8 +173,13 @@ public class RegisterServlet extends HttpServlet {
                     se.printStackTrace();
                 }//end finally try
             } //end try
-
+            
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() 
+                    + "/signupVerify.jsp") );
+            
+            Email.sendEmail(email);
         }
+        
     }
 
     /**
@@ -219,13 +191,7 @@ public class RegisterServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private class DBConnection {
-
-        public DBConnection() {
-
-        }
-
-    }
+    
+    
 
 }
