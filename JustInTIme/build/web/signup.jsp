@@ -24,7 +24,7 @@
 </head>
 <body>
       <div  class="form">
-    		<form id="contactform" action = "verify.jsp">
+    		<form id="contactform" action = "JITServlet" method = "post">
                     
     			<p class="contact"><label for="firstname">First Name</label></p> 
     			<input id="firstname" name="firstname" placeholder="First name" required="required" tabindex="1" type="text"> 

@@ -1,5 +1,7 @@
 package source;
 
+import java.util.ArrayList;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +14,7 @@ package source;
  * @author jacobveal
  */
 public class Users{
-    
+     
     private String email = null;
     private String password = null;
     private String firstName = null;
@@ -26,8 +28,9 @@ public class Users{
     private Boolean verified = false;
    
     
-    public Users(  String fN, String lN, String email,String pw, String bM, 
+    public Users(String fN, String lN, String email,String pw, String bM, 
             String bD, String bY , String gender , String number, String pC ){
+        
         this.email = email;
         this.birthDay = bD;
         this.birthMonth = bM;
@@ -48,7 +51,7 @@ public class Users{
     
     public String getEmail(){return this.email;}
     
-    private void setAccount(){verified = true;}
+    public String getPassword(){return this.password;}
     
     public void printUserAccountInfo(){
         System.out.println(this.firstName + "\n" + 
@@ -58,7 +61,7 @@ public class Users{
                  + "\n" + this.phoneNumber+ "\n" + this.pinCode );
     }
     
-   private void validate(){
+   public boolean validate(){
        
        this.parseStringForNumbers(this.phoneNumber);
        this.parseStringForNumbers(this.phoneNumber);
@@ -66,9 +69,11 @@ public class Users{
        
        if(verified){
             System.out.println("passed number validation");
+            return true;
        }
        else{
            System.out.println("failed number validation");
+           return false;
        }
    }
 

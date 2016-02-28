@@ -22,7 +22,8 @@
                 <div class="app-title">
                     <h1>Just IN Time!</h1>
                 </div>
-                <div class="login-form">
+                <div class ="login-form">
+                    <form id ="login" action="LoginServlet" method="post">
                     <div class="control-group">
                         <input type="email" class="login-field" value="" placeholder="email" id="login-name">
                         <label class="login-field-icon fui-user" for="login-name"></label>
@@ -31,9 +32,10 @@
                         <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
-                    <a class="btn btn-primary btn-large btn-block" href="#">login</a>
+                    <a class="btn btn-primary btn-large btn-block" >login</a>
                     <a class="login-link" href="resetpasswd.html">Forget your password?</a>
                     <a class="registration-link" href = "signup.jsp"> Sign up here</a>
+                    </form>
                 </div>
             </div>
         </div>
