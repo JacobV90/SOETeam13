@@ -154,6 +154,7 @@ public class RegisterServlet extends HttpServlet {
                     }
 
                 }
+                stmt.executeUpdate();
 
                 // Clean-up environment
                 stmt.close();

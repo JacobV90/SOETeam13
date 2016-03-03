@@ -38,11 +38,14 @@ public class Email {
         String password = "jitjitjit";
         String fromEmail = username + "@gmail.com";
         String toEamil = email;
-        String subject = "Welcome to Just In Time Inventories";
-        String txtMessage = "Thank you for registering with us. Get your products"
-                + "Just IN Time!";
         
-       Session session = Session.getDefaultInstance(props,new Authenticator() 
+        String url = "http://localhost:8080/JustInTIme/";
+        String subject = "Welcome to Just In Time Inventories";
+        String txtMessage = "Thank you for registering with us. Now you can get"
+                + " your products Just IN Time! \n Click link to verify your"
+                + "email address " + url;
+        
+       Session session = Session.getInstance(props,new Authenticator()
             //Session session = Session.getInstance(props, new SendMail(username, password));
        {
             @Override

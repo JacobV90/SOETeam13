@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //Grab email and passwords from database
-            String query = "Select Email, Password FROM user WHERE Email = '"+email+"'"+
+            String query = "Select * FROM user WHERE Email = '"+email+"'"+
                       "AND Password = '"+password+"'";
 
             // Execute SQL query
@@ -107,6 +107,23 @@ public class LoginServlet extends HttpServlet {
             if(rs.first()){
                 found = true;
                 System.out.println("Found user");
+                
+                String firstName = null;
+                String role = null;
+                
+                firstName = rs.getString("FirstName");
+                role = rs.getString("Role");
+                  
+                System.out.println(firstName);
+                System.out.println(role);
+                
+                request.setAttribute("name", firstName);
+                request.setAttribute("role", role);
+                
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() 
+                    + "/homePage.jsp") );
+            
+            
                 
             }
             else{

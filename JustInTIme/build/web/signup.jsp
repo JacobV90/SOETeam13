@@ -37,10 +37,10 @@
     			<input id="email" name="email" placeholder="example@domain.com" required="required" tabindex="1"type="email"> 
                         
                         <p class="contact"><label for="password">Create a password</label></p> 
-    			<input type="password" id="password" name="password" required="" tabindex="1"> 
+    			<input type="password" id="password" name="password" required="required" tabindex="1"> 
                         
                         <p class="contact"><label for="repassword">Confirm your password</label></p> 
-    			<input type="password" id="repassword" name="repassword" required="" tabindex="1" > 
+    			<input type="password" id="repassword" name="repassword" required="required" tabindex="1" > 
         
                <fieldset>
                  <label>Birthday</label>
@@ -74,11 +74,11 @@
             <option value="others">Other</option>
             </select><br><br>
             
-            <p class="contact"><label for="phone">Mobile phone</label></p> 
+            <p class="contact"><label for="phone">Mobile phone </label></p> 
             <input id="phone" name="phone" placeholder="phone number" required="required" 
                    tabindex="1" type="text"> <br>
-            <p class="pin"><label for="pin">Pin Code</label></p> 
-            <input id="pin" name="pin" placeholder="pin code" required="" 
+            <p class="pin"><label for="pin">Pin Code </label></p> 
+            <input id="pin" name="pin" placeholder="pin code" required="required" 
                    tabindex="1"type="text"> <br>
             <input class="button" name="submit" id="submit" tabindex="5" value="Sign me up!" type="submit"> 
             
