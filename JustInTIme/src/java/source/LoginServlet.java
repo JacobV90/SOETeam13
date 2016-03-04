@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
         
         System.out.println("Made it to login Servlet");
 
@@ -120,8 +120,7 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("name", firstName);
                 request.setAttribute("role", role);
                 
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() 
-                    + "/homePage.jsp") );
+                request.getRequestDispatcher("homePage.jsp").forward(request, response);
             
             
                 
