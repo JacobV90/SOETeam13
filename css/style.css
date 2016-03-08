@@ -62,3 +62,7 @@
 }
 
 
+.form label:after {
+    color: #e32;
+    content: ' *';
+}
