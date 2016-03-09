@@ -39,7 +39,7 @@ public class Email {
         String fromEmail = username + "@gmail.com";
         String toEamil = email;
         
-        String url = "http://localhost:8080/JustInTIme/";
+        String url = "http://localhost:8080/JustInTime/EmailVerified/";
         String subject = "Welcome to Just In Time Inventories";
         String txtMessage = "Thank you for registering with us. Now you can get"
                 + " your products Just IN Time! \n Click link to verify your"
@@ -63,6 +63,8 @@ public class Email {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEamil));
             message.setSubject(subject);
             message.setText(txtMessage);
+            
+            
 
             Transport.send(message);
             System.out.println("Email successfully sent");
@@ -76,6 +78,7 @@ public class Email {
             throw new RuntimeException(e);
         }
     }
+        
     
 }
 

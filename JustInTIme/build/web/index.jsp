@@ -3,7 +3,7 @@
 <%-- 
     Document   : login
     Created on : Feb 23, 2016, 11:20:53 PM
-    Author     : jvtal
+    Author     : chicheng
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,7 +32,7 @@
                         <input type="password" class="login-field" value="" placeholder="password" id="login-pass" name = "Password">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
-                    <input class="button" name="submit" id="submit" tabindex="5" value="Login" type="submit"> 
+                    <input class="btn" name="submit" id="submit" tabindex="5" value="Login" type="submit"> 
                     <a class="login-link" href="ForgotPassword.jsp">Forget your password?</a>
                     <a class="registration-link" href = "signup.jsp"> Sign up here</a>
                     </form>

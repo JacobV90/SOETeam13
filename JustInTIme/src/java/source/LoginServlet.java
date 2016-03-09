@@ -81,12 +81,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
         System.out.println("Made it to login Servlet");
 
         String email = request.getParameter("Email");
         String password = request.getParameter("Password");
+        
+        System.out.println(email + " " + password);
 
         try {
             // Register JDBC driver
@@ -96,68 +97,40 @@ public class LoginServlet extends HttpServlet {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //Grab email and passwords from database
-            String query = "Select * FROM user WHERE Email = '"+email+"'"+
-                      "AND Password = '"+password+"'";
+            String query = "Select * FROM user WHERE Email = '" + email + "'"
+                    + "AND Password = '" + password + "'";
 
             // Execute SQL query
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
-            Boolean found = false;
-            if(rs.first()){
-                found = true;
+
+            if (rs.first()) {
+
                 System.out.println("Found user");
-                
-                String firstName = null;
-                String role = null;
-                
-                firstName = rs.getString("FirstName");
-                role = rs.getString("Role");
-                  
-                System.out.println(firstName);
-                System.out.println(role);
-                
+
+                String firstName = rs.getString("FirstName");
+                String role = rs.getString("Role");
+
                 request.setAttribute("name", firstName);
                 request.setAttribute("role", role);
-                
+
                 request.getRequestDispatcher("homePage.jsp").forward(request, response);
-            
-            
-                
-            }
-            else{
+
+            } else {
                 System.out.println("User not found");
             }
-            
-
-            
-            /*while (rs.next() || !found) {
-                String em = rs.getString("Email");
-                String pw = rs.getString("Password");
-
-                if (em.equals(email) && pw.equals(password)) {
-                    found = true;
-                    System.out.println("\nFound user \n");
-                }
-               
-            }*/
 
             // Clean-up environment
             stmt.close();
             connection.close();
         } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
+        } catch (ClassNotFoundException | ServletException | IOException e) {
         } finally {// nothing we can do
             try {
                 if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException se) {
-                se.printStackTrace();
             }//end finally try
         } //end try
     }

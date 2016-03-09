@@ -35,12 +35,15 @@ public class RegisterServlet extends HttpServlet {
     static final String USER = "root";
     static final String PASS = "Hondas2k";
 
-    private ArrayList<String> userData = new ArrayList<String>();
-   
+    private final ArrayList<String> userData;
 
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
+
+    public RegisterServlet() {
+        this.userData = new ArrayList<>();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -94,11 +97,8 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
 
-        System.out.println("Submit Test");
-
-        String queryScript = "INSERT INTO user (Email, FirstName, LastName, Password,"
+        final String queryScript = "INSERT INTO user (Email, FirstName, LastName, Password,"
                 + "BirthMonth, BirthDay, BirthYear, Gender, Phone, Code)"
                 + " values (?,?,?,?,?,?,?,?,?,?)";
 
@@ -106,24 +106,12 @@ public class RegisterServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
         String birthMonth = request.getParameter("BirthMonth");
         String birthDay = request.getParameter("BirthDay");
         String birthYear = request.getParameter("BirthYear");
         String gender = request.getParameter("gender");
         String phoneNumber = request.getParameter("phone");
         String pinCode = request.getParameter("pin");
-
-        userData.add(email);
-        userData.add(firstName);
-        userData.add(lastName);
-        userData.add(password);
-        userData.add(birthMonth);
-        userData.add(birthDay);
-        userData.add(birthYear);
-        userData.add(gender);
-        userData.add(phoneNumber);
-        userData.add(pinCode);
 
         Users user = new Users(firstName, lastName, email, password,
                 birthMonth, birthDay, birthYear, gender, phoneNumber,
@@ -133,6 +121,8 @@ public class RegisterServlet extends HttpServlet {
 
         if (user.validate()) {
             System.out.println("User account data validated");
+            System.out.println("Waiting for email Verifcation....");
+
             System.out.println("Pushing user to database");
 
             try {
@@ -147,40 +137,36 @@ public class RegisterServlet extends HttpServlet {
 
                 //Extract data from result set
                 int i = 1;
-                while (i <= userData.size()) {
-                    if (i < 11) {
-                        stmt.setString(i, userData.get(i - 1));
-                        ++i;
-                    }
+                ArrayList<String> userArray = user.userDataArray();
+                while (i <= userArray.size()) {
 
+                    stmt.setString(i, userArray.get(i - 1));
+                    ++i;
                 }
                 stmt.executeUpdate();
 
                 // Clean-up environment
                 stmt.close();
                 conn.close();
+
             } catch (SQLException se) {
-                //Handle errors for JDBC
-                se.printStackTrace();
-            } catch (Exception e) {
-                //Handle errors for Class.forName
-                e.printStackTrace();
+            } catch (ClassNotFoundException ße) {
             } finally {// nothing we can do
                 try {
                     if (conn != null) {
                         conn.close();
                     }
                 } catch (SQLException se) {
-                    se.printStackTrace();
                 }//end finally try
             } //end try
-            
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() 
-                    + "/signupVerify.jsp") );
-            
+
             Email.sendEmail(email);
+
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()
+                    + "/signupVerify.jsp"));
+
         }
-        
+
     }
 
     /**
@@ -192,7 +178,5 @@ public class RegisterServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
 
 }

@@ -8,6 +8,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>source.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmailVerified</servlet-name>
+        <servlet-class>source.EmailVerified</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -16,10 +20,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailVerified</servlet-name>
+        <url-pattern>/EmailVerified</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
-        </session-timeout>
+                    30
+                </session-timeout>
     </session-config>
     <resource-ref>
         <res-ref-name>softwareproject</res-ref-name>

@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <title>Login Form</title>
         <link rel="stylesheet" href="css/index_style.css">
-        
+
     </head>
 
     <body>
@@ -49,14 +49,7 @@
 
         </div>
 
-    </div>
+    
 </body>
 
-
-
-
-
-
-</body>
-</html>
 
