@@ -1,4 +1,4 @@
-package source;
+package servlet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,6 +7,7 @@ package source;
  */
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,12 +15,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.activation.DataSource;
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import source.Email;
+import source.PasswordStorage;
+import source.Users;
+import source.XMLManager;
 
 /**
  *
@@ -123,7 +130,9 @@ public class RegisterServlet extends HttpServlet {
             System.out.println("User account data validated");
             System.out.println("Waiting for email Verifcation....");
 
-            System.out.println("Pushing user to database");
+            XMLManager.addUser(user.getUserDataArray());
+            
+            System.out.println("Pushing user to database....");
 
             try {
                 // Register JDBC driver
@@ -137,7 +146,7 @@ public class RegisterServlet extends HttpServlet {
 
                 //Extract data from result set
                 int i = 1;
-                ArrayList<String> userArray = user.userDataArray();
+                ArrayList<String> userArray = user.getUserDataArray();
                 while (i <= userArray.size()) {
 
                     stmt.setString(i, userArray.get(i - 1));
@@ -159,8 +168,13 @@ public class RegisterServlet extends HttpServlet {
                 } catch (SQLException se) {
                 }//end finally try
             } //end try
-
-            Email.sendEmail(email);
+            try {
+                Email.sendEmail(email);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PasswordStorage.CannotPerformOperationException ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath()
                     + "/signupVerify.jsp"));

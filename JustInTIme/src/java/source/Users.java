@@ -24,21 +24,21 @@ public class Users {
     private Boolean verified = false;
     private ArrayList<String> userData;
 
-    private final String email;
-    private final String password;
-    private final String firstName;
-    private final String lastName;
-    private final String birthMonth;
-    private final String birthDay;
-    private final String birthYear;
-    private final String pinCode;
-    private final String phoneNumber;
-    private final String gender;
-    private final int minPasswordLength = 6;
-    private final int maxPasswordLength = 16;
-    private final int numUpperCase = 1;
-    private final int numLowerCase = 1;
-    private final int numDigits = 1;
+    private  String email;
+    private  String password;
+    private  String firstName;
+    private  String lastName;
+    private  String birthMonth;
+    private  String birthDay;
+    private  String birthYear;
+    private  String pinCode;
+    private  String phoneNumber;
+    private  String gender;
+    private  int minPasswordLength = 6;
+    private  int maxPasswordLength = 16;
+    private  int numUpperCase = 1;
+    private  int numLowerCase = 1;
+    private  int numDigits = 1;
 
     public Users(String fN, String lN, String email, String pw, String bM,
             String bD, String bY, String gender, String number, String pC) {
@@ -95,7 +95,6 @@ public class Users {
 
         this.parseStringForNumbers(phoneNumber);
         this.parseStringForNumbers(phoneNumber);
-        this.parseStringForNumbers(pinCode);
 
         if (verified) {
             System.out.println("passed number validation");
@@ -108,7 +107,7 @@ public class Users {
 
     }
 
-    public ArrayList<String> userDataArray() {
+    public ArrayList<String> getUserDataArray() {
 
         userData = new ArrayList<>();
 
@@ -128,6 +127,20 @@ public class Users {
         }
         return userData;
 
+    }
+    
+    public void setUserData(ArrayList<String> userArray){
+        
+        this.email = userArray.get(0);
+        this.birthDay = userArray.get(1);
+        this.birthMonth = userArray.get(2);;
+        this.birthYear = userArray.get(3);
+        this.firstName = userArray.get(4);
+        this.lastName = userArray.get(5);
+        this.pinCode = userArray.get(6);
+        this.phoneNumber = userArray.get(7);
+        this.gender = userArray.get(8);
+        
     }
     
     private boolean passwordValidation(){

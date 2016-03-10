@@ -38,9 +38,9 @@
                     </div>
 
 
-                    <a class="btn btn-primary btn-large btn-block" href="resetverif.html">Submit</a>
+                    <a class="btn btn-primary btn-large btn-block" href="ResetVerify.jsp">Submit</a>
 
-                    <a class="login-link" href="login.html">Return to Login</a>
+                    <a class="login-link" href="ResetVerify.jsp">Return to Login</a>
 
                 </div>
 
@@ -49,7 +49,7 @@
 
         </div>
 
-    
-</body>
+
+    </body>
 
 

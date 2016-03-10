@@ -51,7 +51,9 @@
             <p class="contact"><label for="email">Email</label></p> 
             <input id="email" name="email" placeholder="example@domain.com" required="required" tabindex="1" type="email"> 
 
-            <p class="contact"><label for="password">Create a password</label></p> 
+            <p class="contact"><label for="password">Create a password</label>
+            <br>Password needs to be at least 6 to 16 characters with at least 1 lower and upper case, and 1 number
+            </p>
             <input type="password" id="password" name="password" required="required" tabindex="1"> 
 
             <p class="contact"><label for="repassword">Confirm your password</label></p> 
@@ -76,7 +78,7 @@
                         <option value="12" >December</option>
                     </select>  
                 </label>
-                <label>Day<input type="date" class="birthday" name="BirthDay" 
+                <label>Day<input type="number" min="1" max="31" class="birthday" name="BirthDay" 
                                   required="" tabindex="1"></label>
                 <label>Year<input type="number" min="1900" max ="2002" class="birthyear" name="BirthYear" 
                                     required="" tabindex="1"></label>

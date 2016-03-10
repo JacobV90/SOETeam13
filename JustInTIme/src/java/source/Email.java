@@ -9,8 +9,8 @@ package source;
  *
  * @author jacobveal
  */
-
-
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 import javax.mail.Session;
 import javax.mail.Message;
@@ -23,62 +23,53 @@ import javax.mail.internet.MimeMessage;
 //import javax.swing.JOptionPane;
 
 public class Email {
-    
-   
-    
-        
-        public static void sendEmail(String email){
+
+    private static String toEmail;
+    private static final String username = "JITInventories";
+    private static final String fromEmail = "JITInventories@gmail.com";
+    private static final String password = "jitjitjit";
+
+    public static void sendEmail(String email) throws MalformedURLException, PasswordStorage.CannotPerformOperationException {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");	
+        props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        
-        String username = "JITInventories";
-        String password = "jitjitjit";
-        String fromEmail = username + "@gmail.com";
-        String toEamil = email;
-        
-        String url = "http://localhost:8080/JustInTime/EmailVerified/";
+
+        toEmail = email;
+
+        URL url = new URL("http://localhost:8080/JustInTIme/EmailVerified?email=" + toEmail);
         String subject = "Welcome to Just In Time Inventories";
         String txtMessage = "Thank you for registering with us. Now you can get"
                 + " your products Just IN Time! \n Click link to verify your"
-                + "email address " + url;
-        
-       Session session = Session.getInstance(props,new Authenticator()
-            //Session session = Session.getInstance(props, new SendMail(username, password));
-       {
+                + "email address \n " + url.toString();
+
+        Session session = Session.getInstance(props, new Authenticator() //Session session = Session.getInstance(props, new SendMail(username, password));
+        {
             @Override
-            protected PasswordAuthentication getPasswordAuthentication() 
-            {
+            protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
-        
-        try 
-        {
+
+        try {
             Message message = new MimeMessage(session);
-            
+
             message.setFrom(new InternetAddress(fromEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEamil));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
             message.setText(txtMessage);
-            
-            
 
             Transport.send(message);
             System.out.println("Email successfully sent");
             //JOptionPane.showMessageDialog(null,"Email sended!");
-            
-        } catch (MessagingException e) 
-        {
+
+        } catch (MessagingException e) {
             //JOptionPane.showMessageDialog(null,"Something happened!");
-            System.out.println("Email sending failed" +"\n" + e);
+            System.out.println("Email sending failed" + "\n" + e);
 
             throw new RuntimeException(e);
         }
     }
-        
-    
-}
 
+}

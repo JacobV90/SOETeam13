@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package source;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,9 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static source.RegisterServlet.DB_URL;
-import static source.RegisterServlet.PASS;
-import static source.RegisterServlet.USER;
+import static servlet.RegisterServlet.DB_URL;
+import static servlet.RegisterServlet.PASS;
+import static servlet.RegisterServlet.USER;
 
 /**
  *
