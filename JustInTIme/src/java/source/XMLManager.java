@@ -22,7 +22,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.jsoup.Jsoup;
-import org.w3c.dom.Node;
 
 //import com.example.joshkeeganjake.stmpddroidapp.QuestionObject;
 /**
@@ -65,17 +64,78 @@ public class XMLManager {
             }
         
     }*/
-    
-    public static void main(String[] args){
-        
-        ArrayList<String> userArray = new ArrayList<>();
-        userArray.add("hello");
-        addUser(userArray);
+    public static ArrayList<String> getUser(String email) {
+        File file = new File(FILENAME);
+
+        if (!file.exists()) {
+            System.out.println("File not found");
+            return null;
+        } else {
+            ArrayList<String> userArray = new ArrayList<>();
+            try {
+                DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+                Document document = documentBuilder.parse(file.toString());
+                Element root = document.getDocumentElement();
+
+                System.out.println("inActiveUser.xml file found");
+                nl = root.getElementsByTagName("user");
+
+                System.out.println("Node List size:" + nl.getLength());
+
+                int j = 0;
+                while (j < nl.getLength()) {
+
+                    Element el = (Element) nl.item(j);
+                    System.out.println(el.getElementsByTagName("Email").item(0).getTextContent());
+                    String userEmail = el.getElementsByTagName("Email").item(0).getTextContent();
+
+                    if (userEmail.equalsIgnoreCase(email)) {
+
+                        System.out.println("User found....retrieving and deleting");
+
+                        for (UserFieldEntries entry : UserFieldEntries.values()) {
+
+                            String userData = el.getElementsByTagName(entry.toString()).item(0).getTextContent();
+
+                            userArray.add(userData);
+                        }
+                        j = nl.getLength();
+                        System.out.println("User successfully Retrieved");
+                        root.removeChild(el);
+                        System.out.println("User removed from inActive list");
+
+                    } else {
+                        j++;
+
+                    }
+
+                }
+                DOMSource source = new DOMSource(document);
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                StreamResult result = new StreamResult(FILENAME);
+                transformer.transform(source, result);
+
+            } catch (SAXException ex) {
+                Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException ex) {
+                Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return userArray;
+        }
+
     }
+
     public static void addUser(ArrayList<String> userArray) {
 
         File file = new File(FILENAME);
-        
+
         if (!file.exists()) {
             System.out.println("File not found");
         } else {
@@ -84,15 +144,22 @@ public class XMLManager {
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
                 Document document = documentBuilder.parse(file.toString());
                 Element root = document.getDocumentElement();
+                System.out.println("inActiveUser.xml file found");
 
-                System.out.println("made it to xml");
+                int count = root.getElementsByTagName("user").getLength();
+                System.out.println("Number of inActive users: " + count);
+
                 // user elements
                 Element newUser = document.createElement("user");
-                newUser.setAttribute("email", userArray.get(0));
+                newUser.setAttribute("id", Integer.toString(count));
 
-                Element BirthMonth = document.createElement("FirstName");
-                BirthMonth.setTextContent(userArray.get(1));
-                newUser.appendChild(BirthMonth);
+                Element email = document.createElement("Email");
+                email.setTextContent(userArray.get(0));
+                newUser.appendChild(email);
+
+                Element FirstName = document.createElement("FirstName");
+                FirstName.setTextContent(userArray.get(1));
+                newUser.appendChild(FirstName);
 
                 Element LastName = document.createElement("LastName");
                 LastName.setTextContent(userArray.get(2));
@@ -114,7 +181,7 @@ public class XMLManager {
                 birthYear.setTextContent(userArray.get(6));
                 newUser.appendChild(birthYear);
 
-                Element gender = document.createElement("gender");
+                Element gender = document.createElement("Gender");
                 gender.setTextContent(userArray.get(7));
                 newUser.appendChild(gender);
 
@@ -135,6 +202,8 @@ public class XMLManager {
                 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                 StreamResult result = new StreamResult(FILENAME);
                 transformer.transform(source, result);
+
+                System.out.println("User pushed to inActive list");
             } catch (SAXException ex) {
                 Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

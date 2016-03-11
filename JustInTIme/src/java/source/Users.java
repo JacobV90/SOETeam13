@@ -34,11 +34,11 @@ public class Users {
     private  String pinCode;
     private  String phoneNumber;
     private  String gender;
-    private  int minPasswordLength = 6;
-    private  int maxPasswordLength = 16;
-    private  int numUpperCase = 1;
-    private  int numLowerCase = 1;
-    private  int numDigits = 1;
+    private final  int minPasswordLength = 6;
+    private final  int maxPasswordLength = 16;
+    private final  int numUpperCase = 1;
+    private final  int numLowerCase = 1;
+    private final  int numDigits = 1;
 
     public Users(String fN, String lN, String email, String pw, String bM,
             String bD, String bY, String gender, String number, String pC) {

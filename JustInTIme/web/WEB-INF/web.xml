@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>EmailVerified</servlet-name>
-        <servlet-class>.EmailVerified</servlet-class>
+        <servlet-class>servlet.EmailVerified</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>

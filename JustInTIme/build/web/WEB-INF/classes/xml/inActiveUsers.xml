@@ -4,37 +4,5 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 --><root>
-<user>
-<FirstName>jvtalon90@yahoo.com</FirstName>
-<LastName>jvtalon90@yahoo.com</LastName>
-<Password>jvtalon90@yahoo.com</Password>
-<BirthMonth>jvtalon90@yahoo.com</BirthMonth>
-<BirthDay>jvtalon90@yahoo.com</BirthDay>
-<BirthYear>jvtalon90@yahoo.com</BirthYear>
-<gender>jvtalon90@yahoo.com</gender>
-<PhoneNumber>jvtalon90@yahoo.com</PhoneNumber>
-<PinCode>jvtalon90@yahoo.com</PinCode>
-</user>
-<user email="jvtalon90@yahoo.com">
-<FirstName>Jacob</FirstName>
-<LastName>veal</LastName>
-<Password>Hondas2k</Password>
-<BirthMonth/>
-<BirthDay>2016-03-16</BirthDay>
-<BirthYear>1990</BirthYear>
-<gender>m</gender>
-<PhoneNumber>435524</PhoneNumber>
-<PinCode>234324</PinCode>
-</user>
-<user email="adsf@dsf.com">
-<FirstName>Jacob</FirstName>
-<LastName>Veal</LastName>
-<Password>Hondas2k</Password>
-<BirthMonth>08</BirthMonth>
-<BirthDay>17</BirthDay>
-<BirthYear>1990</BirthYear>
-<gender>m</gender>
-<PhoneNumber>34334</PhoneNumber>
-<PinCode>3434</PinCode>
-</user>
+
 </root>

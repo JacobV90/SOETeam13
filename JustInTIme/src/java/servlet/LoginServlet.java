@@ -16,9 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static servlet.RegisterServlet.DB_URL;
-import static servlet.RegisterServlet.PASS;
-import static servlet.RegisterServlet.USER;
+import static servlet.EmailVerified.DB_URL;
+import static servlet.EmailVerified.PASS;
+import static servlet.EmailVerified.USER;
 
 /**
  *
@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("Email");
         String password = request.getParameter("Password");
-        
+
         System.out.println(email + " " + password);
 
         try {
