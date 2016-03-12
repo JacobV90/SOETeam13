@@ -12,6 +12,8 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTIme/web/EmailVerified.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTIme/src/java/source/Email.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTIme/src/java/xml/inActiveUsers.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTIme/src/java/servlet/LoginServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTIme/src/java/source/BCrypt.java</file>
         </group>
     </open-files>
 </project-private>

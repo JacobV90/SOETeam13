@@ -29,7 +29,7 @@ public class Email {
     private static final String fromEmail = "JITInventories@gmail.com";
     private static final String password = "jitjitjit";
 
-    public static void sendEmail(String email) throws MalformedURLException, PasswordStorage.CannotPerformOperationException {
+    public static void sendEmail(String email) throws MalformedURLException{
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");

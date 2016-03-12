@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import static servlet.EmailVerified.DB_URL;
 import static servlet.EmailVerified.PASS;
 import static servlet.EmailVerified.USER;
+import source.BCrypt;
 
 /**
  *
@@ -82,12 +83,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("Made it to login Servlet");
+        System.out.println("    Login Servlet:");
 
         String email = request.getParameter("Email");
         String password = request.getParameter("Password");
-
-        System.out.println(email + " " + password);
 
         try {
             // Register JDBC driver
@@ -97,14 +96,15 @@ public class LoginServlet extends HttpServlet {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //Grab email and passwords from database
-            String query = "Select * FROM user WHERE Email = '" + email + "'"
-                    + "AND Password = '" + password + "'";
-
+            String query = "SELECT * FROM  USER WHERE Email = '" + email +"'"+ ";";
+            System.out.println(query);
             // Execute SQL query
+            System.out.println("Fetching user from database");
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            System.out.println("Fetched user from database");
 
-            if (rs.first()) {
+            if (rs.first() && BCrypt.checkpw(password, rs.getString("Password"))) {
 
                 System.out.println("Found user");
 

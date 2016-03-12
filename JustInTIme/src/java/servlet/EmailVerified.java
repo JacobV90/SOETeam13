@@ -6,31 +6,25 @@ package servlet;
  * and open the template in the editor.
  */
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static servlet.EmailVerified.DB_URL;
-import source.Email;
-import source.PasswordStorage;
 import source.XMLManager;
 
 /**
+ * The EmailVerified classes get method is called when the user clicks the sent
+ * email link. Once ran, the class will look for the users email in the in
+ * active database and if found will push their information to the database;
+ *
  *
  * @author jacobveal
  */
@@ -44,8 +38,10 @@ public class EmailVerified extends HttpServlet {
     static final String USER = "root";
     static final String PASS = "Hondas2k";
 
-    Connection conn = null;
+    Connection conn;
+    Connection conn2 = null;
     PreparedStatement stmt = null;
+    Statement pinStmt;
     ResultSet rs = null;
 
     /**
@@ -77,12 +73,17 @@ public class EmailVerified extends HttpServlet {
 
         String userEmail = request.getParameter("email");
 
-        System.out.println("EmailVerifiedServlet:" + userEmail);
+        System.out.println("    EmailVerifiedServlet:" + userEmail);
+
         ArrayList<String> userArray = XMLManager.getUser(userEmail);
 
+        // SQL query to check pin code validation and available 
+        final String pinCodeQuery = "SELECT * FROM user_code;";
+
+        // SQL query to push the user to the data base
         final String queryScript = "INSERT INTO user (Email, FirstName, LastName, Password,"
-                + "BirthMonth, BirthDay, BirthYear, Gender, Phone, Code)"
-                + " values (?,?,?,?,?,?,?,?,?,?)";
+                + "BirthMonth, BirthDay, BirthYear, Gender, Phone, Code, Role)"
+                + " values (?,?,?,?,?,?,?,?,?,?,?)";
         try {
             // Register JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
@@ -90,33 +91,65 @@ public class EmailVerified extends HttpServlet {
             // Open a connection
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            // Execute SQL query
-            stmt = conn.prepareStatement(queryScript);
-
-            //Extract data from result set
-            int i = 1;
-            while (i <= userArray.size()) {
-
-                stmt.setString(i, userArray.get(i - 1));
-                ++i;
+            String pinCode = null;
+            pinStmt = conn.createStatement();
+            ResultSet rs = pinStmt.executeQuery(pinCodeQuery);
+            if(rs.first()){
+                
+                pinCode = rs.getString("Code");
+                System.out.println(pinCode);
             }
-            stmt.executeUpdate();
+            
+            pinStmt.close();
+            conn.close();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
 
+           
+           stmt = conn.prepareStatement(queryScript);
+
+            // Execute pin code SQL query
+            // Check user pin code validation
+            
+            System.out.println(userArray.get(9));
+            
+            if (pinCode.equals(userArray.get(9)) && userArray.size() > 1) {
+
+                //Extract data from result set
+                int i = 1;
+                while (i <= userArray.size()) {
+
+                    stmt.setString(i, userArray.get(i - 1));
+                    ++i;
+                }
+            }
+            else{
+                System.out.println("Invalide pin code entered");
+            }
+
+            // Execute sql query
+            stmt.executeUpdate();
+            System.out.println("User successfully pushed to data base");
+            
             // Clean-up environment
             stmt.close();
-            conn.close();
 
-        } catch (SQLException se) {
-        } catch (ClassNotFoundException ße) {
+            conn.close();
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+        } catch (SQLException | ClassNotFoundException se) {
+            System.out.println("No Database");
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+
         } finally {// nothing we can do
             try {
                 if (conn != null) {
                     conn.close();
                 }
+
             } catch (SQLException se) {
             }//end finally try
         } //end try
-        
 
     }
 

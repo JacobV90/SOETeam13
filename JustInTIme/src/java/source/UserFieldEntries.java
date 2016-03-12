@@ -12,5 +12,5 @@ package source;
 public enum UserFieldEntries {
     
     Email, FirstName, LastName, Password, BirthMonth, BirthDay, BirthYear,
-    Gender, PhoneNumber, PinCode;
+    Gender, PhoneNumber, PinCode, Role;
 }

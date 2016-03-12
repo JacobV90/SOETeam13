@@ -6,17 +6,19 @@ package servlet;
  * and open the template in the editor.
  */
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import source.BCrypt;
 import source.Email;
-import source.PasswordStorage;
 import source.Users;
 import source.XMLManager;
 
@@ -27,6 +29,8 @@ import source.XMLManager;
 public class RegisterServlet extends HttpServlet {
 
     private final ArrayList<String> userData;
+    InputStream is;
+    
 
     public RegisterServlet() {
         this.userData = new ArrayList<>();
@@ -84,6 +88,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
 
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastName");
@@ -100,8 +105,6 @@ public class RegisterServlet extends HttpServlet {
                 birthMonth, birthDay, birthYear, gender, phoneNumber,
                 pinCode);
 
-        user.printUserAccountInfo();
-
         if (user.validate()) {
             System.out.println("User account data validated");
 
@@ -112,12 +115,12 @@ public class RegisterServlet extends HttpServlet {
                 System.out.println("Verication email sent to user");
             } catch (MalformedURLException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (PasswordStorage.CannotPerformOperationException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()
-                    + "/signupVerify.jsp"));
+            request.getRequestDispatcher("/signupVerify.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+
         }
 
     }

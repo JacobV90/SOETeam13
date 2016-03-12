@@ -1,6 +1,5 @@
 package source;
 
-import com.QuestionObject.QuestionObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.jsoup.Jsoup;
 
 //import com.example.joshkeeganjake.stmpddroidapp.QuestionObject;
 /**
@@ -37,33 +35,6 @@ public class XMLManager {
     private static final String FILENAME = "/Users/jacobveal/NetBeansProjects/JustInTIme/src/java/xml/inActiveUsers.xml";
     private static NodeList nl;
 
-    /* private static void parseXmlFile() {
-
-        // get the factory
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        
-        Document doc;
-     
-            try {
-                // Using factory get an instance of document builder
-                DocumentBuilder db = dbf.newDocumentBuilder();
-
-                // parse using builder to get DOM representation of the XML file
-                //doc = db.parse(file);
-                //Element docEle = doc.getDocumentElement();
-
-                //each object is separated by a item tag
-                nl = docEle.getElementsByTagName("users");
-
-            } catch (ParserConfigurationException pce) {
-                pce.printStackTrace();
-            } catch (SAXException se) {
-                se.printStackTrace();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        
-    }*/
     public static ArrayList<String> getUser(String email) {
         File file = new File(FILENAME);
 
@@ -72,6 +43,7 @@ public class XMLManager {
             return null;
         } else {
             ArrayList<String> userArray = new ArrayList<>();
+            
             try {
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -81,13 +53,12 @@ public class XMLManager {
                 System.out.println("inActiveUser.xml file found");
                 nl = root.getElementsByTagName("user");
 
-                System.out.println("Node List size:" + nl.getLength());
+                System.out.println("Number of inActive users: " + nl.getLength());
 
                 int j = 0;
                 while (j < nl.getLength()) {
 
                     Element el = (Element) nl.item(j);
-                    System.out.println(el.getElementsByTagName("Email").item(0).getTextContent());
                     String userEmail = el.getElementsByTagName("Email").item(0).getTextContent();
 
                     if (userEmail.equalsIgnoreCase(email)) {
@@ -149,49 +120,18 @@ public class XMLManager {
                 int count = root.getElementsByTagName("user").getLength();
                 System.out.println("Number of inActive users: " + count);
 
-                // user elements
+                // Create user element
                 Element newUser = document.createElement("user");
                 newUser.setAttribute("id", Integer.toString(count));
 
-                Element email = document.createElement("Email");
-                email.setTextContent(userArray.get(0));
-                newUser.appendChild(email);
-
-                Element FirstName = document.createElement("FirstName");
-                FirstName.setTextContent(userArray.get(1));
-                newUser.appendChild(FirstName);
-
-                Element LastName = document.createElement("LastName");
-                LastName.setTextContent(userArray.get(2));
-                newUser.appendChild(LastName);
-
-                Element password = document.createElement("Password");
-                password.setTextContent(userArray.get(3));
-                newUser.appendChild(password);
-
-                Element birthMonth = document.createElement("BirthMonth");
-                birthMonth.setTextContent(userArray.get(4));
-                newUser.appendChild(birthMonth);
-
-                Element birthDay = document.createElement("BirthDay");
-                birthDay.setTextContent(userArray.get(5));
-                newUser.appendChild(birthDay);
-
-                Element birthYear = document.createElement("BirthYear");
-                birthYear.setTextContent(userArray.get(6));
-                newUser.appendChild(birthYear);
-
-                Element gender = document.createElement("Gender");
-                gender.setTextContent(userArray.get(7));
-                newUser.appendChild(gender);
-
-                Element phoneNumber = document.createElement("PhoneNumber");
-                phoneNumber.setTextContent(userArray.get(8));
-                newUser.appendChild(phoneNumber);
-
-                Element pinCode = document.createElement("PinCode");
-                pinCode.setTextContent(userArray.get(9));
-                newUser.appendChild(pinCode);
+                // Add user data to inActive list
+                int i = 0;
+                for (UserFieldEntries entry : UserFieldEntries.values()) {
+                    Element element = document.createElement(entry.toString());
+                    element.setTextContent(userArray.get(i));
+                    newUser.appendChild(element);
+                    i++;
+                }
 
                 root.appendChild(newUser);
 
@@ -216,44 +156,9 @@ public class XMLManager {
         }
     }
 
-    public static ArrayList<QuestionObject> parseQuestionObjects() {
+    
 
-        ArrayList<QuestionObject> questionArray = new ArrayList<QuestionObject>();
-
-        if (nl != null && nl.getLength() > 0) {
-
-            for (int i = 0; i < nl.getLength(); i++) {
-
-                // get the question element
-                Element el = (Element) nl.item(i);
-
-                // get the object
-                // add it to list
-            }
-        }
-        return questionArray;
-    }
-
-    private String getValue(Element ele, String tagName) {
-        String textVal = null;
-        NodeList nl = ele.getElementsByTagName(tagName);
-
-        if (nl != null && nl.getLength() > 0) {
-            Element el = (Element) nl.item(0);
-            textVal = el.getTextContent();
-            StringBuilder sb = new StringBuilder();
-            sb.append(textVal);
-
-            try {
-                return extractText(sb);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-
-    }
+    
 
     /**
      * Retrieves the questions answers and places them into an array. The
@@ -263,40 +168,6 @@ public class XMLManager {
      * @param tagName
      * @return
      */
-    private String[] getAnswers(Element elem, String tagName) {
-
-        NodeList nl = elem.getElementsByTagName(tagName);
-        NodeList nl2 = elem.getElementsByTagName("setvar");
-
-        String[] array = new String[nl.getLength() + 1];
-
-        if (nl != null && nl.getLength() > 0) {
-            for (int i = 0; i < nl.getLength(); i++) {
-                Element el = (Element) nl.item(i);
-                Element el2 = (Element) nl2.item(i);
-
-                StringBuilder sb = new StringBuilder();
-                sb.append(el.getTextContent());
-
-                try {
-                    String line = extractText(sb);
-                    if (!line.equals("\"")) {
-                        array[i] = line;
-                        if (el2.getTextContent().equals("1")) {
-                            array[nl.getLength()] = String.valueOf(i);
-
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-        }
-        return array;
-
-    }
 
     /**
      * Returns the images id in the xml file
@@ -305,25 +176,5 @@ public class XMLManager {
      * @param tagName
      * @return
      */
-    private String getImage(Element el, String tagName) {
-
-        NodeList nl2 = el.getElementsByTagName(tagName);
-
-        if (nl2 != null && nl2.getLength() > 0) {
-            Element elem = (Element) nl2.item(0);
-
-            if (elem.hasAttribute("uri")) {
-                return elem.getAttribute("uri");
-
-            }
-        }
-        return null;
-    }
-
-    private String extractText(StringBuilder sb) throws IOException {
-
-        String textOnly = Jsoup.parse(sb.toString()).text();
-        return textOnly;
-    }
 
 }

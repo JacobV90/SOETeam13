@@ -24,21 +24,22 @@ public class Users {
     private Boolean verified = false;
     private ArrayList<String> userData;
 
-    private  String email;
-    private  String password;
-    private  String firstName;
-    private  String lastName;
-    private  String birthMonth;
-    private  String birthDay;
-    private  String birthYear;
-    private  String pinCode;
-    private  String phoneNumber;
-    private  String gender;
-    private final  int minPasswordLength = 6;
-    private final  int maxPasswordLength = 16;
-    private final  int numUpperCase = 1;
-    private final  int numLowerCase = 1;
-    private final  int numDigits = 1;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String birthMonth;
+    private String birthDay;
+    private String birthYear;
+    private String pinCode;
+    private String phoneNumber;
+    private String gender;
+    private String role;
+    private final int minPasswordLength = 6;
+    private final int maxPasswordLength = 16;
+    private final int numUpperCase = 1;
+    private final int numLowerCase = 1;
+    private final int numDigits = 1;
 
     public Users(String fN, String lN, String email, String pw, String bM,
             String bD, String bY, String gender, String number, String pC) {
@@ -80,8 +81,15 @@ public class Users {
                 new WhitespaceRule()));
 
         RuleResult result = validator.validate(new PasswordData(this.password));
+
+        // Check password validation
         if (result.isValid()) {
-            System.out.println("Password is valid");
+            System.out.println("Password is valid...hashing password");
+
+            // hash password
+            this.password = BCrypt.hashpw(this.password, BCrypt.gensalt(10));
+
+            System.out.println(this.password);
             verified = true;
         } else {
             System.out.println("Invalid password:");
@@ -93,7 +101,15 @@ public class Users {
             return verified;
         }
 
-        this.parseStringForNumbers(phoneNumber);
+        // Check pinCode validation
+        StringBuilder sb = new StringBuilder();
+        sb.append(pinCode);
+        if (!(sb.charAt(0) == 'a' || sb.charAt(0) == 'm' || sb.charAt(0) == 'u')) {
+            System.out.println("Not a valid pin code");
+            return false;
+        }
+        
+        // Check number validation
         this.parseStringForNumbers(phoneNumber);
 
         if (verified) {
@@ -123,14 +139,15 @@ public class Users {
             userData.add(gender);
             userData.add(phoneNumber);
             userData.add(pinCode);
+            userData.add(getRole(pinCode));
 
         }
         return userData;
 
     }
-    
-    public void setUserData(ArrayList<String> userArray){
-        
+
+    public void setUserData(ArrayList<String> userArray) {
+
         this.email = userArray.get(0);
         this.birthDay = userArray.get(1);
         this.birthMonth = userArray.get(2);;
@@ -140,12 +157,34 @@ public class Users {
         this.pinCode = userArray.get(6);
         this.phoneNumber = userArray.get(7);
         this.gender = userArray.get(8);
-        
+
     }
-    
-    private boolean passwordValidation(){
-        
-          PasswordValidator validator = new PasswordValidator(Arrays.asList(
+
+    private String getRole(String pin) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(pin);
+
+        switch (sb.charAt(0)) {
+            case 'a':
+                this.role = "Administrator";
+                break;
+            case 'm':
+                this.role = "Manager";
+                break;
+            case 'u':
+                this.role = "User";
+                break;
+            default:
+                break;
+        }
+        System.out.println(role);
+        return role;
+    }
+
+    private boolean passwordValidation() {
+
+        PasswordValidator validator = new PasswordValidator(Arrays.asList(
                 // length between 8 and 16 characters
                 new LengthRule(minPasswordLength, maxPasswordLength),
                 // at least one upper-case character
@@ -159,7 +198,7 @@ public class Users {
                 new WhitespaceRule()));
 
         RuleResult result = validator.validate(new PasswordData(this.password));
-        
+
         if (result.isValid()) {
             System.out.println("Password is valid");
             return verified = true;
