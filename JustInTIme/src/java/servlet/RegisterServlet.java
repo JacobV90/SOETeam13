@@ -6,31 +6,31 @@ package servlet;
  * and open the template in the editor.
  */
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import source.BCrypt;
 import source.Email;
 import source.Users;
 import source.XMLManager;
 
 /**
  *
+ * The RegisterServlet class takes information entered on the signup.jsp page
+ * passes it to the user object to validate data and calls the Email's class send
+ * method.
+ * 
  * @author jacobveal
  */
 public class RegisterServlet extends HttpServlet {
 
     private final ArrayList<String> userData;
-    InputStream is;
-    
+    public static String FilePath;
 
     public RegisterServlet() {
         this.userData = new ArrayList<>();
@@ -75,6 +75,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
@@ -88,7 +89,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
 
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastName");
@@ -112,7 +112,6 @@ public class RegisterServlet extends HttpServlet {
 
             try {
                 Email.sendEmail(email);
-                System.out.println("Verication email sent to user");
             } catch (MalformedURLException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

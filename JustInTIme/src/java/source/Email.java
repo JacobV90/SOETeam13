@@ -25,9 +25,9 @@ import javax.mail.internet.MimeMessage;
 public class Email {
 
     private static String toEmail;
-    private static final String username = "JITInventories";
-    private static final String fromEmail = "JITInventories@gmail.com";
-    private static final String password = "jitjitjit";
+    private static final String USERNAME = "JITInventories";
+    private static final String FROM_EMAIL = "JITInventories@gmail.com";
+    private static final String PASSWORD = "jitjitjit";
 
     public static void sendEmail(String email) throws MalformedURLException{
         Properties props = new Properties();
@@ -38,7 +38,7 @@ public class Email {
 
         toEmail = email;
 
-        URL url = new URL("http://localhost:8080/JustInTIme/EmailVerified?email=" + toEmail);
+        URL url = new URL("http://localhost:8080/JustInTime/EmailVerified?email=" + toEmail);
         String subject = "Welcome to Just In Time Inventories";
         String txtMessage = "Thank you for registering with us. Now you can get"
                 + " your products Just IN Time! \n Click link to verify your"
@@ -48,14 +48,14 @@ public class Email {
         {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(USERNAME, PASSWORD);
             }
         });
 
         try {
             Message message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress(fromEmail));
+            message.setFrom(new InternetAddress(FROM_EMAIL));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
             message.setText(txtMessage);
