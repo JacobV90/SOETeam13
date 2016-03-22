@@ -34,7 +34,6 @@ public class XMLManager {
             System.out.println("inActiveUser.xml file found");
 
             int count = root.getElementsByTagName("user").getLength();
-            System.out.println("Number of inActive users: " + count);
 
             // Create user element
             Element newUser = document.createElement("user");
@@ -50,6 +49,9 @@ public class XMLManager {
             }
 
             root.appendChild(newUser);
+
+            count = root.getElementsByTagName("user").getLength();
+            System.out.println("Number of inActive users: " + count);
 
             close(document);
 
@@ -73,8 +75,6 @@ public class XMLManager {
 
             NodeList nl = root.getElementsByTagName("user");
 
-            System.out.println("Number of inActive users: " + nl.getLength());
-
             int j = 0;
             while (j < nl.getLength()) {
 
@@ -93,13 +93,15 @@ public class XMLManager {
                     }
                     j = nl.getLength();
                     System.out.println("User successfully Retrieved");
-                    //root.removeChild(el);
+                    root.removeChild(el);
                     System.out.println("User removed from inActive list");
 
                 } else {
                     j++;
                 }
             }
+
+            System.out.println("Number of inActive users: " + nl.getLength());
 
             close(document);
 
@@ -113,9 +115,8 @@ public class XMLManager {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-       
+
         file = XMLManager.class.getClassLoader().getResource(FILENAME);
-        
 
         return documentBuilder.parse(file.toString());
     }

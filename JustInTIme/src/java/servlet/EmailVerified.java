@@ -37,7 +37,7 @@ public class EmailVerified extends HttpServlet {
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Married2the$";
+    static final String PASS = "Hondas2k";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

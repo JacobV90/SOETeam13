@@ -3,13 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/web/ResetVerify.jsp</file>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/src/java/xml/inActiveUsers.xml</file>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/src/java/source/Email.java</file>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/web/ResetPassword.jsp</file>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/web/ForgotPassword.jsp</file>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/src/java/servlet/EmailVerified.java</file>
-            <file>file:/C:/Users/jvtal/Documents/NetBeansProjects/JustInTIme/src/java/source/BCrypt.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Email.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/xml/inActiveUsers.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/xml/inActiveUsers.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/SourceTestSuite.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/homePage.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ForgotPassword.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/TestRunner.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/EmailVerified.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/servlet/servletTestSuite.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PasswordControl.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/servlet/EmailVerifiedTest.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/BCrypt.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signup.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ResetPassword.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/UsersTest.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/XMLManagerTest.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetPassword.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/index.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/LoginServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/WEB-INF/web.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signupVerify.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Users.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetVerify.jsp</file>
         </group>
     </open-files>
 </project-private>

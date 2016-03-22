@@ -60,7 +60,7 @@ public class Users {
     public void printUserAccountInfo() {
         System.out.println(this.firstName + "\n"
                 + this.lastName + "\n" + this.email + "\n"
-                + "\n" + this.password + "\n" + this.birthMonth
+                + this.password + "\n" + this.birthMonth
                 + "\n" + this.birthDay + "\n" + this.birthYear + "\n" + this.gender
                 + "\n" + this.phoneNumber + "\n" + this.pinCode);
     }
@@ -108,7 +108,7 @@ public class Users {
             System.out.println("Not a valid pin code");
             return false;
         }
-        
+
         // Check number validation
         this.parseStringForNumbers(phoneNumber);
 
@@ -127,7 +127,7 @@ public class Users {
 
         userData = new ArrayList<>();
 
-        if (verified) {
+     
 
             userData.add(email);
             userData.add(firstName);
@@ -141,25 +141,12 @@ public class Users {
             userData.add(pinCode);
             userData.add(getRole(pinCode));
 
-        }
+       
         return userData;
 
     }
 
-    public void setUserData(ArrayList<String> userArray) {
-
-        this.email = userArray.get(0);
-        this.birthDay = userArray.get(1);
-        this.birthMonth = userArray.get(2);;
-        this.birthYear = userArray.get(3);
-        this.firstName = userArray.get(4);
-        this.lastName = userArray.get(5);
-        this.pinCode = userArray.get(6);
-        this.phoneNumber = userArray.get(7);
-        this.gender = userArray.get(8);
-
-    }
-    
+   
 
     private String getRole(String pin) {
         StringBuilder sb = new StringBuilder();
