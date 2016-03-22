@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,12 +33,11 @@ public class EmailVerified extends HttpServlet {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/justintime?autoReconnect=true&useSSL=false"
-            + "&allowMultiQueries=true";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/justintime";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Hondas2k";
+    static final String PASS = "Married2the$";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -99,7 +97,7 @@ public class EmailVerified extends HttpServlet {
             // Open a connection
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            // Prepare run execute statments
+            // Prepare execute statments
             stmt = conn.prepareStatement(queryScript);
             pinStmt = conn.prepareStatement(pinCodeQuery);
             pinStmt2 = conn.prepareStatement(pinCodeActive);

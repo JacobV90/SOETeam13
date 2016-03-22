@@ -38,7 +38,7 @@ public class Email {
 
         toEmail = email;
 
-        URL url = new URL("http://localhost:8080/JustInTime/EmailVerified?email=" + toEmail);
+        URL url = new URL("http://localhost:8080/JustInTIme/EmailVerified?email=" + toEmail);
         String subject = "Welcome to Just In Time Inventories";
         String txtMessage = "Thank you for registering with us. Now you can get"
                 + " your products Just IN Time! \n Click link to verify your"
@@ -82,7 +82,7 @@ public class Email {
 
         toEmail = email;
 
-        URL url = new URL("http://localhost:8080/JustInTime/ResetPassword.jsp?email=" + toEmail);
+        URL url = new URL("http://localhost:8080/JustInTIme/ResetPassword.jsp?email=" + toEmail);
         String subject = "Just In Time Inventories password reset";
         String txtMessage = "Click the link to change your password: " + url.toString();
 

@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import static servlet.EmailVerified.DB_URL;
 import static servlet.EmailVerified.PASS;
 import static servlet.EmailVerified.USER;
+import source.BCrypt;
+import source.PasswordControl;
 
 /**
  *
@@ -93,41 +95,56 @@ public class ResetPassword extends HttpServlet {
         // SQL query to grab user
         final String emailQ = "select * from user where Email = ?;";
 
-        try {
+        if (PasswordControl.validatePass(password)) {
+            
+            //hash password
+            password = BCrypt.hashpw(password, BCrypt.gensalt(10));
+            
+            //Updated flag
+            boolean updated = false;
+            
+            try {
 
-            Class.forName(EmailVerified.JDBC_DRIVER);
+                Class.forName(EmailVerified.JDBC_DRIVER);
 
-            // Open a connection
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                // Open a connection
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            // Prepare sql script
-            stmt = conn.prepareStatement(emailQ, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.setString(1, email);
+                // Prepare sql script
+                stmt = conn.prepareStatement(emailQ, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                stmt.setString(1, email);
 
-            ResultSet rs = stmt.executeQuery();
-            System.out.println("Forgot password user email query executed");
+                ResultSet rs = stmt.executeQuery();
+                System.out.println("Forgot password user email query executed");
 
-            if (rs.next()) {
-                rs.updateString("Password", password);
-                rs.updateRow();
-                System.out.println("User password updated");
-            } else {
-                System.out.println("User not found");
-            }
-
-        } catch (SQLException | ClassNotFoundException se) {
-            System.out.println("Database issue;");
-
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                if (rs.next()) {
+                    rs.updateString("Password", password);
+                    rs.updateRow();
+                    System.out.println("User password updated");
+                    updated = true;
+                } else {
+                    System.out.println("User not found");
+                }
+                
+            } catch (SQLException | ClassNotFoundException se) {
+                System.out.println("Database issue;");
+                request.getRequestDispatcher("/ResetPassword").forward(request, response);
+            } finally {
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if(updated){
+                        request.getRequestDispatcher("/index.jsp").forward(request, response);
+                    }
+                    else{
+                        request.getRequestDispatcher("/ResetPassword.jsp").forward(request, response);
+                    }
                 }
             }
         }
-
     }
 
     /**

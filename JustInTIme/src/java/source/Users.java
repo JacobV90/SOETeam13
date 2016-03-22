@@ -159,6 +159,7 @@ public class Users {
         this.gender = userArray.get(8);
 
     }
+    
 
     private String getRole(String pin) {
         StringBuilder sb = new StringBuilder();
