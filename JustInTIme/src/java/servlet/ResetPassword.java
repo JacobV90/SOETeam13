@@ -1,40 +1,32 @@
-package servlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package servlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import source.Email;
-import source.Users;
-import source.XMLManager;
+import static servlet.EmailVerified.DB_URL;
+import static servlet.EmailVerified.PASS;
+import static servlet.EmailVerified.USER;
 
 /**
  *
- * The RegisterServlet class takes information entered on the signup.jsp page
- * passes it to the user object to validate data and calls the Email's class send
- * method.
- * 
  * @author jacobveal
  */
-public class RegisterServlet extends HttpServlet {
-
-    private final ArrayList<String> userData;
-    public static String FilePath;
-
-    public RegisterServlet() {
-        this.userData = new ArrayList<>();
-    }
+public class ResetPassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,10 +45,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet + RegisterServlet</title>");
+            out.println("<title>Servlet ResetPassword</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet JITServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ResetPassword at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,7 +67,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
@@ -90,36 +81,51 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String firstName = request.getParameter("firstname");
-        String lastName = request.getParameter("lastName");
+        System.out.println("ResetPassword Servlet:");
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String birthMonth = request.getParameter("BirthMonth");
-        String birthDay = request.getParameter("BirthDay");
-        String birthYear = request.getParameter("BirthYear");
-        String gender = request.getParameter("gender");
-        String phoneNumber = request.getParameter("phone");
-        String pinCode = request.getParameter("pin");
 
-        Users user = new Users(firstName, lastName, email, password,
-                birthMonth, birthDay, birthYear, gender, phoneNumber,
-                pinCode);
+        // Connection variables
+        Connection conn = null;
+        PreparedStatement stmt = null;
 
-        if (user.validate()) {
-            System.out.println("User account data validated");
+        // SQL query to grab user
+        final String emailQ = "select * from user where Email = ?;";
 
-            XMLManager.addUser(user.getUserDataArray());
+        try {
 
-            try {
-                Email.sendRegEmail(email);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Class.forName(EmailVerified.JDBC_DRIVER);
+
+            // Open a connection
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare sql script
+            stmt = conn.prepareStatement(emailQ, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+            System.out.println("Forgot password user email query executed");
+
+            if (rs.next()) {
+                rs.updateString("Password", password);
+                rs.updateRow();
+                System.out.println("User password updated");
+            } else {
+                System.out.println("User not found");
             }
 
-            request.getRequestDispatcher("/signupVerify.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+        } catch (SQLException | ClassNotFoundException se) {
+            System.out.println("Database issue;");
 
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
     }

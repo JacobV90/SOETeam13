@@ -30,17 +30,21 @@
                 <div class="login-form">
 
                     <div class="control-group">
+                        
+                        <form action ="ResetVerify.jsp">
 
                         <label class="login-field-icon fui-user" for="login-name">Enter your email address</label>
 
-                        <input type="email" class="login-field" value="" placeholder="email" id="login-name">
+                        <input type="email" name = "Email" class="login-field" value="" placeholder="Email" id="login-name">
 
                     </div>
 
 
-                    <a class="btn btn-primary btn-large btn-block" href="ResetVerify.jsp">Submit</a>
+                    <input class="btn btn-primary btn-large btn-block" name="submit" id="submit" type="submit">
 
                     <a class="login-link" href="ResetVerify.jsp">Return to Login</a>
+                    
+
 
                 </div>
 

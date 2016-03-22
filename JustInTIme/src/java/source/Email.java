@@ -29,7 +29,7 @@ public class Email {
     private static final String FROM_EMAIL = "JITInventories@gmail.com";
     private static final String PASSWORD = "jitjitjit";
 
-    public static void sendEmail(String email) throws MalformedURLException{
+    public static void sendRegEmail(String email) throws MalformedURLException{
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -70,6 +70,52 @@ public class Email {
 
             throw new RuntimeException(e);
         }
+    }
+    
+    public static void sendPREmail(String email) throws MalformedURLException{
+        
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        toEmail = email;
+
+        URL url = new URL("http://localhost:8080/JustInTime/ResetPassword.jsp?email=" + toEmail);
+        String subject = "Just In Time Inventories password reset";
+        String txtMessage = "Click the link to change your password: " + url.toString();
+
+        Session session = Session.getInstance(props, new Authenticator() //Session session = Session.getInstance(props, new SendMail(username, password));
+        {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(USERNAME, PASSWORD);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress(FROM_EMAIL));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            message.setSubject(subject);
+            message.setText(txtMessage);
+
+            Transport.send(message);
+            System.out.println("Email successfully sent");
+            //JOptionPane.showMessageDialog(null,"Email sended!");
+
+        } catch (MessagingException e) {
+            //JOptionPane.showMessageDialog(null,"Something happened!");
+            System.out.println("Email sending failed" + "\n" + e);
+
+            throw new RuntimeException(e);
+        }
+        
+        
+        
+        
     }
 
 }
