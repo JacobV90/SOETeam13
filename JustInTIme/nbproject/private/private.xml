@@ -8,7 +8,9 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/xml/inActiveUsers.xml</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/SourceTestSuite.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/homePage.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/PasswordControlTest.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ForgotPassword.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/DBManagerTest.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/TestRunner.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/EmailVerified.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/servlet/servletTestSuite.java</file>
@@ -20,6 +22,7 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ResetPassword.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/UsersTest.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/DBManager.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/XMLManagerTest.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetPassword.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/index.jsp</file>
@@ -28,6 +31,7 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signupVerify.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Users.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetVerify.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/EmailTest.java</file>
         </group>
     </open-files>
 </project-private>

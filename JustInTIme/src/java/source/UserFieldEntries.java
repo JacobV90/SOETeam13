@@ -10,7 +10,8 @@ package source;
  * @author jacobveal
  */
 public enum UserFieldEntries {
-    
+
     Email, FirstName, LastName, Password, BirthMonth, BirthDay, BirthYear,
-    Gender, PhoneNumber, PinCode, Role;
+    Gender, Phone, Code, Role;
+
 }
