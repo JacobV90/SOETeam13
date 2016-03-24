@@ -72,10 +72,12 @@ public class DBManagerTest {
     @Test
     public void testSelectEntry() {
         System.out.println("selectEntry");
-        String table = "user";
-        String key = "email";
-        String fieldName = "Email";
-        ArrayList<String> expResult = user.getUserDataArray();
+        String table = "user_code";
+        String key = "a52240";
+        String fieldName = "Code";
+        ArrayList<String> expResult = new ArrayList<>();
+        expResult.add("a52240");
+        expResult.add("1");
         ArrayList<String> result = DBManager.selectEntry(table, fieldName, key);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -87,11 +89,11 @@ public class DBManagerTest {
     @Test
     public void testUpdateEntry() {
         System.out.println("updateEntry");
-        String table = "user";
-        String keyCol = "Email";
-        String key = "email";
-        String colName = "FirstName";
-        String value = "Jacob";
+        String table = "user_code";
+        String keyCol = "Code";
+        String key = "a52240";
+        String colName = "isUsed";
+        String value = "1";
         boolean expResult = true;
         boolean result = DBManager.updateEntry(table, keyCol, key, colName, value);
         assertEquals(expResult, result);

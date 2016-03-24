@@ -12,17 +12,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static servlet.EmailVerified.DB_URL;
-import static servlet.EmailVerified.PASS;
-import static servlet.EmailVerified.USER;
 import source.BCrypt;
 import source.PasswordControl;
+import source.DBManager;
 
 /**
  *
@@ -88,63 +87,23 @@ public class ResetPassword extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Connection variables
-        Connection conn = null;
-        PreparedStatement stmt = null;
-
-        // SQL query to grab user
-        final String emailQ = "select * from user where Email = ?;";
-
         if (PasswordControl.validatePass(password)) {
-            
+
             //hash password
             password = BCrypt.hashpw(password, BCrypt.gensalt(10));
-            
-            //Updated flag
-            boolean updated = false;
-            
-            try {
 
-                Class.forName(EmailVerified.JDBC_DRIVER);
+            if (DBManager.updateEntry("user", "Email", email, "Password", password)) {
 
-                // Open a connection
-                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                System.out.println("Password successfully changed");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
 
-                // Prepare sql script
-                stmt = conn.prepareStatement(emailQ, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                stmt.setString(1, email);
+            } else {
+                System.out.println("Password change unsuccessfull");
+                request.getRequestDispatcher("/ResetPassword.jsp").forward(request, response);
 
-                ResultSet rs = stmt.executeQuery();
-                System.out.println("Forgot password user email query executed");
-
-                if (rs.next()) {
-                    rs.updateString("Password", password);
-                    rs.updateRow();
-                    System.out.println("User password updated");
-                    updated = true;
-                } else {
-                    System.out.println("User not found");
-                }
-                
-            } catch (SQLException | ClassNotFoundException se) {
-                System.out.println("Database issue;");
-                request.getRequestDispatcher("/ResetPassword").forward(request, response);
-            } finally {
-                if (stmt != null) {
-                    try {
-                        stmt.close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    if(updated){
-                        request.getRequestDispatcher("/index.jsp").forward(request, response);
-                    }
-                    else{
-                        request.getRequestDispatcher("/ResetPassword.jsp").forward(request, response);
-                    }
-                }
             }
         }
+
     }
 
     /**

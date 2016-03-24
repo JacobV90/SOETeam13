@@ -33,13 +33,11 @@ public class DBManager {
     // Connection variables
     private static Connection conn = null;
     private static PreparedStatement stmt = null;
-
+   
     public static boolean insertEntry(String table, ArrayList<String> entryData) {
 
         //SQL query to determine size of row
         final String selectRow = "select * from " + table + " limit 1;";
-
-        System.out.println("select statement: " + selectRow);
 
         // SQL query to insert a row
         StringBuilder insertRow = new StringBuilder("insert into " + table + " values (");
@@ -47,21 +45,14 @@ public class DBManager {
         try {
             //Prepare statement
             stmt = conn.prepareStatement(selectRow);
-
-            System.out.println("preparedstatement");
-
+            
             //Determine size of row
             ResultSet rs = stmt.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();
             int rowLength = rsd.getColumnCount();
 
-            System.out.println("statement executed");
-
-            System.out.println("Fetch size " + rowLength);
-            System.out.println("Data size " + entryData.size());
-
             //Build insert row SQL query
-            for (int i = 0; i < 11; ++i) {
+            for (int i = 0; i < rowLength; ++i) {
 
                 if (i != 0) {
                     insertRow.append(",?");
@@ -71,9 +62,7 @@ public class DBManager {
             }
             insertRow.append(");");
 
-            System.out.println(insertRow.toString());
-
-            //prepare statement execution
+            //prepare insert statement execution
             stmt = conn.prepareStatement(insertRow.toString());
 
             //add data to sql parameters
@@ -98,29 +87,33 @@ public class DBManager {
     public static ArrayList<String> selectEntry(String table, String fieldName, String value) {
 
         // SQL query script
-        final String selectRow = "select * from " + table + " where ? = ?;";
+        final String selectRow = "select * from " + table + " where "+fieldName+" = ?;";
 
         try {
+
             //Prepare statement
             stmt = conn.prepareStatement(selectRow);
-            int i = 1;
-            stmt.setString(i, fieldName);
-            stmt.setString(++i, value);
+            stmt.setString(1, value);
 
             // Pull entry from database
             ResultSet rs = stmt.executeQuery();
-            rs.next();
+            
+            ResultSetMetaData rsd = rs.getMetaData();
+            int length = rsd.getColumnCount();
 
-            System.out.println("Select statement executed");
+            if (rs.next()) {
+                ArrayList<String> userArr = new ArrayList<>();
 
-            ArrayList<String> userArr = new ArrayList<>();
+                for (int j = 1; j <= length; ++j) {
+                    userArr.add(rs.getString(j));
+                }
 
-            for (UserFieldEntries entry : UserFieldEntries.values()) {
-                userArr.add(rs.getString(entry.toString()));
+                System.out.println("Record succesfully retrieved");
+                return userArr; //return user 
+
+            } else {
+                return null;
             }
-
-            System.out.println("Record succesfully retrieved");
-            return userArr; //return user 
 
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class
@@ -133,8 +126,7 @@ public class DBManager {
     public static boolean updateEntry(String table, String keyCol, String key, String colName, String value) {
 
         final String updateRecord = "update " + table + " set " + colName + " = ? where " + keyCol + " = ?";
-        System.out.println(updateRecord);
-
+        
         try {
 
             //Prepare statement
@@ -176,7 +168,6 @@ public class DBManager {
             System.out.println("Connection to database failed");
             try {
 
-                stmt.close();
                 conn.close();
 
             } catch (SQLException ex) {
@@ -193,7 +184,10 @@ public class DBManager {
 
         try {
 
+            stmt.close();
             conn.close();
+            
+            System.out.println("Database connection closed");
         } catch (SQLException ex) {
 
         }
