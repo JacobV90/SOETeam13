@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package source;
 
 import java.sql.Connection;
@@ -17,7 +12,10 @@ import java.util.logging.Logger;
 import servlet.EmailVerified;
 
 /**
- *
+ * The DBManager class provides methods to push and retrieve information from the database.
+ * initializeConnection needs to be called first before calling any other classes. After database 
+ * accessing call the closeConnection method to close the connection.
+ * 
  * @author jacobveal
  */
 public class DBManager {
@@ -33,7 +31,14 @@ public class DBManager {
     // Connection variables
     private static Connection conn = null;
     private static PreparedStatement stmt = null;
-   
+    
+    /**
+     * The insertEntry method inserts a new row into the specified table
+     * 
+     * @param table - table to access
+     * @param entryData - arrayList containing the entry's values
+     * @return - true if entry statement is successfully executed. false if not.
+     */
     public static boolean insertEntry(String table, ArrayList<String> entryData) {
 
         //SQL query to determine size of row
@@ -45,7 +50,7 @@ public class DBManager {
         try {
             //Prepare statement
             stmt = conn.prepareStatement(selectRow);
-            
+
             //Determine size of row
             ResultSet rs = stmt.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();
@@ -84,10 +89,18 @@ public class DBManager {
 
     }
 
+    /**
+     * THe selectEntry method selects and returns an ArrayList containing the specified rows values.
+     * 
+     * @param table - table to access
+     * @param fieldName - primary key column name
+     * @param value - value to match primary key value
+     * @return - ArrayList containing the row values
+     */
     public static ArrayList<String> selectEntry(String table, String fieldName, String value) {
 
         // SQL query script
-        final String selectRow = "select * from " + table + " where "+fieldName+" = ?;";
+        final String selectRow = "select * from " + table + " where " + fieldName + " = ?;";
 
         try {
 
@@ -97,7 +110,7 @@ public class DBManager {
 
             // Pull entry from database
             ResultSet rs = stmt.executeQuery();
-            
+
             ResultSetMetaData rsd = rs.getMetaData();
             int length = rsd.getColumnCount();
 
@@ -123,10 +136,21 @@ public class DBManager {
 
     }
 
+    /**
+     * The updateEntry method changes the value in the specified column name, primary key value, and 
+     * table.
+     * 
+     * @param table - table to access
+     * @param keyCol - name of the primary key column
+     * @param key - value of the primary key column
+     * @param colName - column name to change value in 
+     * @param value - value to be inserted
+     * @return - true if update statement is executed successfully. false if not.
+     */
     public static boolean updateEntry(String table, String keyCol, String key, String colName, String value) {
 
         final String updateRecord = "update " + table + " set " + colName + " = ? where " + keyCol + " = ?";
-        
+
         try {
 
             //Prepare statement
@@ -149,7 +173,13 @@ public class DBManager {
         }
 
     }
-
+    /**
+     * The initialize connection method establishes a connection between the JDBC driver
+     * and the MySQL database.
+     * 
+     * @return - true if the DriverManager.getConnection does not throw and SQL exception.
+     *              false if it does.
+     */
     public static boolean initializeConnection() {
 
         boolean connection = false;
@@ -180,13 +210,19 @@ public class DBManager {
         return connection;
     }
 
+    /**
+     * 
+     * The closeConnection method closes the database's statement and connection objects.
+     * 
+     */
     public static void closeConnection() {
 
         try {
 
+            // close connections
             stmt.close();
             conn.close();
-            
+
             System.out.println("Database connection closed");
         } catch (SQLException ex) {
 
