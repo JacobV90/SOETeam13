@@ -20,6 +20,7 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signup.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/UserFieldEntries.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/UserCart.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ResetPassword.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/UsersTest.java</file>
@@ -29,9 +30,12 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/index.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/LoginServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/WEB-INF/web.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Product.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signupVerify.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ManagerCart.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Users.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetVerify.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ProductContainer.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/EmailTest.java</file>
         </group>
     </open-files>
