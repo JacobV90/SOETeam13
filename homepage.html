@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Reset Password</title>
+<title>Home</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -10,15 +10,43 @@
    
 </head>
 <body>
-	<p class="Welcome">
-		Welcome
-	</p>
+<!-- Topbar ================================================== -->
+	<div id="topbar" class="topbar">
+		<p class="Welcome">
+			Welcome
+		<p class="cart">
+			<a href="Cart.html">Cart</p>
+	</div>
 <!-- Sidebar ================================================== -->
 	<div id="sidebar" class="sidebar">
 		<li><a href="">My Account</a></li>
-		<li><a href="">My Order</a></li>
-		<li><a href="">My Payment Info</a></li>
-		<li><a href="">Edit Product</a></li>
+		<li><a href="">My Settings</a></li>
+		<li><a href="productpage.html">Edit Product</a></li>
+		<li><a href="">Logout</a></li>
+	</div>
+<!-- Categories ================================================== -->
+	<div id="category" class="category">
+		<ul id="sideManu" class="nav nav-tabs nav-stacked">
+			<li class="subMenu open"><a> ELECTRONICS</a>
+				<ul>
+				<li><a class="active" href="homepage.html"><i class="icon-chevron-right"></i>Cameras </a></li>
+				<li><a href="homepage.html"><i class="icon-chevron-right"></i>Computers, Tablets & laptop</a></li>
+				<li><a href="homepage.html"><i class="icon-chevron-right"></i>Mobile Phone</a></li>
+				<li><a href="homepage.html"><i class="icon-chevron-right"></i>Sound & Vision</a></li>
+				</ul>
+			</li>
+	</div>
+<!-- Products ================================================== -->
+	<div id="product" class="product">
+	<a class="productname">MacPro</a>
+		<li><a class="price"> $1,200 </a></li>
+		<li><a class="productnumber"> 123456 </a></li>
+		<li><a class="productdesc"> New model Macbook pro </a></li>
+	<p class="amount"><label for="amount">Enter how many do you want<label></p>
+	<input id="amount" name="amount" Placeholder="Amount number" required="required" type="text">
+	<a id="addcart" class="addcart" href="Cart">Add to Cart</a>
+	</div>
+
 </body>
 </html><!DOCTYPE html>
 <html >
