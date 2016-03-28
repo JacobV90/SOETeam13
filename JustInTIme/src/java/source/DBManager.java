@@ -71,7 +71,7 @@ public class DBManager {
             stmt = conn.prepareStatement(insertRow.toString());
 
             //add data to sql parameters
-            for (int j = 0; j < 11; ++j) {
+            for (int j = 0; j < rowLength; ++j) {
                 stmt.setString(j + 1, entryData.get(j));
             }
 

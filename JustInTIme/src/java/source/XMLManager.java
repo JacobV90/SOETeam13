@@ -23,13 +23,14 @@ import org.xml.sax.SAXException;
 
 public class XMLManager {
 
-    private static final String FILENAME = "xml/inActiveUsers.xml";
+    private static final String USERFILENAME = "xml/inActiveUsers.xml";
+    private static final String PRODUCTFILENAME = "xml/ProductNumber.xml";
     private static URL file;
 
     public static void addUser(ArrayList<String> userArray) {
 
         try {
-            Document document = initialize();
+            Document document = initialize(USERFILENAME);
             Element root = document.getDocumentElement();
             System.out.println("inActiveUser.xml file found");
 
@@ -68,7 +69,7 @@ public class XMLManager {
 
         try {
             // initialize document and get root element
-            Document document = initialize();
+            Document document = initialize(USERFILENAME);
             Element root = document.getDocumentElement();
 
             System.out.println("inActiveUser.xml file found");
@@ -111,12 +112,42 @@ public class XMLManager {
         return userArray;
     }
 
-    private static Document initialize() throws SAXException, IOException, ParserConfigurationException {
+    public static int getProductNumber() {
+
+        Document document;
+        String itemNum = null;
+        int num = 0;
+        try {
+            
+            document = initialize(PRODUCTFILENAME);
+            Element root = document.getDocumentElement();
+            itemNum = root.getElementsByTagName("number").item(0).getTextContent();
+            System.out.println(itemNum);
+            num = Integer.getInteger(itemNum);
+            System.out.printf("%d \n", num);
+            root.getFirstChild().setTextContent(Integer.toString(++num));
+            --num;
+            close(document);
+
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return num;
+    }
+
+    private static Document initialize(String filePath) throws SAXException, IOException, ParserConfigurationException {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
-        file = XMLManager.class.getClassLoader().getResource(FILENAME);
+        file = XMLManager.class.getClassLoader().getResource(filePath);
+        System.out.println("XML File Found");
 
         return documentBuilder.parse(file.toString());
     }
