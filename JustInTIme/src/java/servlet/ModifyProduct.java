@@ -7,8 +7,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +15,9 @@ import source.DBManager;
 import source.Product;
 
 /**
- *
+ * The ModfiyProduct servlet class communicates with the data base to handle product
+ * inquires from the user interface.
+ * 
  * @author jacobveal
  */
 public class ModifyProduct extends HttpServlet {
@@ -64,7 +64,9 @@ public class ModifyProduct extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> from AddProduct.jsp and ModifiyProduct.jsp
+     * Determines if a product will be added, deleted or modified in relationship to 
+     * the database.
      *
      * @param request servlet request
      * @param response servlet response
@@ -76,21 +78,36 @@ public class ModifyProduct extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
+        //Grab parameters from previous page
         String name = request.getParameter("ProductName");
         String description = request.getParameter("ProductDescription");
-        String action = request.getParameter("addButton");
-        double price = Double.valueOf(request.getParameter("ProductPrice"));
-        int count = Integer.valueOf(request.getParameter("ProductQuantity"));
+        String action = request.getParameter("submit");
+        String itemNum = request.getParameter("itemNum");
+        String price = request.getParameter("ProductPrice");
+        String count = request.getParameter("ProductQuantity");
 
+        //determines which action to perform on the database
         switch (action) {
-            case "Add Product":
+            case "Add":
                 System.out.println(action);
-                Product product = new Product(name, count, price, description);
+                Product product = new Product(name, Integer.valueOf(count), Double.valueOf(price), description);
                 DBManager.initializeConnection();
                 DBManager.insertEntry("item", product.getProduct());
                 //DBManager.insertEntry("itemaddedby", )
                 DBManager.closeConnection();
-
+            case "Delete":
+                System.out.println(action);
+                DBManager.initializeConnection();
+                DBManager.deleteEntry("item", itemNum, "Item_No");
+                DBManager.closeConnection();
+            case "Modify":
+                System.out.println(action);
+                DBManager.initializeConnection();
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Name", name);
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Cost", price);
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Qty", count);
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Desc", description);
+                DBManager.closeConnection();
         }
 
     }

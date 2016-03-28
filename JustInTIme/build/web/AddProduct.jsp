@@ -23,8 +23,8 @@
                     <p><label for="productDescription">Product Description</label><input id="productDescription" name="ProductDescription" placeholder="" required="required" tabindex="4" type="text" size="20"></p>
                     <p><label for="image">Image</label><img src="url" alt="Some txt"> </p>
                     <p><button id="addImage" type="button">Add Image</button> </p>
-                    <p><input class="button" id="add" type="submit" name="addButton" value="Add Product" > 
-                        <input class="button" id="Cancel" type="submit" name="Cancel" value="Cancel" ></p>
+                    <p><input class="button" id="add" type="submit" name="submit" value="Add" > 
+                        <input class="button" id="Cancel" type="submit" name="submit" value="Cancel" ></p>
                 </fieldset>  
 
             </form>

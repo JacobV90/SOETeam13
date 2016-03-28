@@ -53,7 +53,7 @@ public final class ModifyProduct_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("    <body>\n");
       out.write("        <h1>Modify Product</h1>\n");
       out.write("        <div  class=\"form\">\n");
-      out.write("            <form id=\"modifyProducForm\">\n");
+      out.write("            <form id=\"modifyProducForm\" action = \"ModifyProduct\" method=\"post\">\n");
       out.write("                <fieldset>\n");
       out.write("                    <p><label for=\"txtproductNumber\">Product #: </label>\n");
       out.write("                    <p><label for=\"txtProductName\">Product Name</label><input id=\"prodName\" type=\"text\" name=\"txtProductName\" size=\"20\" tabindex=\"1\"></p>    \n");
@@ -62,9 +62,9 @@ public final class ModifyProduct_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    <p><label for=\"productDescription\">Product Description</label><input id=\"productDescription\" name=\"productDescription\" placeholder=\"\" required=\"required\" tabindex=\"4\" type=\"text\" size=\"20\"></p>\n");
       out.write("                    <p><label for=\"image\"></label><img src=\"url\" alt=\"Some image\"> </p>\n");
       out.write("                    <p><button id=\"addImage\" type=\"button\">Add Image</button> </p>\n");
-      out.write("                    <p><input class=\"button\" id=\"modify\" type=\"submit\" name=\"modifyButton\" value=\"Modify\" >  \n");
-      out.write("                    <input class=\"button\" id=\"delete\" type=\"submit\" name=\"deleteButton\" value=\"Delete\" > \n");
-      out.write("                    <input class=\"button\" id=\"Cancel\" type=\"submit\" name=\"Cancel\" value=\"Cancel\" > </p>                    \n");
+      out.write("                    <p><input class=\"button\" id=\"modify\" type=\"submit\" name=\"submit\" value=\"Modify\" >  \n");
+      out.write("                    <input class=\"button\" id=\"delete\" type=\"submit\" name=\"submit\" value=\"Delete\" > \n");
+      out.write("                    <input class=\"button\" id=\"Cancel\" type=\"submit\" name=\"submit\" value=\"Cancel\" > </p>                    \n");
       out.write("              \n");
       out.write("                </fieldset>  \n");
       out.write("\n");

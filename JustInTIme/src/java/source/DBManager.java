@@ -12,10 +12,11 @@ import java.util.logging.Logger;
 import servlet.EmailVerified;
 
 /**
- * The DBManager class provides methods to push and retrieve information from the database.
- * initializeConnection needs to be called first before calling any other classes. After database 
- * accessing call the closeConnection method to close the connection.
- * 
+ * The DBManager class provides methods to push and retrieve information from
+ * the database. initializeConnection needs to be called first before calling
+ * any other classes. After database accessing call the closeConnection method
+ * to close the connection.
+ *
  * @author jacobveal
  */
 public class DBManager {
@@ -31,10 +32,10 @@ public class DBManager {
     // Connection variables
     private static Connection conn = null;
     private static PreparedStatement stmt = null;
-    
+
     /**
      * The insertEntry method inserts a new row into the specified table
-     * 
+     *
      * @param table - table to access
      * @param entryData - arrayList containing the entry's values
      * @return - true if entry statement is successfully executed. false if not.
@@ -89,9 +90,32 @@ public class DBManager {
 
     }
 
+    public static int getRowCount(String table) {
+
+        // SQL query script
+        final String selectRows = "select * from " + table;
+        int count = 0;
+
+        try {
+            //Prepare statement
+            stmt = conn.prepareStatement(selectRows);
+            ResultSet rs = stmt.executeQuery();
+
+            count = 0;
+            while (rs.next()) {
+                ++count;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
     /**
-     * THe selectEntry method selects and returns an ArrayList containing the specified rows values.
-     * 
+     * THe selectEntry method selects and returns an ArrayList containing the
+     * specified rows values.
+     *
      * @param table - table to access
      * @param fieldName - primary key column name
      * @param value - value to match primary key value
@@ -136,16 +160,37 @@ public class DBManager {
 
     }
 
+    public static boolean deleteEntry(String table, String key, String col) {
+
+        final String sql = "DELETE FROM " + table + " WHERE " + col + " = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, key);
+            if (stmt.execute()) {
+                System.out.println("Entry deleted from table " + table);
+                return true;
+            }
+            else{
+                System.out.println("Entry was removed from table "+ table);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
     /**
-     * The updateEntry method changes the value in the specified column name, primary key value, and 
-     * table.
-     * 
+     * The updateEntry method changes the value in the specified column name,
+     * primary key value, and table.
+     *
      * @param table - table to access
      * @param keyCol - name of the primary key column
      * @param key - value of the primary key column
-     * @param colName - column name to change value in 
+     * @param colName - column name to change value in
      * @param value - value to be inserted
-     * @return - true if update statement is executed successfully. false if not.
+     * @return - true if update statement is executed successfully. false if
+     * not.
      */
     public static boolean updateEntry(String table, String keyCol, String key, String colName, String value) {
 
@@ -173,12 +218,13 @@ public class DBManager {
         }
 
     }
+
     /**
-     * The initialize connection method establishes a connection between the JDBC driver
-     * and the MySQL database.
-     * 
-     * @return - true if the DriverManager.getConnection does not throw and SQL exception.
-     *              false if it does.
+     * The initialize connection method establishes a connection between the
+     * JDBC driver and the MySQL database.
+     *
+     * @return - true if the DriverManager.getConnection does not throw and SQL
+     * exception. false if it does.
      */
     public static boolean initializeConnection() {
 
@@ -211,9 +257,10 @@ public class DBManager {
     }
 
     /**
-     * 
-     * The closeConnection method closes the database's statement and connection objects.
-     * 
+     *
+     * The closeConnection method closes the database's statement and connection
+     * objects.
+     *
      */
     public static void closeConnection() {
 

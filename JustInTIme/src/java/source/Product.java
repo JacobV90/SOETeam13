@@ -22,7 +22,7 @@ public class Product {
         this.itemPrice = price;
         this.itemDescription = description;
         DBManager.initializeConnection();
-        this.itemNo = DBManager.selectEntry("item", "Item_No", "0").size();
+        this.itemNo = DBManager.getRowCount("item") + 1;
         DBManager.closeConnection();
     }
 
