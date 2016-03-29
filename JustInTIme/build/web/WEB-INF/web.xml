@@ -17,8 +17,8 @@
         <servlet-class>servlet.ResetPassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ModifyProduct</servlet-name>
-        <servlet-class>servlet.ModifyProduct</servlet-class>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>servlet.ProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -37,8 +37,8 @@
         <url-pattern>/ResetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ModifyProduct</servlet-name>
-        <url-pattern>/ModifyProduct</url-pattern>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/ProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

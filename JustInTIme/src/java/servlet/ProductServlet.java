@@ -15,12 +15,12 @@ import source.DBManager;
 import source.Product;
 
 /**
- * The ModfiyProduct servlet class communicates with the data base to handle product
- * inquires from the user interface.
- * 
+ * The ModfiyProduct servlet class communicates with the data base to handle
+ * product inquires from the user interface.
+ *
  * @author jacobveal
  */
-public class ModifyProduct extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +39,7 @@ public class ModifyProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyProduct</title>");
+            out.println("<title>Servlet Product</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ModifyProduct at " + request.getContextPath() + "</h1>");
@@ -60,13 +60,17 @@ public class ModifyProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String user = request.getParameter("Email");
+        System.out.println(user);
+        System.out.println("Hello from the product server");
+
     }
 
     /**
-     * Handles the HTTP <code>POST</code> from AddProduct.jsp and ModifiyProduct.jsp
-     * Determines if a product will be added, deleted or modified in relationship to 
-     * the database.
+     * Handles the HTTP <code>POST</code> from AddProduct.jsp and
+     * ModifiyProduct.jsp Determines if a product will be added, deleted or
+     * modified in relationship to the database.
      *
      * @param request servlet request
      * @param response servlet response

@@ -38,6 +38,8 @@ public abstract class ProductContainer {
     
     protected void removeProduct(int i){productArray.remove(i);}
     
+    protected ArrayList<Product> getProducts(){return productArray;}
+    
     
     
 }

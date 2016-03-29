@@ -41,54 +41,54 @@ public class ModifyProductTest {
     }
 
     /**
-     * Test of processRequest method, of class ModifyProduct.
+     * Test of processRequest method, of class ProductServlet.
      */
     @Test
     public void testProcessRequest() throws Exception {
         System.out.println("processRequest");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        ModifyProduct instance = new ModifyProduct();
+        ProductServlet instance = new ProductServlet();
         instance.processRequest(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of doGet method, of class ModifyProduct.
+     * Test of doGet method, of class ProductServlet.
      */
     @Test
     public void testDoGet() throws Exception {
         System.out.println("doGet");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        ModifyProduct instance = new ModifyProduct();
+        ProductServlet instance = new ProductServlet();
         instance.doGet(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of doPost method, of class ModifyProduct.
+     * Test of doPost method, of class ProductServlet.
      */
     @Test
     public void testDoPost() throws Exception {
         System.out.println("doPost");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        ModifyProduct instance = new ModifyProduct();
+        ProductServlet instance = new ProductServlet();
         instance.doPost(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getServletInfo method, of class ModifyProduct.
+     * Test of getServletInfo method, of class ProductServlet.
      */
     @Test
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
-        ModifyProduct instance = new ModifyProduct();
+        ProductServlet instance = new ProductServlet();
         String expResult = "";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);

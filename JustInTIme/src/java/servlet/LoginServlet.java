@@ -84,8 +84,6 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("Email");
         String password = request.getParameter("Password");
 
-        String query = "SELECT * FROM  USER WHERE Email = '" + email + "'" + ";";
-
         if (DBManager.initializeConnection()) {
 
             ArrayList<String> user = DBManager.selectEntry("user", "Email", email);
@@ -99,7 +97,14 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("name", firstName);
                 request.setAttribute("role", role);
 
-                request.getRequestDispatcher("homePage.jsp").forward(request, response);
+                switch (role) {
+                    case "Administrator":
+                        System.out.println("Made it to homepage");
+                        request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
+                        break;
+                    case "Manager":
+                        request.getRequestDispatcher("Productpage.jsp").forward(request, response);
+                }
 
             } else {
 
@@ -108,16 +113,14 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}
