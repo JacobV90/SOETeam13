@@ -1,0 +1,12 @@
+body {background: #fff url(../images/bg.jpg) repeat top left;}
+
+.bar
+{
+ width:40;
+}
+
+#right
+{
+    float:right;
+    margin-right:20;
+}
