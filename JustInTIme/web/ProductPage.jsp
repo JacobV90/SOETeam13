@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Product</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	    <!-- Bootstrap Core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-	    <!-- Custom CSS -->
-	    <link href="css/heroic-features.css" rel="stylesheet">
+    <head>
 
 
-</head>
+        <title>Products</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/heroic-features.css" rel="stylesheet">
+
+        <%
+            String categ = request.getParameter("categ");
+
+        %>
+
+    </head>
     <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div id="container" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -40,10 +46,10 @@
                 </ul>
                 <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
                     <li>
-				        <a id="cart" href="#">Cart</a>
-				    </li>
-				    <li>
-				        <a id="logout" href="#">Logout</a>
+                        <a id="cart" href="#">Cart</a>
+                    </li>
+                    <li>
+                        <a id="logout" href="#">Logout</a>
                     </li>
                 </ul>
                 </ul>
@@ -54,30 +60,33 @@
     </nav>
 
 
-<!-- Products ================================================== -->
-<table border="1" style="width:20%">
-    <tr>
-    <td>Item #</td>
-    <td>00001</td>
-  </tr>
-    <tr>
-    <td>Name</td>
-    <td>MacPro</td>
-  </tr>
-  <tr>
-    <td>Price</td>
-    <td>$600</td>
-  </tr>
-  <tr>
-    <td>Quantity Available</td>
-    <td>10</td>
-  </tr>
-    <tr>
-    <td>Description</td>
-    <td>New Model Macbook Pro for Students</td>
-  </tr>
-</table>
-  <a id="buy" href="#" class="btn btn-primary">Buy </a>
+    <!-- Products ================================================== -->
+    <table border="1" style="width:35%">
+        <tr>
+            <th>${categ}</th>
+        </tr>
+        <tr>
+            <td>Item #</td>
+            <td>00001</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>MacPro</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>$600</td>
+        </tr>
+        <tr>
+            <td>Quantity Available</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>New Model Macbook Pro for Students</td>
+        </tr>
+    </table>
+    <a id="buy" href="#" class="btn btn-primary">Buy </a>
 
 </body>
 </html>

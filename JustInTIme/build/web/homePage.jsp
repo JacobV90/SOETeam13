@@ -27,7 +27,7 @@
         <%
             String name = request.getParameter("name");
             String role = request.getParameter("role");
-                 
+
         %>
 
     </head>
@@ -76,8 +76,10 @@
 
         <!-- Page Content -->
         <div id="search" class="search">
-            <input type="text">
-            <a><a href="#" class="btn btn-primary">Find it</a>
+            <form action = "SearchServlet" method ="post">
+                <input type="text" name="Product">
+                <input type ="submit" value="Search">
+            </form>
         </div>
         <div class="container">
 
@@ -107,13 +109,13 @@
                             <h3>Electronics</h3>
                             <p>Labtops, TVs, Desktops, and etc here.</p>
                             <p>
-                                <a id="electronics" href="#" class="btn btn-primary">Explore!</a>
+                                <a id="electronics" href="http://localhost:8080/JustInTime/ProductPage.jsp?categ=electronics" class="btn btn-primary">Explore!</a>
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div id="col-md-3 col-sm-6 hero-feature" class="col-md-3 col-sm-6 hero-feature">
+                <div id="hero-feature" class="col-md-3 col-sm-6 hero-feature">
                     <div id="thumbnail" class="thumbnail">
                         <img src="http://placehold.it/800x500" alt="">
                         <div id="caption" class="caption">
@@ -126,7 +128,7 @@
                     </div>
                 </div>
 
-                <div id="col-md-3 col-sm-6 hero-feature" class="col-md-3 col-sm-6 hero-feature">
+                <div id="hero-feature" class="col-md-3 col-sm-6 hero-feature">
                     <div id="thumbnail" class="thumbnail">
                         <img src="http://placehold.it/800x500" alt="">
                         <div id="caption" class="caption">
@@ -139,7 +141,7 @@
                     </div>
                 </div>
 
-                <div id="col-md-3 col-sm-6 hero-feature" class="col-md-3 col-sm-6 hero-feature">
+                <div id="hero-feature" class="col-md-3 col-sm-6 hero-feature">
                     <div id="thumbnail" class="thumbnail">
                         <img src="http://placehold.it/800x500" alt="">
                         <div id="caption" class="caption">

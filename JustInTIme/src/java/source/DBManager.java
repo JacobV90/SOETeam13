@@ -159,6 +159,8 @@ public class DBManager {
         }
 
     }
+    
+    public static 
 
     public static boolean deleteEntry(String table, String key, String col) {
 
