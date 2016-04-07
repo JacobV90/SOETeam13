@@ -7,10 +7,17 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import source.DBManager;
+import source.Product;
 
 /**
  *
@@ -70,10 +77,37 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String product = request.getParameter("Product");
-        System.out.println("Hello from the search servlet");
-        System.out.println(product);
 
+        System.out.println("Search Servlet: ");
+        String keyword = request.getParameter("Product");
+        ArrayList<String> array = new ArrayList<>();
+        array.add("Item_Name");
+
+        // Fetch products from database based on inputted keyword
+        DBManager.initializeConnection();
+        HashMap<String, ArrayList<String>> productMap = DBManager.searchTable("item", array, keyword);
+        DBManager.closeConnection();
+
+        List<Product> list = new ArrayList<>();
+
+        for (Map.Entry<String, ArrayList<String>> entry : productMap.entrySet()) {
+            ArrayList<String> plist = entry.getValue();
+            Product product = new Product();
+
+            // Create product object
+            if (plist != null) {
+                product.setItemNo(Integer.valueOf(plist.get(0)));
+                product.setItemName(plist.get(1));
+                product.setItemPrice(Integer.valueOf(plist.get(2)));
+                product.setItemCount(Integer.valueOf(plist.get(3)));
+                product.setItemDescription(plist.get(4));
+                list.add(product);
+            }
+        }
+        
+        System.out.println("Product list size: "+list.size());
+        request.setAttribute("productList", list);
+        request.getRequestDispatcher("/ProductPage.jsp").forward(request, response);
     }
 
     /**

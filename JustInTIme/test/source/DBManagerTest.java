@@ -6,6 +6,7 @@
 package source;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -97,6 +98,18 @@ public class DBManagerTest {
         boolean expResult = true;
         boolean result = DBManager.updateEntry(table, keyCol, key, colName, value);
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    @Test
+    public void searchTable() {
+        System.out.println("searchTable");
+        String table = "item";
+        List<String> colArr = new ArrayList<>();
+        colArr.add("Item_Name");
+        String keyword = "mac";
+        String expected = "select * from item where Item_Name like '%mac%'";
+       // assertEquals(expected, result);
         // TODO review the generated test code and remove the default call to fail.
     }
 

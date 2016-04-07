@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import servlet.EmailVerified;
@@ -159,21 +161,65 @@ public class DBManager {
         }
 
     }
-    
-    public static 
+
+    public static HashMap searchTable(String table, List colArr, String keyword) {
+
+        String sql = "select * from " + table + " where ";
+        StringBuilder sb = new StringBuilder(sql);
+        for (int i = 0; i < colArr.size(); ++i) {
+            if (i == 0) {
+                sb.append(colArr.get(i) + " like '%" + keyword + "%'");
+            } else {
+
+                sb.append(" or " + colArr.get(i) + " like '%" + keyword + "%'");
+            }
+
+        }
+
+        try {
+
+            stmt = conn.prepareStatement(sb.toString());
+            ResultSet rs = stmt.executeQuery();
+            System.out.println("Search Query Executed");
+            System.out.println(sb.toString());
+
+            HashMap<Integer, ArrayList<String>> productMap = new HashMap<>();
+
+            int i = 0;
+            while (rs.next()) {
+                System.out.println("Results found");
+                ArrayList<String> productArr = new ArrayList<>();
+
+                productArr.add(String.valueOf(rs.getInt(1)));
+                productArr.add(rs.getString(2));
+                productArr.add(rs.getString(3));
+                productArr.add(rs.getString(4));
+                productArr.add(rs.getString(5));
+                productMap.put(i, productArr);
+                ++i;
+            }
+            System.out.println("Product Map size: " + productMap.size());
+
+            return productMap;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
 
     public static boolean deleteEntry(String table, String key, String col) {
 
-        final String sql = "DELETE FROM " + table + " WHERE " + col + " = ?";
+        String sql = "DELETE FROM " + table + " WHERE " + col + " = ?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, key);
             if (stmt.execute()) {
                 System.out.println("Entry deleted from table " + table);
                 return true;
-            }
-            else{
-                System.out.println("Entry was removed from table "+ table);
+            } else {
+                System.out.println("Entry was removed from table " + table);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);

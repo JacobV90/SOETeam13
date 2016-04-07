@@ -1,12 +1,13 @@
 package source;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Owner
  */
-public class Product {
+public class Product implements Serializable{
 
     private int itemNo;
     private String itemName;
@@ -14,6 +15,10 @@ public class Product {
     private double itemPrice;
     private String itemDescription;
     private static int productCount = 0;
+    
+    public Product(){
+        
+    }
 
     //class constructor
     public Product(String name, int count, double price, String description) {

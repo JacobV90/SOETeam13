@@ -1,7 +1,10 @@
+<%@page import="source.Product"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
 
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <title>Products</title>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
@@ -12,11 +15,6 @@
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
-
-        <%
-            String categ = request.getParameter("categ");
-
-        %>
 
     </head>
     <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -61,32 +59,30 @@
 
 
     <!-- Products ================================================== -->
-    <table border="1" style="width:35%">
+
+    <table border="1" style="width:35%" align = "center">
         <tr>
-            <th>${categ}</th>
+            <th align = "center">Product Name</th>
+            <th align = "center">Product Number</th>
+            <th align = "center">Product Price</th>
+            <th align = "center">Product Availability</th>
+            <th align = "center">Product Description</th>
         </tr>
-        <tr>
-            <td>Item #</td>
-            <td>00001</td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>MacPro</td>
-        </tr>
-        <tr>
-            <td>Price</td>
-            <td>$600</td>
-        </tr>
-        <tr>
-            <td>Quantity Available</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>Description</td>
-            <td>New Model Macbook Pro for Students</td>
-        </tr>
+
+        <c:forEach items="${productList}" var="product">
+
+            <tr>
+                <td align = "center"><a href="http://localhost:8080/JustInTime/HomePage.jsp">${product.itemName}</a></td>
+                <td align = "center">#${product.itemNo}</td>
+                <td align = "center">$${product.itemPrice}</td>
+                <td align = "center">${product.itemCount}</td>
+                <td align = "center">${product.itemDescription}</td>
+            </tr>
+        </c:forEach>
+            
     </table>
-    <a id="buy" href="#" class="btn btn-primary">Buy </a>
+
+    
 
 </body>
 </html>
