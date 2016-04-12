@@ -88,8 +88,10 @@ public class SearchServlet extends HttpServlet {
         HashMap<String, ArrayList<String>> productMap = DBManager.searchTable("item", array, keyword);
         DBManager.closeConnection();
 
+        // ArrayList to hold product values
         List<Product> list = new ArrayList<>();
 
+        // iterate through map and retreive product values
         for (Map.Entry<String, ArrayList<String>> entry : productMap.entrySet()) {
             ArrayList<String> plist = entry.getValue();
             Product product = new Product();

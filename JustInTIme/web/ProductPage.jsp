@@ -27,7 +27,7 @@
                     <span id="icon-bar" class="icon-bar"></span>
                     <span id="icon-bar" class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Welcome Product Manager</a>
+                <a class="navbar-brand">Just In Time Inventories</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -59,7 +59,12 @@
 
 
     <!-- Products ================================================== -->
-
+    <div align = "center">
+        <form action = "SearchServlet" method ="post">
+            <input type="text" name="Product">
+            <input type ="submit" value="Search">
+        </form>
+    </div>
     <table border="1" style="width:35%" align = "center">
         <tr>
             <th align = "center">Product Name</th>
@@ -70,19 +75,25 @@
         </tr>
 
         <c:forEach items="${productList}" var="product">
-
             <tr>
-                <td align = "center"><a href="http://localhost:8080/JustInTime/HomePage.jsp">${product.itemName}</a></td>
+                <c:url value="/ProductDetails.jsp" var = "productDetails">
+                    <c:param name = "productNumber" value = "${product.itemNo}"/>
+                    <c:param name = "productName" value = "${product.itemName}"/>
+                    <c:param name = "productPrice" value = "${product.itemPrice}"/>
+                    <c:param name = "productCount" value = "${product.itemCount}"/>
+                    <c:param name = "productDescription" value = "${product.itemDescription}"/>
+                </c:url>
+                <td align = "center"><a href="${productDetails}">${product.itemName}</td>
                 <td align = "center">#${product.itemNo}</td>
                 <td align = "center">$${product.itemPrice}</td>
                 <td align = "center">${product.itemCount}</td>
                 <td align = "center">${product.itemDescription}</td>
             </tr>
         </c:forEach>
-            
+
     </table>
 
-    
+
 
 </body>
 </html>
