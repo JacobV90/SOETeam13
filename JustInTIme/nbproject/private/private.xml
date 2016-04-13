@@ -3,50 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Email.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/xml/inActiveUsers.xml</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ModifyProduct.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/SourceTestSuite.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/ProductTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/PasswordControlTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ForgotPassword.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/DBManagerTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/TestRunner.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/servlet/ModifyProductTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductPage.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/EmailVerified.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/servlet/servletTestSuite.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PasswordControl.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/servlet/EmailVerifiedTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/BCrypt.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/HomePage.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signup.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/UserFieldEntries.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/UserCart.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ResetPassword.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductDetails.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/UsersTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/DBManager.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ManagerProductPage.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/XMLManagerTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetPassword.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/index.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/LoginServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/WEB-INF/web.xml</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ProductServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductPage.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Product.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signupVerify.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/xml/ProductNumber.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/CartServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/SearchServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ManagerCart.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Users.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/newjsp.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ResetVerify.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/Cart.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductDetails.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ProductContainer.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/AddProduct.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/EmailTest.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/xml/ProductNumber.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
         </group>
     </open-files>
 </project-private>

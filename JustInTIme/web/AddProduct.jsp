@@ -14,7 +14,7 @@
     <body>
         <h1>Add Product</h1>
         <div  class="form">
-            <form id="addProducForm" action="ModifyProduct" method="post">
+            <form id="addProducForm" action="ProductServlet" method="post">
                 <fieldset>  
                     <p><label for="ProductNumber">Product #: </label>
                     <p><label for="ProductName">Product Name</label><input id="prodName" type="text" name="ProductName" size="20"></p>

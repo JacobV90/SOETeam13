@@ -7,23 +7,20 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import source.DBManager;
 import source.Product;
+import source.ProductContainer;
+import source.XMLManager;
 
 /**
  *
  * @author jacobveal
  */
-public class SearchServlet extends HttpServlet {
+public class CartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +39,10 @@ public class SearchServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchServlet</title>");
+            out.println("<title>Servlet CartServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CartServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +60,16 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String email = (String) request.getSession().getAttribute("userEmail");
+        String itemNo = request.getParameter("productNumber");
+        List productList = (List) request.getSession().getAttribute("productList");
+        for (Object item : productList) {
+            Product prod = (Product) item;
+            if (String.valueOf(prod.getItemNo()).equals(itemNo)) {
+                request.setAttribute("product", prod);
+                request.getRequestDispatcher("/Cart.jsp").forward(request, response);
+            }
+        }
     }
 
     /**
@@ -78,38 +84,30 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("Search Servlet: ");
-        String keyword = request.getParameter("Product");
-        ArrayList<String> array = new ArrayList<>();
-        array.add("Item_Name");
+        String action = request.getParameter("action");
+        String email = (String) request.getSession().getAttribute("userEmail");
 
-        // Fetch products from database based on inputted keyword
-        DBManager.initializeConnection();
-        HashMap<String, ArrayList<String>> productMap = DBManager.searchTable("item", array, keyword);
-        DBManager.closeConnection();
+        switch (action) {
+            case "addtocart":
+                String itemNum = request.getParameter("productNumber");
+                List productList = (List) request.getSession().getAttribute("productList");
+                for (Object item : productList) {
+                    Product prod = (Product) item;
+                    if (String.valueOf(prod.getItemNo()).equals(itemNum)) {
+                        XMLManager.addProductToCart(email, prod);
+                        System.out.println(prod.getItemName());
+                    }
+                }
+                break;
+            default:
+                break;
 
-        // ArrayList to hold product values
-        List<Product> list = new ArrayList<>();
-
-        // iterate through map and retreive product values
-        for (Map.Entry<String, ArrayList<String>> entry : productMap.entrySet()) {
-            ArrayList<String> plist = entry.getValue();
-            Product product = new Product();
-
-            // Create product object
-            if (plist != null) {
-                product.setItemNo(Integer.valueOf(plist.get(0)));
-                product.setItemName(plist.get(1));
-                product.setItemPrice(Integer.valueOf(plist.get(2)));
-                product.setItemCount(Integer.valueOf(plist.get(3)));
-                product.setItemDescription(plist.get(4));
-                list.add(product);
-            }
         }
         
-        System.out.println("Product list size: "+list.size());
-        request.getSession().setAttribute("productList", list);
-        request.getRequestDispatcher("/ProductPage.jsp").forward(request, response);
+        ProductContainer cart = XMLManager.getCart(email);
+        request.getSession().setAttribute("Cart", cart);
+        request.getRequestDispatcher("/Cart.jsp").forward(request, response);
+
     }
 
     /**

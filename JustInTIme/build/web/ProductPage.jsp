@@ -66,6 +66,10 @@
         </form>
     </div>
     <table border="1" style="width:35%" align = "center">
+        <div>
+            <input type="hidden" name="action" value="details" />
+
+        </div
         <tr>
             <th align = "center">Product Name</th>
             <th align = "center">Product Number</th>
@@ -75,13 +79,15 @@
         </tr>
 
         <c:forEach items="${productList}" var="product">
+            
             <tr>
-                <c:url value="/ProductDetails.jsp" var = "productDetails">
+                <c:url value="/ProductServlet" var = "productDetails">
                     <c:param name = "productNumber" value = "${product.itemNo}"/>
                     <c:param name = "productName" value = "${product.itemName}"/>
                     <c:param name = "productPrice" value = "${product.itemPrice}"/>
                     <c:param name = "productCount" value = "${product.itemCount}"/>
                     <c:param name = "productDescription" value = "${product.itemDescription}"/>
+                    <c:param name = "action" value = "details"/>
                 </c:url>
                 <td align = "center"><a href="${productDetails}">${product.itemName}</td>
                 <td align = "center">#${product.itemNo}</td>

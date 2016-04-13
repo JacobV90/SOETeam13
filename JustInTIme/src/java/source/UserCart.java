@@ -15,11 +15,11 @@ public class UserCart extends ProductContainer {
         super(email);
     }
     
-    //sum cost of each item from array list
+   /* //sum cost of each item from array list
     public Double getTotalPrice(){
         for (int i = 0 ; i<= productArr.size() ; i++)
-        sum += getPrice(i);
+        ;sum += getCartPrice(i);
         return sum;
-    }
+    }*/
     
 }

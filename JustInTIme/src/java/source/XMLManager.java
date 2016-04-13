@@ -3,6 +3,7 @@ package source;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -112,13 +113,132 @@ public class XMLManager {
         return userArray;
     }
 
+    public static void addProductToCart(String email, Product product) {
+
+        Document document;
+
+        try {
+
+            document = initialize(PRODUCTFILENAME);
+            Element root = document.getDocumentElement();
+            NodeList nl = root.getElementsByTagName("user");
+            String userEmail = null;
+            Element user = null;
+
+            for (int i = 0; i < nl.getLength(); ++i) {
+                user = (Element) nl.item(i);
+                if (user.getAttribute("email").equals(email)) {
+                    userEmail = user.getAttribute("email");
+                    i = nl.getLength(); // exit loop
+                }
+            }
+
+            if (userEmail == null & userEmail != "") {
+                System.out.println("User not found. Adding user and product to cart...");
+                Element newUser = document.createElement("user");
+                Element item = document.createElement("product");
+                newUser.setAttribute("email", email);
+                item.setAttribute("id", String.valueOf(product.getItemNo()));
+                ArrayList<String> array = product.getProduct();
+
+                for (String value : array) {
+                    Element el = document.createElement("productValue");
+                    el.setTextContent(value);
+                    item.appendChild(el);
+                }
+
+                newUser.appendChild(item);
+                root.appendChild(newUser);
+                System.out.println("User and product added to cart");
+
+            } else {
+                System.out.println("User found. Adding product...");
+                Element item = document.createElement("product");
+                item.setAttribute("id", String.valueOf(product.getItemNo()));
+                ArrayList<String> array = product.getProduct();
+
+                for (String value : array) {
+                    Element el = document.createElement("productValue");
+                    el.setTextContent(value);
+                    item.appendChild(el);
+                }
+
+                user.appendChild(item);
+                System.out.println("Product added to user's cart");
+
+            }
+            close(document);
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static ProductContainer getCart(String email) {
+
+        Document document;
+        List<Product> cart = new ArrayList<>();
+        ProductContainer cartObj = new ProductContainer(email);
+
+        try {
+            document = initialize(PRODUCTFILENAME);
+            Element root = document.getDocumentElement();
+            NodeList nl = root.getElementsByTagName("user");
+            System.out.println("Found user status = " + nl.getLength());
+            for (int i = 0; i < nl.getLength(); ++i) {
+                Element user = (Element) nl.item(i);
+                if (user.getAttribute("email").equals(email)) {
+                    System.out.println("User found. Retrieving cart..");
+                    NodeList nl2 = user.getElementsByTagName("product");
+
+                    System.out.println("Number of products: " + nl2.getLength());
+                    for (int j = 0; j < nl2.getLength(); ++j) {
+                        List<String> list = new ArrayList<>();
+                        Element item = (Element) nl2.item(j);
+                        NodeList nl3 = item.getElementsByTagName("productValue");
+                        for (int k = 0; k < nl3.getLength(); ++k) {
+                            list.add(nl3.item(k).getTextContent());
+                            System.out.println(nl3.item(k).getTextContent());
+
+                        }
+                        Product product = new Product();
+                        product.createProduct(list);
+                        cart.add(product);
+                        cartObj.addProduct(product);
+                    }
+
+                    i = nl.getLength(); // exit loop
+                }
+            }
+            System.out.println("User cart Retrieved");
+            close(document);
+
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return cartObj;
+    }
+
     public static int getProductNumber() {
 
         Document document;
         String itemNum = null;
         int num = 0;
         try {
-            
+
             document = initialize(PRODUCTFILENAME);
             Element root = document.getDocumentElement();
             itemNum = root.getElementsByTagName("number").item(0).getTextContent();
@@ -151,7 +271,13 @@ public class XMLManager {
 
         return documentBuilder.parse(file.toString());
     }
-
+    /**
+     * Writes the contents of the document object to the DOM (Document Object
+     * Model) source.
+     * 
+     * @param doc - the document object 
+     * @throws TransformerException 
+     */
     private static void close(Document doc) throws TransformerException {
 
         DOMSource source = new DOMSource(doc);

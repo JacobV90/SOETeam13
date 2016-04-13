@@ -180,8 +180,14 @@ public class DBManager {
 
             stmt = conn.prepareStatement(sb.toString());
             ResultSet rs = stmt.executeQuery();
+
+            ResultSetMetaData rsd = rs.getMetaData();
+            int rowLength = rsd.getColumnCount();
+
             System.out.println("Search Query Executed");
             System.out.println(sb.toString());
+            System.out.println("row length: " +rowLength);
+
 
             HashMap<Integer, ArrayList<String>> productMap = new HashMap<>();
 
@@ -190,11 +196,9 @@ public class DBManager {
                 System.out.println("Results found");
                 ArrayList<String> productArr = new ArrayList<>();
 
-                productArr.add(String.valueOf(rs.getInt(1)));
-                productArr.add(rs.getString(2));
-                productArr.add(rs.getString(3));
-                productArr.add(rs.getString(4));
-                productArr.add(rs.getString(5));
+                for (int j = 1; j <= rowLength; ++j) {
+                    productArr.add(rs.getString(j));
+                }
                 productMap.put(i, productArr);
                 ++i;
             }

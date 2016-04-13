@@ -5,22 +5,37 @@
  */
 package source;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author jacobveal
  */
-public abstract class ProductContainer {
+public class ProductContainer implements Serializable{
     
-    private final String userEmail;
-    private ArrayList<Product> productArray = null;
+    private String userEmail;
+    private List<Product> productArray;
+    private double cartPrice = 0;
+    
+    public ProductContainer(){productArray = new ArrayList<>();}
     
     public ProductContainer(String email){
+        productArray = new ArrayList<>();
         this.userEmail = email;
     }
     
-    public void addProduct(Product item){productArray.add(item);}
+    public void addProduct(Product item){
+        cartPrice += item.getTotalPrice();
+        productArray.add(item);
+    }
+    
+    public List<Product> getProductArray(){return productArray;}
+    
+    public double getCartPrice(){return cartPrice;}
+
+    protected void setUserEmail(String email){this.userEmail = email;}
     
     protected String getUserEmail(){return this.userEmail;}
     
@@ -30,7 +45,6 @@ public abstract class ProductContainer {
     
     protected int getProductCount(int i){return getProduct(i).getItemCount();}
     
-    protected double getPrice(int i){return getProduct(i).getTotalPrice();}
     
     protected int getProductNum(int i){return getProduct(i).getItemNo();}
     
@@ -38,8 +52,6 @@ public abstract class ProductContainer {
     
     protected void removeProduct(int i){productArray.remove(i);}
     
-    protected ArrayList<Product> getProducts(){return productArray;}
     
-    
-    
+        
 }

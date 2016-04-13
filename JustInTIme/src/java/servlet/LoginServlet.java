@@ -10,12 +10,16 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import source.BCrypt;
 import source.DBManager;
+import source.Product;
+import source.ProductContainer;
 
 /**
  *
@@ -82,6 +86,8 @@ public class LoginServlet extends HttpServlet {
         System.out.println("    Login Servlet:");
 
         String email = request.getParameter("Email");
+        System.out.println(email);
+
         String password = request.getParameter("Password");
 
         if (DBManager.initializeConnection()) {
@@ -98,12 +104,32 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("role", role);
 
                 switch (role) {
-                    case "Administrator":
+                    case "User":
                         System.out.println("Made it to homepage");
+                        ///ProductContainer cart = new Product
+                        request.getSession().setAttribute("userEmail", email);
                         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
                         break;
                     case "Manager":
-                        request.getRequestDispatcher("Productpage.jsp").forward(request, response);
+
+                        ProductContainer products = new ProductContainer(email);
+                        ArrayList<String> array = new ArrayList<>();
+                        array.add("Email");
+
+                        // Fetch products from database based on inputted keyword
+                        DBManager.initializeConnection();
+                        HashMap<String, ArrayList<String>> productItemNumMap = DBManager.searchTable("itemaddedby", array, email);
+                        for (Map.Entry<String, ArrayList<String>> entry : productItemNumMap.entrySet()) {
+                            ArrayList<String> plist = entry.getValue();
+                            Product product = new Product();
+                            product.createProduct(DBManager.selectEntry("item", "Item_No", plist.get(1)));
+                            products.addProduct(product);
+                        }
+
+                        request.getSession().setAttribute("userEmail", email);
+                        request.getSession().setAttribute("productList", products);
+                        request.getRequestDispatcher("/ManagerProductPage.jsp").forward(request, response);
+                        break;
                 }
 
             } else {

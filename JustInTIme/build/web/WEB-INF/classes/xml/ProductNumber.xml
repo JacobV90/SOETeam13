@@ -1,11 +1,161 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
--->
+--><root>
 
 
-<root>
-    <number>0</number>
+
+
+
+<user email="jacobveal90@gmail.com">
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="4">
+<productValue>4</productValue>
+<productValue>MacBook Pro</productValue>
+<productValue>340.0</productValue>
+<productValue>3</productValue>
+<productValue>Laptop</productValue>
+</product>
+<product id="4">
+<productValue>4</productValue>
+<productValue>MacBook Pro</productValue>
+<productValue>340.0</productValue>
+<productValue>3</productValue>
+<productValue>Laptop</productValue>
+</product>
+<product id="4">
+<productValue>4</productValue>
+<productValue>MacBook Pro</productValue>
+<productValue>340.0</productValue>
+<productValue>3</productValue>
+<productValue>Laptop</productValue>
+</product>
+<product id="6">
+<productValue>6</productValue>
+<productValue>MacBook Pro</productValue>
+<productValue>340.0</productValue>
+<productValue>3</productValue>
+<productValue>Laptop</productValue>
+</product>
+<product id="2">
+<productValue>2</productValue>
+<productValue>MacBook pro</productValue>
+<productValue>1200.0</productValue>
+<productValue>1</productValue>
+<productValue/>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="1">
+<productValue>1</productValue>
+<productValue>Sony Vaio</productValue>
+<productValue>150.0</productValue>
+<productValue>25</productValue>
+<productValue>My old laptop :(</productValue>
+</product>
+<product id="0">
+<productValue>0</productValue>
+<productValue>Computer</productValue>
+<productValue>100.0</productValue>
+<productValue>1</productValue>
+<productValue/>
+</product>
+</user>
 </root>

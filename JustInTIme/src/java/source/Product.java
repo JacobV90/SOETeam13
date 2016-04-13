@@ -2,6 +2,7 @@ package source;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,7 +15,7 @@ public class Product implements Serializable{
     private int itemCount;
     private double itemPrice;
     private String itemDescription;
-    private static int productCount = 0;
+    private double totalPrice = itemPrice * itemCount;
     
     public Product(){
         
@@ -88,5 +89,14 @@ public class Product implements Serializable{
 
         return array;
 
+    }
+    
+    public void createProduct(List<String> values){
+        
+        this.itemNo = Integer.valueOf(values.get(0));
+        this.itemName = values.get(1);
+        this.itemPrice = Double.valueOf(values.get(2));
+        this.itemCount = Integer.valueOf(values.get(3));
+        this.itemDescription = values.get(4);
     }
 }
