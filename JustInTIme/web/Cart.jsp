@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-     <head>
+    <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <meta charset="utf-8">
@@ -34,12 +34,12 @@
         <%
             String name = request.getParameter("name");
             String role = request.getParameter("role");
-                 
+
         %>
 
     </head>
-<!-- Navigation -->
-<body>
+    <!-- Navigation -->
+    <body>
         <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div id="container" class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,67 +58,83 @@
                         <li>
                             <a id="myaccount" href="#">My account</a>
                         </li>
-<!--                        <li>
-                            <a id="mysettings" href="#">My Settings</a>
-                        </li>-->
-<!--                        <li>
-                            <a id="myorder" href="#">My order</a>
-                        </li>-->
-                    </ul>
-                    <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
-<!--                        <li>
-                            <a id="cart" href="#">Cart</a>
-                        </li>-->
                         <li>
-                            <a id="logout" href="index.jsp">Logout</a>
+                            <a id="homepage" href="HomePage.jsp">Home</a>
                         </li>
+                        <li>
+                            <a id="logout" href="LogoutServlet">Logout</a>
+                        </li>
+                        <!--                        <li>
+                                                    <a id="mysettings" href="#">My Settings</a>
+                                                </li>-->
+                        <!--                        <li>
+                                                    <a id="myorder" href="#">My order</a>
+                                                </li>-->
                     </ul>
+                        <!--                        <li>
+                                                    <a id="cart" href="#">Cart</a>
+                                                </li>-->
+                        
+                        </ </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
         </nav>
-         <hr>
+        <hr>
         <!-- Title -->
-            <div id="row" class="row">
-                <div id="col-lg-12" class="col-lg-12">
-                    <h2>Cart</h2>
-                </div>
+        <div id="row" class="row">
+            <div id="col-lg-12" class="col-lg-12">
+                <div id="search" class="search">
+                    <form action = "SearchServlet" method ="post">
+                        <input type="text" name="Product">
+                        <input type ="submit" value="Search">
+                    </form>
+                </div><h2>Cart</h2>
             </div>
-            <!-- /.row -->        
-            <!-- Page Features -->
-            <div id="row text-center" class="row text-center">
+        </div>
+        <!-- /.row -->        
+        <!-- Page Features -->
+       
 
-                <div id="col-md-3 col-sm-6 hero-feature" class="col-md-3 col-sm-6 hero-feature">
-                    <c:forEach items = "${Cart.productArray}" var ="product">
+                <c:forEach items = "${Cart.productArray}" var ="product">
+
                     <div id="thumbnail" class="thumbnail">
+
                         <img src="http://placehold.it/800x500" alt="">
                         <div id="caption" class="caption">
                             <h3>${product.itemName}</h3>
                             <p>${product.itemCount}</p> 
                             <p>Total: $${product.totalPrice}</p>
-                            <p><a id="removecart1" href="#">Remove from cart</a></p>
+                            <form action ="CartServlet" method ="post">
+                                <input type="hidden" name="action" value="deletefromcart">
+                                <input type="hidden" name="productNumber" value="${product.itemNo}">
+                                <input type = "submit" value="Remove">
+                            </form>
                         </div>
-                    </div>
-                    </c:forEach>
-                    
-                </div>
-                                              
-                <div>
-                    <p>Total Price -> ${Cart.cartPrice}</p>
-<!--                    <p><input class="button" id="buy" type="submit" name="payAmount" value="Pay" ></p>
-                    <p><input class="button" id="Cancel" type="submit" name="Cancel" value="Cancel" ></p>-->
-                    <p>
-                    <form name = "pay"  action = "PurchaseOrder.jsp" method="get">
-                          <input class="btn btn-primary" id="pay" type = "submit">
-                    </form>      
-                    <p><a class="btn btn-primary" id="cancel" type="submit" href="homePage.jsp">Cancel</a></p>
-                </div>
-     
-                <!-- jQuery -->
-        <script src="js/jquery.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-        </body>
+                    </div>
+
+
+                </c:forEach>
+
+
+            <div>
+                <p>Total Price -> $${Cart.cartPrice}</p>
+                <!--                    <p><input class="button" id="buy" type="submit" name="payAmount" value="Pay" ></p>
+                                    <p><input class="button" id="Cancel" type="submit" name="Cancel" value="Cancel" ></p>-->
+                
+                <form name = "pay"  action = "POBufferServlet" method="post">
+                    
+                    <input class="btn btn-primary" id="pay" type = "submit" name="Pay">
+                </form>      
+                <p><a class="btn btn-primary" id="cancel" href="HomePage.jsp">Cancel</a></p>
+            </div>
+
+            <!-- jQuery -->
+            <script src="js/jquery.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="js/bootstrap.min.js"></script>
+    </body>
 </html>

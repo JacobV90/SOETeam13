@@ -149,10 +149,10 @@ public class XMLManager {
 
                 newUser.appendChild(item);
                 root.appendChild(newUser);
-                System.out.println("User and product added to cart");
+                System.out.println(email + " and product added to cart");
 
             } else {
-                System.out.println("User found. Adding product...");
+                System.out.println(email + " found. Adding product...");
                 Element item = document.createElement("product");
                 item.setAttribute("id", String.valueOf(product.getItemNo()));
                 ArrayList<String> array = product.getProduct();
@@ -164,9 +164,51 @@ public class XMLManager {
                 }
 
                 user.appendChild(item);
-                System.out.println("Product added to user's cart");
+                System.out.println("Product added to " + email + "'s cart");
 
             }
+            close(document);
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static void removeProductFromCart(String email, String itemNum) {
+        Document document;
+        try {
+
+            document = initialize(PRODUCTFILENAME);
+            Element root = document.getDocumentElement();
+            NodeList nl = root.getElementsByTagName("user");
+            Element user = null;
+
+            //Find user by email
+            for (int i = 0; i < nl.getLength(); ++i) {
+                user = (Element) nl.item(i);
+                if (user.getAttribute("email").equals(email)) {
+                    i = nl.getLength(); //Found user, exit loop
+                }
+            }
+
+            //Iterate through users product list
+            NodeList nl2 = user.getElementsByTagName("product");
+            for (int i = 0; i < nl2.getLength(); ++i) {
+                Element el = (Element) nl2.item(i);
+
+                //If product node attribute matches specified item remove from user node
+                if (el.getAttribute("id").equals(itemNum)) {
+                    user.removeChild(nl2.item(i));
+                }
+            }
+            System.out.println("Item removed from " + email + "'s cart");
+
             close(document);
         } catch (SAXException ex) {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,22 +232,20 @@ public class XMLManager {
             document = initialize(PRODUCTFILENAME);
             Element root = document.getDocumentElement();
             NodeList nl = root.getElementsByTagName("user");
-            System.out.println("Found user status = " + nl.getLength());
             for (int i = 0; i < nl.getLength(); ++i) {
                 Element user = (Element) nl.item(i);
                 if (user.getAttribute("email").equals(email)) {
-                    System.out.println("User found. Retrieving cart..");
-                    NodeList nl2 = user.getElementsByTagName("product");
 
+                    NodeList nl2 = user.getElementsByTagName("product");
+                    System.out.println("User found. Retrieving cart..");
                     System.out.println("Number of products: " + nl2.getLength());
+                    
                     for (int j = 0; j < nl2.getLength(); ++j) {
                         List<String> list = new ArrayList<>();
                         Element item = (Element) nl2.item(j);
                         NodeList nl3 = item.getElementsByTagName("productValue");
                         for (int k = 0; k < nl3.getLength(); ++k) {
                             list.add(nl3.item(k).getTextContent());
-                            System.out.println(nl3.item(k).getTextContent());
-
                         }
                         Product product = new Product();
                         product.createProduct(list);
@@ -271,12 +311,13 @@ public class XMLManager {
 
         return documentBuilder.parse(file.toString());
     }
+
     /**
      * Writes the contents of the document object to the DOM (Document Object
      * Model) source.
-     * 
-     * @param doc - the document object 
-     * @throws TransformerException 
+     *
+     * @param doc - the document object
+     * @throws TransformerException
      */
     private static void close(Document doc) throws TransformerException {
 

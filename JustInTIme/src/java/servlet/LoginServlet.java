@@ -86,8 +86,6 @@ public class LoginServlet extends HttpServlet {
         System.out.println("    Login Servlet:");
 
         String email = request.getParameter("Email");
-        System.out.println(email);
-
         String password = request.getParameter("Password");
 
         if (DBManager.initializeConnection()) {
@@ -100,9 +98,13 @@ public class LoginServlet extends HttpServlet {
                 String firstName = user.get(1);
                 String role = user.get(10);
 
+                request.getSession().setAttribute("userEmail", email);
+                request.getSession().setAttribute("firstName", firstName);
+                request.getSession().setAttribute("role", role);
+
                 request.setAttribute("name", firstName);
                 request.setAttribute("role", role);
-
+                
                 switch (role) {
                     case "User":
                         System.out.println("Made it to homepage");
@@ -111,14 +113,16 @@ public class LoginServlet extends HttpServlet {
                         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
                         break;
                     case "Manager":
-
+                        
                         ProductContainer products = new ProductContainer(email);
                         ArrayList<String> array = new ArrayList<>();
                         array.add("Email");
 
-                        // Fetch products from database based on inputted keyword
+                        // Fetch products from database based on inputted keyword and user email
                         DBManager.initializeConnection();
                         HashMap<String, ArrayList<String>> productItemNumMap = DBManager.searchTable("itemaddedby", array, email);
+                        
+                        // Iterate through each product and it to the product cart
                         for (Map.Entry<String, ArrayList<String>> entry : productItemNumMap.entrySet()) {
                             ArrayList<String> plist = entry.getValue();
                             Product product = new Product();
@@ -126,7 +130,6 @@ public class LoginServlet extends HttpServlet {
                             products.addProduct(product);
                         }
 
-                        request.getSession().setAttribute("userEmail", email);
                         request.getSession().setAttribute("productList", products);
                         request.getRequestDispatcher("/ManagerProductPage.jsp").forward(request, response);
                         break;

@@ -67,7 +67,7 @@ public class Users {
 
     public boolean validate() {
 
-        PasswordValidator validator = new PasswordValidator(Arrays.asList(
+        /*PasswordValidator validator = new PasswordValidator(Arrays.asList(
                 // length between 8 and 16 characters
                 new LengthRule(minPasswordLength, maxPasswordLength),
                 // at least one upper-case character
@@ -80,10 +80,12 @@ public class Users {
                 // no whitespace
                 new WhitespaceRule()));
 
-        RuleResult result = validator.validate(new PasswordData(this.password));
+        RuleResult result = validator.validate(new PasswordData(this.password));*/
+        
+        Boolean result = PasswordControl.validatePass(this.password);
 
         // Check password validation
-        if (result.isValid()) {
+        if (result) {
             System.out.println("Password is valid...hashing password");
 
             // hash password
@@ -93,10 +95,7 @@ public class Users {
             verified = true;
         } else {
             System.out.println("Invalid password:");
-            for (String msg : validator.getMessages(result)) {
-
-                System.out.println(msg);
-            }
+            
             verified = false;
             return verified;
         }

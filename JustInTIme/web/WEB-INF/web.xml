@@ -36,6 +36,18 @@
         <servlet-name>ManagerServlet</servlet-name>
         <servlet-class>servlet.ManagerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartBufferServlet</servlet-name>
+        <servlet-class>servlet.CartBufferServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>POBufferServlet</servlet-name>
+        <servlet-class>servlet.POBufferServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -71,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>ManagerServlet</servlet-name>
         <url-pattern>/ManagerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartBufferServlet</servlet-name>
+        <url-pattern>/CartBufferServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>POBufferServlet</servlet-name>
+        <url-pattern>/POBufferServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

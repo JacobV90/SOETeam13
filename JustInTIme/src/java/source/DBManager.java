@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 import servlet.EmailVerified;
 
 /**
- * The DBManager class provides methods to push and retrieve information from
- * the database. initializeConnection needs to be called first before calling
- * any other classes. After database accessing call the closeConnection method
+ * The DBManager class provides methods to push, update and retrieve information from
+ * the database. The "initializeConnection" method needs to be called first before calling
+ * any other class methods. After database manipulation is finished, call the "closeConnection" method
  * to close the connection.
  *
  * @author jacobveal
@@ -24,15 +24,34 @@ import servlet.EmailVerified;
 public class DBManager {
 
     // JDBC driver name and database URL
+    /**
+     * The location of the JDBC driver
+     */
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    
+    /**
+     * The location of the database and a schema
+     */
     private static final String DB_URL = "jdbc:mysql://localhost:3306/justintime";
 
-    //  Database credentials
+    /**
+     * The username for the database credentials
+     */
     private static final String USER = "root";
+    
+    /**
+     * The password for the database credentials
+     */
     private static final String PASS = "Hondas2k";
 
-    // Connection variables
+    /**
+     * The reference to the database connection object
+     */
     private static Connection conn = null;
+    
+    /**
+     * The 
+     */
     private static PreparedStatement stmt = null;
 
     /**
@@ -92,6 +111,12 @@ public class DBManager {
 
     }
 
+    /**
+     * Counts the number of rows the specified database table possesses.
+     * 
+     * @param table - name of the database table
+     * @return - number of row entries
+     */
     public static int getRowCount(String table) {
 
         // SQL query script
@@ -162,6 +187,38 @@ public class DBManager {
 
     }
 
+    public static String selectEntryValue(String table, String keyName, String key, String field) {
+
+        // SQL query script
+        final String selectRow = "select * from " + table + " where " + keyName + " = ?;";
+
+        try {
+
+            //Prepare statement
+            stmt = conn.prepareStatement(selectRow);
+            stmt.setString(1, key);
+
+            // Pull entry from database
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String colValue = rs.getString(field);
+
+                System.out.println("Record succesfully retrieved");
+                return colValue; //return user 
+
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
     public static HashMap searchTable(String table, List colArr, String keyword) {
 
         String sql = "select * from " + table + " where ";
@@ -186,8 +243,7 @@ public class DBManager {
 
             System.out.println("Search Query Executed");
             System.out.println(sb.toString());
-            System.out.println("row length: " +rowLength);
-
+            System.out.println("row length: " + rowLength);
 
             HashMap<Integer, ArrayList<String>> productMap = new HashMap<>();
 
@@ -212,13 +268,23 @@ public class DBManager {
         }
 
     }
-
+    /**
+     * Deletes an entire row entry from the specified table based on the primary key value that is
+     * passed in. 
+     * 
+     * @param table - database table to access
+     * @param key - the name of the primary key column
+     * @param col - the value of the primary key
+     * @return - true or false
+     */
     public static boolean deleteEntry(String table, String key, String col) {
 
         String sql = "DELETE FROM " + table + " WHERE " + col + " = ?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, key);
+            
+            // Remove entry
             if (stmt.execute()) {
                 System.out.println("Entry deleted from table " + table);
                 return true;

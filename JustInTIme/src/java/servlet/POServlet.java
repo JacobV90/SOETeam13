@@ -56,7 +56,8 @@ public class POServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        request.getRequestDispatcher("/PurchaseOrder.jsp").forward(request, response);
     }
 
     /**

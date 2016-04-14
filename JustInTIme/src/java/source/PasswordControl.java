@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package source;
 
 import java.util.Arrays;
@@ -15,8 +10,11 @@ import org.passay.RuleResult;
 import org.passay.WhitespaceRule;
 
 /**
- *
- * @author jvtal
+ * The "PasswordControl" class provides a static method that validates a provided password.
+ * The "PasswordValidator" class is used to set password requirements and validate the provided
+ * password.
+ * 
+ * @author Jacob Veal
  */
 public class PasswordControl {
     
@@ -28,6 +26,7 @@ public class PasswordControl {
     
     public static boolean validatePass(String pw){
         
+        // PasswordValidator is from the passay-1.1.0 library
         PasswordValidator validator = new PasswordValidator(Arrays.asList(
                 // length between 8 and 16 characters
                 new LengthRule(minPasswordLength, maxPasswordLength),

@@ -7,20 +7,16 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import source.Product;
-import source.ProductContainer;
-import source.XMLManager;
 
 /**
  *
  * @author jacobveal
  */
-public class CartServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +35,10 @@ public class CartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartServlet</title>");
+            out.println("<title>Servlet LogoutServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,18 +56,10 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = (String) request.getSession().getAttribute("userEmail");
-        String itemNo = request.getParameter("productNumber");
-        List productList = (List) request.getSession().getAttribute("productList");
-        for (Object item : productList) {
-            Product prod = (Product) item;
-            if (String.valueOf(prod.getItemNo()).equals(itemNo)) {
-                request.setAttribute("product", prod);
-                request.getRequestDispatcher("/Cart.jsp").forward(request, response);
-            }
-        }
-        
-        response.sendRedirect("/CartBufferServlet");
+        request.getSession().invalidate();
+
+        // The user is now logged out so redirect the user to the welcome.jsp page .
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
     /**
@@ -85,32 +73,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String action = request.getParameter("action");
-        String email = (String) request.getSession().getAttribute("userEmail");
-        String itemNum = request.getParameter("productNumber");
-        String itemCount = request.getParameter("qty");
-
-        switch (action) {
-            case "addtocart":
-                List productList = (List) request.getSession().getAttribute("productList");
-                for (Object item : productList) {
-                    Product prod = (Product) item;
-                    if (String.valueOf(prod.getItemNo()).equals(itemNum)) {
-                        prod.setItemCount(Integer.valueOf(itemCount));
-                        XMLManager.addProductToCart(email, prod);
-                    }
-                }
-                break;
-            case "deletefromcart":
-                XMLManager.removeProductFromCart(email, itemNum);
-                break;
-            default:
-                break;
-
-        }
-        response.sendRedirect("CartBufferServlet");
-       
+        processRequest(request, response);
     }
 
     /**

@@ -62,13 +62,10 @@
                     </ul>
                     <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
                         <li>
-                            <form id ="cart" action ="CartServlet" method ="post">
-                                <input type="hidden" name="action" value="load">
-                                <input type="submit" value="Cart">
-                            </form>
+                            <a id="logout" href="CartBufferServlet">Cart</a>
                         </li>
                         <li>
-                            <a id="logout" href="#">Logout</a>
+                            <a id="logout" href="LogoutServlet">Logout</a>
                         </li>
                     </ul>
                 </div>

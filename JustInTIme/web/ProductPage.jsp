@@ -44,10 +44,10 @@
                 </ul>
                 <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
                     <li>
-                        <a id="cart" href="#">Cart</a>
+                        <a id="cart" href="CartBufferServlet">Cart</a>
                     </li>
                     <li>
-                        <a id="logout" href="#">Logout</a>
+                        <a id="logout" href="LogoutServlet">Logout</a>
                     </li>
                 </ul>
                 </ul>
