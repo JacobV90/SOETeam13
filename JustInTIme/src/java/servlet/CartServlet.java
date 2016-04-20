@@ -93,8 +93,8 @@ public class CartServlet extends HttpServlet {
 
         switch (action) {
             case "addtocart":
-                List productList = (List) request.getSession().getAttribute("productList");
-                for (Object item : productList) {
+                ProductContainer productCart = (ProductContainer) request.getSession().getAttribute("productList");
+                for (Product item : productCart.getProductArray()) {
                     Product prod = (Product) item;
                     if (String.valueOf(prod.getItemNo()).equals(itemNum)) {
                         prod.setItemCount(Integer.valueOf(itemCount));

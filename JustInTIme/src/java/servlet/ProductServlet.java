@@ -71,16 +71,16 @@ public class ProductServlet extends HttpServlet {
 
         switch (action) {
             case "details":
-                List<Product> productList = (List) request.getSession().getAttribute("productList");
+                ProductContainer productCart = (ProductContainer) request.getSession().getAttribute("productList");
 
-                for (Object item : productList) {
+                for (Product item : productCart.getProductArray()) {
                     Product product = (Product) item;
                     if (String.valueOf(product.getItemNo()).equals(itemNo)) {
                         request.getSession().setAttribute("product", product);
                         request.getRequestDispatcher("/ProductDetails.jsp").forward(request, response);
                     }
                 }
-                System.out.println(((Product) productList.get(0)).getItemName());
+                //System.out.println(((Product) productCart.get(0)).getItemName());
 
                 break;
             default:

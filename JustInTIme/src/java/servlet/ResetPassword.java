@@ -91,10 +91,14 @@ public class ResetPassword extends HttpServlet {
 
             //hash password
             password = BCrypt.hashpw(password, BCrypt.gensalt(10));
+            
+            DBManager.initializeConnection();
 
             if (DBManager.updateEntry("user", "Email", email, "Password", password)) {
 
                 System.out.println("Password successfully changed");
+                
+                DBManager.closeConnection();
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
 
             } else {
