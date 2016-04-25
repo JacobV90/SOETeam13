@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import source.DBManager;
 import source.Product;
 import source.ProductContainer;
+import source.PurchaseOrder;
 import source.XMLManager;
 
 /**
@@ -76,14 +78,22 @@ public class POBufferServlet extends HttpServlet {
             throws ServletException, IOException {
 
         ProductContainer cart = (ProductContainer) request.getSession().getAttribute("Cart");
-        String email =(String) request.getSession().getAttribute("userEmail");
+        PurchaseOrder purchase = new PurchaseOrder();
+        purchase.setPurchasedItems(cart);
+        String email = (String) request.getSession().getAttribute("userEmail");
         DBManager.initializeConnection();
+        
+        
+
+        String poNum = String.valueOf(DBManager.getRowCount("purchaseorder"));
+        request.setAttribute("poNum", poNum);
 
         for (Product item : cart.getProductArray()) {
 
             String itemNum = String.valueOf(item.getItemNo());
             String itemCartCount = String.valueOf(item.getItemCount());
             String itemCount = DBManager.selectEntryValue("item", "Item_No", itemNum, "Item_Qty");
+            System.out.println(itemCount);
 
             int numCartItems = Integer.valueOf(itemCartCount);
             int numItems = Integer.valueOf(itemCount);
@@ -91,13 +101,28 @@ public class POBufferServlet extends HttpServlet {
             if (numCartItems > numItems | numItems == 0) {
                 request.getRequestDispatcher("/Cart.jsp").forward(request, response);
             } else {
+                // Update quantity amounts in item table
                 int newItemCount = numItems - numCartItems;
-                XMLManager.removeProductFromCart(email, itemNum);
                 DBManager.updateEntry("item", "Item_No", itemNum, "Item_Qty", String.valueOf(newItemCount));
+
+                // Create Purchase Order Number and update PO Database table
+                ArrayList<String> entryArray = new ArrayList<>();
+                entryArray.add(poNum);
+                entryArray.add(itemNum);
+                entryArray.add(email);
+                entryArray.add(String.valueOf(item.getTotalPrice()));
+                entryArray.add(String.valueOf(item.getItemCount()));
+                DBManager.insertEntry("purchaseorder", entryArray);
+
+                // Remove product from user's cart
+                XMLManager.removeProductFromCart(email, itemNum);
+                purchase.setPurchaseNumber(poNum);
+                XMLManager.addPurchaseOrder(purchase);
+
             }
         }
-        
         DBManager.closeConnection();
+
         response.sendRedirect("POServlet");
 
     }

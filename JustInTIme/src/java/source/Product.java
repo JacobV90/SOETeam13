@@ -1,6 +1,8 @@
 package source;
 
+import java.util.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,29 +20,50 @@ public class Product implements Serializable {
     private double itemPrice;
     private String itemDescription;
     private double totalPrice = 0;
-    private String deliveryTime;
+    private String deliveryDate;
+    private String size;
+    private int deliveryTime = 0;
+    private String imageUrl = null;
 
     /**
      * Default constructor
      */
-    public Product() {}
+    public Product() {
+       
+    }
 
     /**
      * Creates a product object from 4 passed in parameters.
-     * 
+     *
      * @param name - name of the product
      * @param count - number of products
      * @param price - unit price of product
      * @param description - description of the product
      */
-    public Product(String name, int count, double price, String description) {
+    public Product(String name, int count, double price, String size, String description) {
+        
         this.itemName = name;
         this.itemCount = count;
         this.itemPrice = price;
         this.itemDescription = description;
+        this.size = size;
         DBManager.initializeConnection();
         this.itemNo = DBManager.getRowCount("item") + 1;
         DBManager.closeConnection();
+
+        switch(size){
+            case "small":
+                deliveryTime = 3;
+                break;
+            case "medium":
+                deliveryTime = 5;
+                break;
+            case "large":
+                deliveryTime = 7;
+                break;
+            default:
+                deliveryTime = 5;
+        }
     }
 
     /**
@@ -143,6 +166,50 @@ public class Product implements Serializable {
     }
 
     /**
+     * Gets the products size
+     *
+     * @return
+     */
+    public String getSize() {
+        return this.size;
+    }
+
+    /**
+     * Sets the products size
+     *
+     * @param size
+     */
+    public void setSize(String size) {
+        this.size = size;
+    }
+    
+    public void setImageUrl(String url){
+        this.imageUrl = url;
+    }
+    
+    public String getImageUrl(){
+        return this.imageUrl;
+    }
+
+    /**
+     * Gets the delivery date for this product
+     *
+     * @return
+     */
+    public String getDeliveryTime() {
+        return this.size;
+    }
+
+    /**
+     * Sets the products size
+     *
+     * @param size
+     */
+    public void setDeliveryTime(int date) {
+        this.deliveryTime = date;
+    }
+
+    /**
      * Gets this products values in a list format
      *
      * @return - an ArrayList containing the products information
@@ -154,8 +221,9 @@ public class Product implements Serializable {
         array.add(itemName);
         array.add(String.valueOf(itemPrice));
         array.add(String.valueOf(itemCount));
+        array.add(size);
         array.add(itemDescription);
-
+        array.add(imageUrl);
         return array;
 
     }
@@ -166,11 +234,12 @@ public class Product implements Serializable {
      * @param values - list of string values containing product information
      */
     public void createProduct(List<String> values) {
-
         this.itemNo = Integer.valueOf(values.get(0));
         this.itemName = values.get(1);
         this.itemPrice = Double.valueOf(values.get(2));
         this.itemCount = Integer.valueOf(values.get(3));
-        this.itemDescription = values.get(4);
+        this.size = values.get(4);
+        this.itemDescription = values.get(5);
+        this.imageUrl = values.get(6);
     }
 }

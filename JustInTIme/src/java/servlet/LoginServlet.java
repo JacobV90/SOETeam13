@@ -119,10 +119,10 @@ public class LoginServlet extends HttpServlet {
                         array.add("Email");
 
                         // Fetch products from database based on inputted keyword and user email
-                        DBManager.initializeConnection();
+                        //DBManager.initializeConnection();
                         HashMap<String, ArrayList<String>> productItemNumMap = DBManager.searchTable("itemaddedby", array, email);
                         
-                        // Iterate through each product and it to the product cart
+                        // Iterate through each product and add it to the product cart
                         for (Map.Entry<String, ArrayList<String>> entry : productItemNumMap.entrySet()) {
                             ArrayList<String> plist = entry.getValue();
                             Product product = new Product();

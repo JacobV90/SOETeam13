@@ -33,7 +33,7 @@ public class ProductTest {
     
     @Before
     public void setUp() {
-        product = new Product("Computer",1,15,"Mac");
+        //product = new Product("Computer",1,15,"Mac");
     }
     
     @After

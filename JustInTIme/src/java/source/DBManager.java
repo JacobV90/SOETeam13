@@ -258,7 +258,7 @@ public class DBManager {
                 productMap.put(i, productArr);
                 ++i;
             }
-            System.out.println("Product Map size: " + productMap.size());
+            System.out.println("Map size: " + productMap.size());
 
             return productMap;
 

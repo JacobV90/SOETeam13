@@ -57,7 +57,7 @@
                             <a id="mysettings" href="#">My Settings</a>
                         </li>
                         <li>
-                            <a id="myorder" href="#">My order</a>
+                            <a id="myorder" href="MyOrdersServlet">My orders</a>
                         </li>
                     </ul>
                     <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">

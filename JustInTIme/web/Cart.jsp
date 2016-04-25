@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="stylesheet" href="css/style2.css">
+<!--        <link rel="stylesheet" href="css/style2.css">-->
         <title>Cart</title>
 
         <!-- Bootstrap Core CSS -->
@@ -34,7 +34,6 @@
         <%
             String name = request.getParameter("name");
             String role = request.getParameter("role");
-
         %>
 
     </head>
@@ -64,18 +63,7 @@
                         <li>
                             <a id="logout" href="LogoutServlet">Logout</a>
                         </li>
-                        <!--                        <li>
-                                                    <a id="mysettings" href="#">My Settings</a>
-                                                </li>-->
-                        <!--                        <li>
-                                                    <a id="myorder" href="#">My order</a>
-                                                </li>-->
-                    </ul>
-                        <!--                        <li>
-                                                    <a id="cart" href="#">Cart</a>
-                                                </li>-->
                         
-                        </ </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
@@ -126,9 +114,10 @@
                 
                 <form name = "pay"  action = "POBufferServlet" method="post">
                     
-                    <input class="btn btn-primary" id="pay" type = "submit" name="Pay">
+                    <p><input class="btn btn-primary" id="pay" type = "submit" name="Pay"></p>
+                    <p><a class="btn btn-primary" id="cancel" href="homePage.jsp">Cancel</a></p>
+                    
                 </form>      
-                <p><a class="btn btn-primary" id="cancel" href="HomePage.jsp">Cancel</a></p>
             </div>
 
             <!-- jQuery -->
@@ -138,3 +127,4 @@
             <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
+

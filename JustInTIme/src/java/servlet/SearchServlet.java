@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import source.DBManager;
 import source.Product;
+import source.ProductContainer;
 
 /**
  *
@@ -89,7 +90,7 @@ public class SearchServlet extends HttpServlet {
         DBManager.closeConnection();
 
         // ArrayList to hold product values
-        List<Product> list = new ArrayList<>();
+        ProductContainer cart = new ProductContainer();
 
         // iterate through map and retreive product values
         for (Map.Entry<String, ArrayList<String>> entry : productMap.entrySet()) {
@@ -103,12 +104,11 @@ public class SearchServlet extends HttpServlet {
                 product.setItemPrice(Integer.valueOf(plist.get(2)));
                 product.setItemCount(Integer.valueOf(plist.get(3)));
                 product.setItemDescription(plist.get(4));
-                list.add(product);
+                cart.addProduct(product);
             }
         }
         
-        System.out.println("Product list size: "+list.size());
-        request.getSession().setAttribute("productList", list);
+        request.getSession().setAttribute("productList", cart);
         request.getRequestDispatcher("/ProductPage.jsp").forward(request, response);
     }
 

@@ -78,7 +78,7 @@
             <th align = "center">Product Description</th>
         </tr>
 
-        <c:forEach items="${productList}" var="product">
+        <c:forEach items="${productList.productArray}" var="product">
             
             <tr>
                 <c:url value="/ProductServlet" var = "productDetails">

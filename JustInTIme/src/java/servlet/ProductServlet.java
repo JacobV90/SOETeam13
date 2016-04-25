@@ -5,16 +5,31 @@
  */
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.mail.Part;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import source.DBManager;
 import source.Product;
 import source.ProductContainer;
@@ -25,6 +40,7 @@ import source.ProductContainer;
  *
  * @author jacobveal
  */
+@MultipartConfig
 public class ProductServlet extends HttpServlet {
 
     /**
@@ -69,21 +85,24 @@ public class ProductServlet extends HttpServlet {
         String itemNo = request.getParameter("productNumber");
         String action = request.getParameter("action");
 
+        System.out.println(itemNo);
+
         switch (action) {
             case "details":
                 ProductContainer productCart = (ProductContainer) request.getSession().getAttribute("productList");
 
                 for (Product item : productCart.getProductArray()) {
                     Product product = (Product) item;
+                    System.out.println("Did not find item");
                     if (String.valueOf(product.getItemNo()).equals(itemNo)) {
                         request.getSession().setAttribute("product", product);
                         request.getRequestDispatcher("/ProductDetails.jsp").forward(request, response);
                     }
                 }
-                //System.out.println(((Product) productCart.get(0)).getItemName());
 
                 break;
             default:
+                System.out.println("No action taken");
                 break;
         }
 
@@ -103,22 +122,32 @@ public class ProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //Grab parameters from previous page
+        String email = (String) request.getSession().getAttribute("userEmail");
+        ArrayList<String> values = parseRequest(request, response);
+        //Part filePart = (Part) request.getPart("file");
+
+        /*//Grab parameters from previous page
         String name = request.getParameter("ProductName");
         String description = request.getParameter("ProductDescription");
         String action = request.getParameter("submit");
         String itemNum = request.getParameter("itemNum");
         String price = request.getParameter("ProductPrice");
+        String size = request.getParameter("ProductSize");
         String count = request.getParameter("ProductQuantity");
-        String email = (String) request.getSession().getAttribute("userEmail");
-        System.out.println(email);
-        System.out.println(itemNum);
+        String imageUrl = (String) request.getSession().getAttribute("file");
+        request.setAttribute("imageUrl", imageUrl);*/
+        String action = values.get(values.size() - 1);
+        //System.out.println(email);
+        //System.out.println(imageUrl);
 
         //determines which type of database query execution to perform
         switch (action) {
             case "Add":
                 System.out.println(action);
-                Product product = new Product(name, Integer.valueOf(count), Double.valueOf(price), description);
+                Product product = new Product(values.get(0), Integer.valueOf(values.get(1)), Double.valueOf(values.get(2)), values.get(3), values.get(4));
+
+                product.setImageUrl(values.get(5));
+
                 ArrayList<String> list = new ArrayList<>();
                 list.add(email);
                 list.add(String.valueOf(product.getItemNo()));
@@ -130,49 +159,76 @@ public class ProductServlet extends HttpServlet {
             case "Delete":
                 System.out.println(action);
                 DBManager.initializeConnection();
-                DBManager.deleteEntry("item", itemNum, "Item_No");
+                //DBManager.deleteEntry("item", itemNum, "Item_No");
+                // DBManager.deleteEntry("itemaddedby", itemNum, "Item_No");
                 DBManager.closeConnection();
                 break;
             case "Modify":
                 System.out.println(action);
                 DBManager.initializeConnection();
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Name", name);
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Cost", price);
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Qty", count);
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Desc", description);
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Name", values.get(0));
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Cost", values.get(1));
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Qty", values.get(2));
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Size", values.get(3));
+                DBManager.updateEntry("item", "Item_No", "1", "Item_Desc", values.get(4));
                 DBManager.closeConnection();
                 break;
 
         }
-
-        ProductContainer products = new ProductContainer(email);
-        ArrayList<String> array = new ArrayList<>();
-        array.add("Email");
-
-        // Fetch products from database based on inputted keyword
-        DBManager.initializeConnection();
-        HashMap<String, ArrayList<String>> productItemNumMap = DBManager.searchTable("itemaddedby", array, email);
-        for (Map.Entry<String, ArrayList<String>> entry : productItemNumMap.entrySet()) {
-            ArrayList<String> plist = entry.getValue();
-            Product product = new Product();
-            product.createProduct(DBManager.selectEntry("item", "Item_No", plist.get(1)));
-            products.addProduct(product);
-        }
-        
-        request.getSession().setAttribute("productList", products);
-        request.getRequestDispatcher("/ManagerProductPage.jsp").forward(request, response);
+        response.sendRedirect("ManagerServlet");
     }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
+
+    private ArrayList<String> parseRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        ArrayList<String> values = new ArrayList<>();
+
+        FileItemFactory factory = new DiskFileItemFactory();
+
+        // Create a new file upload handler
+        ServletFileUpload upload = new ServletFileUpload(factory);
+
+        try {
+            // Parse the request to get file items.
+            List<FileItem> fileItems = upload.parseRequest(request);
+
+            // Process the uploaded file items
+            Iterator i = fileItems.iterator();
+
+            while (i.hasNext()) {
+                FileItem fi = (FileItem) i.next();
+
+                if (fi.isFormField()) {
+                    values.add(fi.getString());
+                    System.out.println(fi.getString());
+
+                } else {
+                    // Get the uploaded file parameters
+                    ServletContext servlet = request.getServletContext();
+                    File uploadDir = new File(servlet.getRealPath("/WEB-INF/classes/images/").toString());
+                    File temp = File.createTempFile("img", ".jpeg", uploadDir);
+                    System.out.println(temp.getCanonicalPath());
+                    values.add(temp.getCanonicalPath());
+                    fi.write(temp);
+                }
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+
+        }
+
+        return values;
 
     }
+
+}

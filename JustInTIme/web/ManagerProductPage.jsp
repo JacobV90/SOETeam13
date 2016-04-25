@@ -66,9 +66,6 @@
             </form>
             <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
                 <li>
-                    <a id="cart" href="Cart.jsp">Cart</a>
-                </li>
-                <li>
                     <a id="logout" href="index.jsp">Logout</a>
                 </li>
             </ul>
@@ -101,33 +98,34 @@
 <table border="1" style="width:35%" align = "center">
     <div>
         <input type="hidden" name="action" value="details" />
+        <input type="hidden" name="filter" value="manager" />
 
     </div
+
+
     <tr>
         <th align = "center">Product Name</th>
         <th align = "center">Product Number</th>
         <th align = "center">Product Price</th>
         <th align = "center">Product Availability</th>
+        <th align = "center">Product Size</th>
         <th align = "center">Product Description</th>
     </tr>
 
     <c:forEach items="${productList.productArray}" var="product">
-
-        <tr>
         <c:url value="/ProductServlet" var = "productDetails">
             <c:param name = "productNumber" value = "${product.itemNo}"/>
-            <c:param name = "productName" value = "${product.itemName}"/>
-            <c:param name = "productPrice" value = "${product.itemPrice}"/>
-            <c:param name = "productCount" value = "${product.itemCount}"/>
-            <c:param name = "productDescription" value = "${product.itemDescription}"/>
             <c:param name = "action" value = "details"/>
         </c:url>
-        <td align = "center"><a href="${productDetails}">${product.itemName}</td>
-        <td align = "center">#${product.itemNo}</td>
-        <td align = "center">$${product.itemPrice}</td>
-        <td align = "center">${product.itemCount}</td>
-        <td align = "center">${product.itemDescription}</td>
+        <tr>
+            <td align = "center"><a href="${productDetails}">${product.itemName}</td>
+            <td align = "center">#${product.itemNo}</td>
+            <td align = "center">$${product.itemPrice}</td>
+            <td align = "center">${product.itemCount}</td>
+            <td align = "center">${product.size}</td>
+            <td align = "center">${product.itemDescription}</td>
         </tr>
+
     </c:forEach>
 
 </table>

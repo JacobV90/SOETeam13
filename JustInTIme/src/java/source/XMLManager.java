@@ -26,6 +26,7 @@ public class XMLManager {
 
     private static final String USERFILENAME = "xml/inActiveUsers.xml";
     private static final String PRODUCTFILENAME = "xml/ProductNumber.xml";
+    private static final String PURCHASEFILENAME = "xml/PurchaseOrders.xml";
     private static URL file;
 
     public static void addUser(ArrayList<String> userArray) {
@@ -232,14 +233,16 @@ public class XMLManager {
             document = initialize(PRODUCTFILENAME);
             Element root = document.getDocumentElement();
             NodeList nl = root.getElementsByTagName("user");
+
             for (int i = 0; i < nl.getLength(); ++i) {
                 Element user = (Element) nl.item(i);
+
                 if (user.getAttribute("email").equals(email)) {
 
                     NodeList nl2 = user.getElementsByTagName("product");
                     System.out.println("User found. Retrieving cart..");
                     System.out.println("Number of products: " + nl2.getLength());
-                    
+
                     for (int j = 0; j < nl2.getLength(); ++j) {
                         List<String> list = new ArrayList<>();
                         Element item = (Element) nl2.item(j);
@@ -299,6 +302,122 @@ public class XMLManager {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return num;
+    }
+
+    public static void addPurchaseOrder(PurchaseOrder po) {
+
+        Document document;
+
+        try {
+
+            document = initialize(PURCHASEFILENAME);
+            Element root = document.getDocumentElement();
+            System.out.println("PurchaseOrder.xml file found");
+
+            //int count = root.getElementsByTagName("user").getLength();
+            // Create purchase order element
+            Element purchase = document.createElement("purhcase");
+            purchase.setAttribute("number", po.getPurchaseNumber());
+
+            // Add purchase order element
+            ProductContainer cart = po.getPurchasedItems();
+
+            for (Product item : cart.getProductArray()) {
+                Element product = document.createElement("Product");
+                product.setAttribute("number", String.valueOf(item.getItemNo()));
+
+                int i = 0;
+                for (String value : item.getProduct()) {
+
+                    Element el = document.createElement("Value");
+                    el.setTextContent(value);
+                    product.appendChild(el);
+
+                }
+                purchase.appendChild(product);
+                i++;
+            }
+
+            root.appendChild(purchase);
+
+            close(document);
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static PurchaseOrder getPurchaseOrder(String poNum) {
+
+        Document document;
+        PurchaseOrder purchase = new PurchaseOrder();
+
+        int num = 0;
+        try {
+            // initialize document and get root element
+            document = initialize(PURCHASEFILENAME);
+            Element root = document.getDocumentElement();
+
+            System.out.println("PurchaseOrder.xml file found");
+
+            NodeList nl = root.getElementsByTagName("PurchaseOrder");
+
+            int j = 0;
+            while (j < nl.getLength()) {
+
+                Element el = (Element) nl.item(j);
+                String poNumber = el.getAttribute("number");
+
+                if (poNumber.equalsIgnoreCase(poNum)) {
+                    System.out.println("Purchase Order found");
+
+                    ProductContainer cart = new ProductContainer();
+
+                    NodeList nl2 = el.getElementsByTagName("Product");
+
+                    for (int i = 0; i < nl2.getLength(); ++i) {
+
+                        Element el3 = (Element) nl2.item(i);
+                        Product product = new Product();
+                        NodeList nl3 = el3.getElementsByTagName("Value");
+                        List<String> list = new ArrayList<>();
+                        for (int k = 0; k < nl3.getLength(); ++k) {
+
+                            list.add(nl3.item(i).getTextContent());
+                        }
+                        product.createProduct(list);
+                        cart.addProduct(product);
+
+                    }
+                    purchase.setPurchasedItems(cart);
+
+                    j = nl.getLength();
+                    System.out.println("Purchase Order successfully Retrieved");
+
+                } else {
+                    j++;
+                }
+            }
+
+            close(document);
+
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return purchase;
     }
 
     private static Document initialize(String filePath) throws SAXException, IOException, ParserConfigurationException {

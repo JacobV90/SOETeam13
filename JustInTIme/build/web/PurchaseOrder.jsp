@@ -82,12 +82,10 @@
         <div class="container">
 
             <!-- Jumbotron Header -->
-            <%
-                String firstName = (String) request.getSession().getAttribute("firstName");
-            %>
+            
             <header id="jumbotronhero-spacer" class="jumbotron hero-spacer">
-                <h1>Thanks for your purchase ${firstName}</h1>
-                <p>You successfully placed an order. Your order number is 123-456.</p>
+                <h1>Thanks for your purchase ${sessionScope.firstName}</h1>
+                <p>You successfully placed an order.</p>
             </header>
 
         </div>

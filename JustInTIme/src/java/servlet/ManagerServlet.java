@@ -7,10 +7,16 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import source.DBManager;
+import source.Product;
+import source.ProductContainer;
 
 /**
  *
@@ -56,7 +62,25 @@ public class ManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String email = (String) request.getSession().getAttribute("userEmail");
+        
+        ProductContainer products = new ProductContainer(email);
+        ArrayList<String> array = new ArrayList<>();
+        array.add("Email");
+
+        // Fetch products from database based on inputted keyword
+        DBManager.initializeConnection();
+        HashMap<String, ArrayList<String>> productItemNumMap = DBManager.searchTable("itemaddedby", array, email);
+        for (Map.Entry<String, ArrayList<String>> entry : productItemNumMap.entrySet()) {
+            ArrayList<String> plist = entry.getValue();
+            Product product = new Product();
+            product.createProduct(DBManager.selectEntry("item", "Item_No", plist.get(1)));
+            products.addProduct(product);
+        }
+        
+        request.getSession().setAttribute("productList", products);
+        request.getRequestDispatcher("/ManagerProductPage.jsp").forward(request, response);
     }
 
     /**
