@@ -53,32 +53,45 @@
     </nav>
 
 
-<!-- Admin ================================================== -->
-
-<table border="1" style="width:35%" align = "center">
-    <div>
-        <input type="hidden" name="action" value="details" />
-
-    </div
-    <tr>
-        <th align = "center">User Name</th>
-        <th align = "center">User position</th>
-        <th align = "center">User email</th>
-        <th align = "center">Promotion</th>
-        <th align = "center">Demotion</th>
-
-    </tr>
-    <c:forEach items="${productList.productArray}" var="product">
 
 
-        <td align = "center"></td>
-        <td align = "center"></td>
-        <td align = "center"></td>
-	<td align = "center"><a href="">Promotion</td>
-        <td align = "center"><a href="">Demotion</td>
+<!-- Profile ================================================== -->
+	<div align="center">
+		<p class="confirmold" id="confirmold"><label for="password">Enter the current password</p>
+		<input type="password" id="currentpassword" name="password" required=""> 
+		<p class="resetpwd" id="resetpwd"><label for="password">Enter new password</p>
+		<input type="password" id="newpassword" name="password" required="">
+		<p class="confirmpwd" id="confrimpwd"><label for="password">Confirm new password</p>
+		<input type="password" id="repassword" name="password" required="">
+		<p class="currentphone" id="currentphone"><label for="currentphone">Your current phone number:</p>
+		<p class="newphone" id="newphone"><label for="newphone">Enter your new phone number</p>
+		<input id="phone" name="phone" placeholder="phone number" required="required" type="text"> <br>
 
-        </tr>
-    </c:forEach>
+                <fieldset>
+                 <label>Enter your Birthday</label><br>
+                  <label class="month"> 
+                  <select class="select-style" name="BirthMonth">
+                  <option value="">Month</option>
+                  <option  value="01">January</option>
+                  <option value="02">February</option>
+                  <option value="03" >March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12" >December</option>
+                  </label>
+                 </select>    
+                <label>Day<input class="birthday" maxlength="2" name="BirthDay"  placeholder="Day" required=""></label>
+                <label>Year <input class="birthyear" maxlength="4" name="BirthYear" placeholder="Year" required=""></label>
+               </fieldset>
 
+                    <p><input class="button" id="confirm" type="submit" name="submit" value="Confirm"> 
+                       <input class="button" id="Cancel" type="submit" name="submit" value="Cancel"></p>
+</div>
 </body>
 </html>
