@@ -104,6 +104,8 @@ public class SearchServlet extends HttpServlet {
                 product.setItemPrice(Integer.valueOf(plist.get(2)));
                 product.setItemCount(Integer.valueOf(plist.get(3)));
                 product.setItemDescription(plist.get(4));
+                product.setSize(plist.get(5));
+                product.setImageUrl(plist.get(6));
                 cart.addProduct(product);
             }
         }

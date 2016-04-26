@@ -8,6 +8,8 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.nio.file.Files;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +34,6 @@ public class UploadServlet extends HttpServlet {
     private int maxFileSize = 50 * 1024;
     private int maxMemSize = 4 * 1024;
     private File file;
-
-    public void init() {
-        // Get the file location where it would be stored.
-        filePath = getServletContext().getInitParameter("file-upload");
-    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -76,7 +73,43 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        ServletContext servlet = request.getServletContext();
+        
+        //File image = new File(servlet.getRealPath("/WEB-INF/classes/images/").toString()+"/img1784305371077167846.jpg");
+        File image = new File("/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img1907912953585696567.jpeg");
+        System.out.println(image.toString());
+        // Check if file actually exists in filesystem.
+        if (!image.exists()) {
+            // Do your thing if the file appears to be non-existing.
+            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
+           // response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
+            //return;
+        }
+
+        // Get content type by filename.
+        String contentType = getServletContext().getMimeType(image.getName());
+
+        // Check if file is actually an image (avoid download of other files by hackers!).
+        // For all content types, see: http://www.w3schools.com/media/media_mimeref.asp
+        if (contentType == null || !contentType.startsWith("image")) {
+            // Do your thing if the file appears not being a real image.
+            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
+            //response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
+           // return;
+        }
+
+        // Init servlet response.
+        //response.reset();
+        response.setContentType(contentType);
+        response.setHeader("Content-Length", String.valueOf(image.length()));
+
+        // Write image content to response.
+        Files.copy(image.toPath(), response.getOutputStream());
+        response.sendRedirect("UploadServlet");
+        //request.getRequestDispatcher("ProductDetails.jsp").forward(request, response);
+
+        // Get requested image by path info.
     }
 
     /**

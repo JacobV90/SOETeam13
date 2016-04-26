@@ -89,7 +89,7 @@
 
                     <div id="thumbnail" class="thumbnail">
 
-                        <img src="http://placehold.it/800x500" alt="">
+                        <img src="images/${product.imageUrl}" alt="Image not found" width ="500" height="350">
                         <div id="caption" class="caption">
                             <h3>${product.itemName}</h3>
                             <p>${product.itemCount}</p> 

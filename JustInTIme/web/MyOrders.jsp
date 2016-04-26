@@ -3,10 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-        <title>Products</title>
+        <title>Purchase Orders</title>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -17,7 +14,7 @@
         <link href="css/heroic-features.css" rel="stylesheet">
 
     </head>
-    <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div id="container" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div id="navbar-header" class="navbar-header">
@@ -31,18 +28,18 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul id="nav navbar-nav" class="nav navbar-nav">
+                <ul id="navnavbar-nav" class="nav navbar-nav">
                     <li>
-                        <a id="myaccount" href="#">My account</a>
+                        <a id="myaccount" href="Account.html">My account</a>
                     </li>
                     <li>
-                        <a id="mysettings" href="#">My Settings</a>
+                        <a id="mysettings" href="Admin.html">My Settings</a>
                     </li>
                     <li>
-                        <a id="myorder" href="#">My order</a>
+                        <a id="myorder" href="Order.html">My order</a>
                     </li>
                 </ul>
-                <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
+                <ul id="navnavbar-navnavbar-right" class="nav navbar-nav navbar-right">
                     <li>
                         <a id="cart" href="CartBufferServlet">Cart</a>
                     </li>
@@ -50,7 +47,7 @@
                         <a id="logout" href="LogoutServlet">Logout</a>
                     </li>
                 </ul>
-                </ul>
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -58,48 +55,36 @@
     </nav>
 
 
-    <!-- Products ================================================== -->
-    <div align = "center">
-        <form action = "SearchServlet" method ="post">
-            <input type="text" name="Product">
-            <input type ="submit" value="Search">
-        </form>
-    </div>
+    <!-- Order ================================================== -->
+
     <table border="1" style="width:35%" align = "center">
         <div>
             <input type="hidden" name="action" value="details" />
 
         </div
         <tr>
-            <th align = "center">Order #:</th>
-            <th align = "center">Date:</th>
-            <th align = "center">Number of Items</th>
-            <th align = "center">Produ</th>
-            <th align = "center">Product Description</th>
+            <th align = "center"> Number</th>
+            <th align = "center"> Amount</th>
+            <th align = "center"> Cost</th>
+            <th align = "center">Order Date</th>
+            <th align = "center">ETA Date</th>
+            <th align = "center">Details</th>
         </tr>
+        <c:forEach items="${orders}" var="order">
 
-        <c:forEach items="${productList.productArray}" var="product">
-            
-            <tr>
-                <c:url value="/ProductServlet" var = "productDetails">
-                    <c:param name = "productNumber" value = "${product.itemNo}"/>
-                    <c:param name = "productName" value = "${product.itemName}"/>
-                    <c:param name = "productPrice" value = "${product.itemPrice}"/>
-                    <c:param name = "productCount" value = "${product.itemCount}"/>
-                    <c:param name = "productDescription" value = "${product.itemDescription}"/>
-                    <c:param name = "action" value = "details"/>
-                </c:url>
-                <td align = "center"><a href="${productDetails}">${product.itemName}</td>
-                <td align = "center">#${product.itemNo}</td>
-                <td align = "center">$${product.itemPrice}</td>
-                <td align = "center">${product.itemCount}</td>
-                <td align = "center">${product.itemDescription}</td>
+            <td align = "center">"${order}"</td>
+            <td align = "center"></td>
+            <td align = "center"></td>
+            <td align = "center"></td>
+            <td align = "center"></td>
+            <th align = "center"></th>
+            <td align = "center"><a href="">Cancel order</td>
             </tr>
         </c:forEach>
 
+
+
     </table>
-
-
 
 </body>
 </html>

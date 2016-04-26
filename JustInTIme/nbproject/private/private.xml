@@ -7,22 +7,22 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ModifyProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/AddProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/CartBufferServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img750412645893845115.jpeg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/POServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/ProductTest.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ManagerServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/ManagerProductPage.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ForgotPassword.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductPage.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/ModifyProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/PurchaseOrder.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/EmailVerified.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/POBufferServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PurchaseOrder.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PasswordControl.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/Cart.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img5982374454003836758.jpeg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/HomePage.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img2659435790760755105.jpeg</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img6856498568090422947.jpeg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductDetails.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/DBManager.java</file>
@@ -36,10 +36,10 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/CartServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/SearchServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ManagerCart.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/images/bg.jpg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/AddProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/UploadServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img7439520769862121822.jpeg</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img1907912953585696567.jpeg</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ProductContainer.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/MyOrders.jsp</file>
         </group>
     </open-files>

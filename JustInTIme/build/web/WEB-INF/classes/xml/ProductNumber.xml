@@ -4,4 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 --><root>
+<user email="jacobveal90@gmail.com">
+<product id="3">
+<productValue>3</productValue>
+<productValue>Samsung Note 5</productValue>
+<productValue>750.0</productValue>
+<productValue>1</productValue>
+<productValue>small</productValue>
+<productValue>Android Marshmallow</productValue>
+<productValue>img5565001860135809878.jpg</productValue>
+</product>
+</user>
 </root>

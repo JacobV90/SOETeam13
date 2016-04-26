@@ -93,8 +93,16 @@ public class ProductServlet extends HttpServlet {
 
                 for (Product item : productCart.getProductArray()) {
                     Product product = (Product) item;
-                    System.out.println("Did not find item");
                     if (String.valueOf(product.getItemNo()).equals(itemNo)) {
+
+                        //File image = new File(product.getImageUrl());
+                        //byte[] imageBytes = Files.readAllBytes(image.toPath());
+
+                       // response.setContentLength(imageBytes.length);
+                       
+                        //response.getOutputStream().write(imageBytes);
+                        //request.setAttribute("image", image.getName());
+                        //System.out.println(image.getName());
                         request.getSession().setAttribute("product", product);
                         request.getRequestDispatcher("/ProductDetails.jsp").forward(request, response);
                     }
@@ -214,10 +222,10 @@ public class ProductServlet extends HttpServlet {
                 } else {
                     // Get the uploaded file parameters
                     ServletContext servlet = request.getServletContext();
-                    File uploadDir = new File(servlet.getRealPath("/WEB-INF/classes/images/").toString());
-                    File temp = File.createTempFile("img", ".jpeg", uploadDir);
-                    System.out.println(temp.getCanonicalPath());
-                    values.add(temp.getCanonicalPath());
+                    File uploadDir = new File(servlet.getRealPath("/images/").toString());
+                    File temp = File.createTempFile("img", ".jpg", uploadDir);
+                    System.out.println(request.getContextPath());
+                    values.add(temp.getName());
                     fi.write(temp);
                 }
             }
