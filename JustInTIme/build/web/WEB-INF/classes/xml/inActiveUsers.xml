@@ -1,11 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
--->
-
-
-<root>
+--><root>
     
+
+
+
+<user id="1">
+<Email>jordynveal90@yahoo.com</Email>
+<FirstName>jordyn</FirstName>
+<LastName>veal</LastName>
+<Password>$2a$10$k1cb.zBhV7B2ARXGxyD3XuE8wZFWhQVtWWLiE.wkrba0FLboU5SQW</Password>
+<BirthMonth>12</BirthMonth>
+<BirthDay>23</BirthDay>
+<BirthYear>1990</BirthYear>
+<Gender>m</Gender>
+<Phone>5636769490</Phone>
+<Code>m1</Code>
+<Role>User</Role>
+</user>
 </root>

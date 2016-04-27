@@ -316,7 +316,7 @@ public class XMLManager {
 
             //int count = root.getElementsByTagName("user").getLength();
             // Create purchase order element
-            Element purchase = document.createElement("purhcase");
+            Element purchase = document.createElement("purchase");
             purchase.setAttribute("number", po.getPurchaseNumber());
 
             // Add purchase order element
@@ -366,13 +366,15 @@ public class XMLManager {
 
             System.out.println("PurchaseOrder.xml file found");
 
-            NodeList nl = root.getElementsByTagName("PurchaseOrder");
+            NodeList nl = root.getElementsByTagName("purchase");
 
+            System.out.println(nl.getLength());
             int j = 0;
             while (j < nl.getLength()) {
 
                 Element el = (Element) nl.item(j);
                 String poNumber = el.getAttribute("number");
+                System.out.println(poNumber);
 
                 if (poNumber.equalsIgnoreCase(poNum)) {
                     System.out.println("Purchase Order found");
@@ -380,18 +382,23 @@ public class XMLManager {
                     ProductContainer cart = new ProductContainer();
 
                     NodeList nl2 = el.getElementsByTagName("Product");
+                    System.out.println(nl2.getLength());
 
                     for (int i = 0; i < nl2.getLength(); ++i) {
 
                         Element el3 = (Element) nl2.item(i);
                         Product product = new Product();
                         NodeList nl3 = el3.getElementsByTagName("Value");
+                        System.out.println(nl3.getLength());
+
                         List<String> list = new ArrayList<>();
                         for (int k = 0; k < nl3.getLength(); ++k) {
-
-                            list.add(nl3.item(i).getTextContent());
+                            System.out.println(nl3.item(k).getTextContent());
+                            list.add(nl3.item(k).getTextContent());
                         }
                         product.createProduct(list);
+                        product.setDeliveryDate(list.get(list.size()-1));
+                        System.out.println(product.getImageUrl());
                         cart.addProduct(product);
 
                     }

@@ -138,7 +138,7 @@ public class Users {
             userData.add(gender);
             userData.add(phoneNumber);
             userData.add(pinCode);
-            userData.add(getRole(pinCode));
+            userData.add("User");
 
        
         return userData;
@@ -147,27 +147,7 @@ public class Users {
 
    
 
-    private String getRole(String pin) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(pin);
-
-        switch (sb.charAt(0)) {
-            case 'a':
-                this.role = "Administrator";
-                break;
-            case 'm':
-                this.role = "Manager";
-                break;
-            case 'u':
-                this.role = "User";
-                break;
-            default:
-                break;
-        }
-        System.out.println(role);
-        return role;
-    }
+  
 
     private boolean passwordValidation() {
 

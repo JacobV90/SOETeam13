@@ -64,9 +64,16 @@ public class EmailVerified extends HttpServlet {
         ArrayList<String> code = DBManager.selectEntry("user_code", "Code", userArray.get(9));
 
         if (!code.get(1).equals("1")) {
+            
+            ArrayList<String> codeArr = new ArrayList<>();
+            
+            String role = getRole(userArray.get(9));
+            codeArr.add(userArray.get(0));
+            codeArr.add("0");
+            codeArr.add(role);
 
             // activate code
-            DBManager.updateEntry("user_code", "Code", code.get(0), "isUsed", "1");
+            DBManager.insertEntry("auth", codeArr);
 
             // push user to database
             if (DBManager.insertEntry("user", userArray)) {
@@ -97,6 +104,29 @@ public class EmailVerified extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+      private String getRole(String pin) {
+        String role = null;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(pin);
+
+        switch (sb.charAt(0)) {
+            case 'a':
+                role = "Administrator";
+                break;
+            case 'm':
+                role = "Manager";
+                break;
+            case 'u':
+                role = "User";
+                break;
+            default:
+                break;
+        }
+        System.out.println(role);
+        return role;
     }
 
     /**

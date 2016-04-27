@@ -14,10 +14,10 @@ import java.util.logging.Logger;
 import servlet.EmailVerified;
 
 /**
- * The DBManager class provides methods to push, update and retrieve information from
- * the database. The "initializeConnection" method needs to be called first before calling
- * any other class methods. After database manipulation is finished, call the "closeConnection" method
- * to close the connection.
+ * The DBManager class provides methods to push, update and retrieve information
+ * from the database. The "initializeConnection" method needs to be called first
+ * before calling any other class methods. After database manipulation is
+ * finished, call the "closeConnection" method to close the connection.
  *
  * @author jacobveal
  */
@@ -28,7 +28,7 @@ public class DBManager {
      * The location of the JDBC driver
      */
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    
+
     /**
      * The location of the database and a schema
      */
@@ -38,7 +38,7 @@ public class DBManager {
      * The username for the database credentials
      */
     private static final String USER = "root";
-    
+
     /**
      * The password for the database credentials
      */
@@ -48,9 +48,9 @@ public class DBManager {
      * The reference to the database connection object
      */
     private static Connection conn = null;
-    
+
     /**
-     * The 
+     * The
      */
     private static PreparedStatement stmt = null;
 
@@ -113,7 +113,7 @@ public class DBManager {
 
     /**
      * Counts the number of rows the specified database table possesses.
-     * 
+     *
      * @param table - name of the database table
      * @return - number of row entries
      */
@@ -178,6 +178,61 @@ public class DBManager {
             } else {
                 return null;
             }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBManager.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public static ArrayList<ArrayList<String>> selectEntries(String table, String fieldName, String value) {
+
+        // SQL query script
+        final String selectRow = "select * from " + table;
+
+        try {
+
+            //Prepare statement
+            stmt = conn.prepareStatement(selectRow);
+
+            // Pull entry from database
+            ResultSet rs = stmt.executeQuery();
+
+            ResultSetMetaData rsd = rs.getMetaData();
+            int length = rsd.getColumnCount();
+            ArrayList<ArrayList<String>> users = new ArrayList<>();
+
+            while (rs.next()) {
+                ArrayList<String> userArr = new ArrayList<>();
+
+                if (fieldName.equals("Role")) {
+                    String role = rs.getString(11);
+                    if (role.equals(value)) {
+                        System.out.println("Admin: Found User");
+                        for (int j = 1; j <= length; ++j) {
+                            if (j == 1 | j == 2 | j == 3 | j == 9 | j == 11) {
+                                userArr.add(rs.getString(j));
+                                System.out.println(rs.getString(j));
+                            }
+                        }
+                        users.add(userArr);
+                    }
+                } else if (fieldName.equals("auth")) {
+                    for (int j = 1; j <= length; ++j) {
+                        if (rs.getString(2).equals("0")) {
+                            userArr.add(rs.getString(j));
+                        }
+                        System.out.println(rs.getString(j));
+                    }
+                    users.add(userArr);
+                }
+
+                System.out.println("Record succesfully retrieved");
+
+            }
+            return users;
 
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class
@@ -268,10 +323,11 @@ public class DBManager {
         }
 
     }
+
     /**
-     * Deletes an entire row entry from the specified table based on the primary key value that is
-     * passed in. 
-     * 
+     * Deletes an entire row entry from the specified table based on the primary
+     * key value that is passed in.
+     *
      * @param table - database table to access
      * @param key - the name of the primary key column
      * @param col - the value of the primary key
@@ -283,7 +339,7 @@ public class DBManager {
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, key);
-            
+
             // Remove entry
             if (stmt.execute()) {
                 System.out.println("Entry deleted from table " + table);

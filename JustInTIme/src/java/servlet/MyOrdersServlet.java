@@ -49,20 +49,23 @@ public class MyOrdersServlet extends HttpServlet {
         HashMap<String, ArrayList<String>> productMap = DBManager.searchTable("purchaseorder", array, email);
         DBManager.closeConnection();
 
-        List<ArrayList<String>> purchaseList = new ArrayList<>();
-
+        ArrayList<ArrayList<String>> purchaseList = new ArrayList<>();
+        
+        String previous = null;
         for (Map.Entry<String, ArrayList<String>> entry : productMap.entrySet()) {
             ArrayList<String> purchase = entry.getValue();
-
-            if (purchase.get(2).equals(email)) {
+            System.out.println(purchase.get(0));
+            if (purchase.get(2).equals(email) && !purchase.get(0).equals(previous)) {
+                purchase.remove(1);
+                purchase.remove(1);
+                purchase.remove(2);
                 purchaseList.add(purchase);
-                System.out.println(purchaseList.get(0).get(2));
+                previous = purchase.get(0);
             }
-
         }
         
         request.getSession().setAttribute("orders", purchaseList);
-
+        request.getRequestDispatcher("/MyOrders.jsp").forward(request, response);
     }
 
     /**

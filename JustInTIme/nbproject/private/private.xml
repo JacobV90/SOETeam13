@@ -6,6 +6,8 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Email.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ModifyProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/AddProduct.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/LogoutServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/PODetails.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/CartBufferServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img750412645893845115.jpeg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/POServlet.java</file>
@@ -17,12 +19,14 @@
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/ModifyProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/PurchaseOrder.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/EmailVerified.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/xml/PurchaseOrders.xml</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/POBufferServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PurchaseOrder.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PasswordControl.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/Cart.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/HomePage.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/PurchaseOrderDetails.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductDetails.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/DBManager.java</file>

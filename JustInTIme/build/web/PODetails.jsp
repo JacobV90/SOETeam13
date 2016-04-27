@@ -1,13 +1,46 @@
+<%-- 
+    Document   : PODetails
+    Created on : Apr 26, 2016, 10:07:52 PM
+    Author     : jacobveal
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="source.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            .floating-box {
+                display: inline-block;
+                width: 300px;
+                height: auto;
+                margin: 1em;
+            }
 
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-        <title>Purchase Orders</title>
+            img{
+                max-width: 100%;
+                height: auto;
+            }
+
+
+            .after-box {
+                border: 3px solid red; 
+            }
+        </style>
+
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/heroic-features.css" rel="stylesheet">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>PO Details</title>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -34,13 +67,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul id="navnavbar-nav" class="nav navbar-nav">
                     <li>
-                        <a id="myaccount" href="Account.html">My account</a>
+                        <a id="myaccount" href="#">My account</a>
                     </li>
                     <li>
-                        <a id="mysettings" href="Admin.html">My Settings</a>
+                        <a id="mysettings" href="#">My Settings</a>
                     </li>
                     <li>
-                        <a id="myorder" href="Order.html">My order</a>
+                        <a id="myorder" href="#">My order</a>
                     </li>
                 </ul>
                 <ul id="navnavbar-navnavbar-right" class="nav navbar-nav navbar-right">
@@ -59,44 +92,29 @@
     </nav>
 
 
-    <!-- Order ================================================== -->
-    <div>
-        <input type="hidden" name="action" value="details" />
+    <!-- Products ================================================== -->
+    <div align = "center">
+        <form action = "SearchServlet" method ="post">
+            <input type="text" name="Product">
+            <input type ="submit" value="Search">
+        </form>
     </div>
-    <table border="1" style="width:60%" align = "center">
-
-        <tr>
-            <th align = "center">Number</th>
-            <th align = "center">$Cost</th>
-            <th align = "center">Order Date</th>
-            <th align = "center">Delivery Date</th>
-            <th align = "center">Details</th>
-        </tr>
-        <c:forEach items="${orders}" var="order">
-            <tr>
-                <c:set var="poNumflag" value="0"/>
-                <c:forEach items="${order}" var="value">
-
-                    <c:if test="${poNumflag == '0'}">
-                        <c:set var="poNum" value="${value}"/>
-                        <c:set var="poNumflag" value="1"/>
-                    </c:if>
-                    <td align="center">${value}</td>
-                </c:forEach>
-
-
-                <td>  
-                    <form method="get" action="PurchaseOrderDetails">
-                        <input type="submit" value="Go"/>
-                        <input type="hidden" name="details" value="${poNum}"/>
-                    </form>
-                </td>
-            </tr>
+    <div style="text-align:center; max-height: 100px" >
+        <c:forEach var="item" items="${purchase.purchasedItems.productArray}">
+            <div id="hero-feature" class="floating-box">
+                <div id="thumbnail" class="thumbnail">
+                    <img src="images/${item.imageUrl}" alt="image not fountd" class="img" height="200" width="200">
+                    <div id="caption" class="caption" style="height: 50%">
+                        <h3>${item.itemName}</h3>
+                        <p>Quantity: ${item.itemCount}</p>
+                        <p>Price:$ ${item.itemPrice}</p>
+                        <p>${item.itemDescription}</p>
+                        <p>Delivery Date: ${item.deliveryDate}</p>
+                    </div>
+                </div>
+            </div>
         </c:forEach>
-
-
-
-    </table>
+    </div>
 
 </body>
 </html>

@@ -104,7 +104,7 @@ public class LoginServlet extends HttpServlet {
 
                 request.setAttribute("name", firstName);
                 request.setAttribute("role", role);
-                
+
                 switch (role) {
                     case "User":
                         System.out.println("Made it to homepage");
@@ -113,7 +113,7 @@ public class LoginServlet extends HttpServlet {
                         request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
                         break;
                     case "Manager":
-                        
+
                         ProductContainer products = new ProductContainer(email);
                         ArrayList<String> array = new ArrayList<>();
                         array.add("Email");
@@ -121,7 +121,7 @@ public class LoginServlet extends HttpServlet {
                         // Fetch products from database based on inputted keyword and user email
                         //DBManager.initializeConnection();
                         HashMap<String, ArrayList<String>> productItemNumMap = DBManager.searchTable("itemaddedby", array, email);
-                        
+
                         // Iterate through each product and add it to the product cart
                         for (Map.Entry<String, ArrayList<String>> entry : productItemNumMap.entrySet()) {
                             ArrayList<String> plist = entry.getValue();
@@ -132,6 +132,10 @@ public class LoginServlet extends HttpServlet {
 
                         request.getSession().setAttribute("productList", products);
                         request.getRequestDispatcher("/ManagerProductPage.jsp").forward(request, response);
+                        break;
+                    case "Administrator":
+                        //request.getRequestDispatcher("/AdminServlet").forward(request, response);
+                        response.sendRedirect("AdminServlet");
                         break;
                 }
 

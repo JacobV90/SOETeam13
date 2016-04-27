@@ -49,9 +49,9 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul id="nav navbar-nav" class="nav navbar-nav">
+                    <ul id="navnavbar-nav" class="nav navbar-nav">
                         <li>
-                            <a id="myaccount" href="#">My account</a>
+                            <a id="myaccount" href="Account.jsp">My account</a>
                         </li>
                         <li>
                             <a id="mysettings" href="#">My Settings</a>
@@ -60,7 +60,7 @@
                             <a id="myorder" href="MyOrdersServlet">My orders</a>
                         </li>
                     </ul>
-                    <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
+                    <ul id="navnavbar-navnavbar-right" class="nav navbar-nav navbar-right">
                         <li>
                             <a id="logout" href="CartBufferServlet">Cart</a>
                         </li>

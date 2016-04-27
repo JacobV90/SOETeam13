@@ -12,6 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.Month;
 import source.DBManager;
 import source.Product;
 import source.ProductContainer;
@@ -82,8 +86,6 @@ public class POBufferServlet extends HttpServlet {
         purchase.setPurchasedItems(cart);
         String email = (String) request.getSession().getAttribute("userEmail");
         DBManager.initializeConnection();
-        
-        
 
         String poNum = String.valueOf(DBManager.getRowCount("purchaseorder"));
         request.setAttribute("poNum", poNum);
@@ -105,6 +107,29 @@ public class POBufferServlet extends HttpServlet {
                 int newItemCount = numItems - numCartItems;
                 DBManager.updateEntry("item", "Item_No", itemNum, "Item_Qty", String.valueOf(newItemCount));
 
+                switch (item.getSize()) {
+                    case "small":
+                        item.setDeliveryTime(3);
+                        break;
+                    case "medium":
+                        item.setDeliveryTime(5);
+                        break;
+                    case "large":
+                        item.setDeliveryTime(7);
+                        break;
+                    default:
+                        item.setDeliveryTime(5);
+                }
+
+                LocalDateTime currentTime = LocalDateTime.now();
+                LocalDate date1 = currentTime.toLocalDate();
+
+                //Calculate product delivery date
+                LocalDate deliveryDate = date1.plusDays(item.getDeliveryTime());
+                item.setDeliveryDate(deliveryDate.toString());
+
+                System.out.println(String.valueOf(item.getDeliveryTime()));
+
                 // Create Purchase Order Number and update PO Database table
                 ArrayList<String> entryArray = new ArrayList<>();
                 entryArray.add(poNum);
@@ -112,6 +137,8 @@ public class POBufferServlet extends HttpServlet {
                 entryArray.add(email);
                 entryArray.add(String.valueOf(item.getTotalPrice()));
                 entryArray.add(String.valueOf(item.getItemCount()));
+                entryArray.add(date1.toString());
+                entryArray.add(item.getDeliveryDate());
                 DBManager.insertEntry("purchaseorder", entryArray);
 
                 // Remove product from user's cart

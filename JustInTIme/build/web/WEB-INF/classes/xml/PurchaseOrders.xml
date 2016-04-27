@@ -1,11 +1,196 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
--->
-
-
-<root>
+--><root>
     
+<purchase number="12">
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>1</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+<Product number="1">
+<Value>1</Value>
+<Value>MacBook Pro</Value>
+<Value>1000.0</Value>
+<Value>1</Value>
+<Value>A1425 Retina 13"</Value>
+<Value>medium</Value>
+<Value>mac.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+</purchase>
+<purchase number="12">
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>1</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+<Product number="1">
+<Value>1</Value>
+<Value>MacBook Pro</Value>
+<Value>1000.0</Value>
+<Value>1</Value>
+<Value>A1425 Retina 13"</Value>
+<Value>medium</Value>
+<Value>mac.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+</purchase>
+<purchase number="14">
+<Product number="2">
+<Value>2</Value>
+<Value>Mario</Value>
+<Value>10.0</Value>
+<Value>1</Value>
+<Value>small</Value>
+<Value>Its me..Mario</Value>
+<Value>img1057026852142517014.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+</purchase>
+<purchase number="15">
+<Product number="1">
+<Value>1</Value>
+<Value>MacBook Pro</Value>
+<Value>1000.0</Value>
+<Value>1</Value>
+<Value>A1425 Retina 13"</Value>
+<Value>medium</Value>
+<Value>mac.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+</purchase>
+<purchase number="16">
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value>2016-04-26</Value>
+</Product>
+</purchase>
+<purchase number="17">
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>1</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value>2016-04-29</Value>
+</Product>
+</purchase>
+<purchase number="18">
+<Product number="1">
+<Value>1</Value>
+<Value>MacBook Pro</Value>
+<Value>1000.0</Value>
+<Value>1</Value>
+<Value>A1425 Retina 13"</Value>
+<Value>medium</Value>
+<Value>mac.jpg</Value>
+<Value>2016-05-02</Value>
+</Product>
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value/>
+</Product>
+<Product number="2">
+<Value>2</Value>
+<Value>Mario</Value>
+<Value>10.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Its me..Mario</Value>
+<Value>img1057026852142517014.jpg</Value>
+<Value/>
+</Product>
+</purchase>
+<purchase number="18">
+<Product number="1">
+<Value>1</Value>
+<Value>MacBook Pro</Value>
+<Value>1000.0</Value>
+<Value>1</Value>
+<Value>A1425 Retina 13"</Value>
+<Value>medium</Value>
+<Value>mac.jpg</Value>
+<Value>2016-05-02</Value>
+</Product>
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value>2016-04-30</Value>
+</Product>
+<Product number="2">
+<Value>2</Value>
+<Value>Mario</Value>
+<Value>10.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Its me..Mario</Value>
+<Value>img1057026852142517014.jpg</Value>
+<Value/>
+</Product>
+</purchase>
+<purchase number="18">
+<Product number="1">
+<Value>1</Value>
+<Value>MacBook Pro</Value>
+<Value>1000.0</Value>
+<Value>1</Value>
+<Value>A1425 Retina 13"</Value>
+<Value>medium</Value>
+<Value>mac.jpg</Value>
+<Value>2016-05-02</Value>
+</Product>
+<Product number="3">
+<Value>3</Value>
+<Value>Samsung Note 5</Value>
+<Value>750.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Android Marshmallow</Value>
+<Value>img5565001860135809878.jpg</Value>
+<Value>2016-04-30</Value>
+</Product>
+<Product number="2">
+<Value>2</Value>
+<Value>Mario</Value>
+<Value>10.0</Value>
+<Value>2</Value>
+<Value>small</Value>
+<Value>Its me..Mario</Value>
+<Value>img1057026852142517014.jpg</Value>
+<Value>2016-04-30</Value>
+</Product>
+</purchase>
 </root>

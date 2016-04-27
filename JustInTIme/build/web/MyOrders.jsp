@@ -1,8 +1,12 @@
 <%@page import="source.Product"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
+
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <title>Purchase Orders</title>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -56,29 +60,37 @@
 
 
     <!-- Order ================================================== -->
+    <div>
+        <input type="hidden" name="action" value="details" />
+    </div>
+    <table border="1" style="width:60%" align = "center">
 
-    <table border="1" style="width:35%" align = "center">
-        <div>
-            <input type="hidden" name="action" value="details" />
-
-        </div
         <tr>
-            <th align = "center"> Number</th>
-            <th align = "center"> Amount</th>
-            <th align = "center"> Cost</th>
+            <th align = "center">Number</th>
+            <th align = "center">$Cost</th>
             <th align = "center">Order Date</th>
-            <th align = "center">ETA Date</th>
+            <th align = "center">Delivery Date</th>
             <th align = "center">Details</th>
         </tr>
         <c:forEach items="${orders}" var="order">
+            <tr>
+                <c:set var="poNumflag" value="0"/>
+                <c:forEach items="${order}" var="value">
 
-            <td align = "center">"${order}"</td>
-            <td align = "center"></td>
-            <td align = "center"></td>
-            <td align = "center"></td>
-            <td align = "center"></td>
-            <th align = "center"></th>
-            <td align = "center"><a href="">Cancel order</td>
+                    <c:if test="${poNumflag == '0'}">
+                        <c:set var="poNum" value="${value}"/>
+                        <c:set var="poNumflag" value="1"/>
+                    </c:if>
+                    <td align="center">${value}</td>
+                </c:forEach>
+
+
+                <td>  
+                    <form method="get" action="PurchaseOrderDetails">
+                        <input type="submit" value="Go"/>
+                        <input type="hidden" name="details" value="${poNum}"/>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
 

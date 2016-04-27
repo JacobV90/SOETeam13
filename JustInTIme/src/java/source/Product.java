@@ -20,9 +20,9 @@ public class Product implements Serializable {
     private double itemPrice;
     private String itemDescription;
     private double totalPrice = 0;
-    private String deliveryDate;
+    private String deliveryDate = null;
     private String size;
-    private int deliveryTime = 0;
+    private long deliveryTime = 0;
     private String imageUrl = null;
 
     /**
@@ -196,8 +196,8 @@ public class Product implements Serializable {
      *
      * @return
      */
-    public String getDeliveryTime() {
-        return this.size;
+    public long getDeliveryTime() {
+        return this.deliveryTime;
     }
 
     /**
@@ -207,6 +207,14 @@ public class Product implements Serializable {
      */
     public void setDeliveryTime(int date) {
         this.deliveryTime = date;
+    }
+    
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     /**
@@ -224,6 +232,7 @@ public class Product implements Serializable {
         array.add(size);
         array.add(itemDescription);
         array.add(imageUrl);
+        array.add(deliveryDate);
         return array;
 
     }
