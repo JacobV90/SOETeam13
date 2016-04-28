@@ -58,16 +58,12 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<ArrayList<String>> users = new ArrayList<>();
-        ArrayList<ArrayList<String>> managers = new ArrayList<>();
-        ArrayList<ArrayList<String>> admins = new ArrayList<>();
-        ArrayList<ArrayList<String>> pending = new ArrayList<>();
 
         DBManager.initializeConnection();
-        users = DBManager.selectEntries("user", "Role", "User");
-        managers = DBManager.selectEntries("user", "Role", "Manager");
-        admins = DBManager.selectEntries("user", "Role", "Administrator");
-        pending = DBManager.selectEntries("auth", "auth", "n/a");
+        ArrayList<ArrayList<String>> users = DBManager.selectEntries("user", "Role", "User");
+        ArrayList<ArrayList<String>> managers = DBManager.selectEntries("user", "Role", "Manager");
+        ArrayList<ArrayList<String>> admins = DBManager.selectEntries("user", "Role", "Administrator");
+        ArrayList<ArrayList<String>> pending = DBManager.selectEntries("auth", "auth", "n/a");
         DBManager.closeConnection();
 
         request.getSession().setAttribute("users", users);

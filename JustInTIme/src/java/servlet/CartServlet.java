@@ -86,12 +86,12 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String action = request.getParameter("action");
+        
+        String action = request.getParameter("submit");
         String email = (String) request.getSession().getAttribute("userEmail");
         String itemNum = request.getParameter("productNumber");
         String itemCount = request.getParameter("qty");
-
+        
         switch (action) {
             case "addtocart":
                 ProductContainer productCart = (ProductContainer) request.getSession().getAttribute("productList");
@@ -106,12 +106,16 @@ public class CartServlet extends HttpServlet {
             case "deletefromcart":
                 XMLManager.removeProductFromCart(email, itemNum);
                 break;
-            default:
+            case "Cancel":
+                
                 break;
-
+            default:
+                
+                break;
+            
         }
         response.sendRedirect("CartBufferServlet");
-       
+        
     }
 
     /**

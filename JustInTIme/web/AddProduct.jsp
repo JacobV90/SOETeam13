@@ -50,26 +50,24 @@
                         <a id="logout" href="LogoutServlet">Logout</a>
                     </li>
                 </ul>
-                
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
 
-    
+    <div align="center">
         <h1>Add Product</h1>
         <div  class="form">
             <form id="addProducForm" action="ProductServlet" method="post" enctype="multipart/form-data">
                 <fieldset>  
                     <!--                    <p><label for="ProductNumber">Product #: </label>-->
-                    <p><label for="ProductName">Product Name</label><input id="prodName" type="text" name="ProductName" size="20"></p>
-                    <p><label for="txtproductQuantity">Product Quantity</label><input id="ProductQuantity" type="text" name="ProductQuantity" size="20"></p>
-                    <p><label for="ProductPrice">Product Price</label><input id="productPrice" name="ProductPrice" placeholder="" tabindex="3" type="text" size="20"></p>
-                    <p><label for="productDescription">Product Description</label><input id="productDescription" name="ProductDescription" placeholder="" tabindex="4" type="text" size="20"></p>
-                    <p><label for="productSize">Product Size</label><input id="productSize" name="ProductSize" placeholder="" tabindex="4" type="text" size="20"></p>
-
-                    <p><label for="image">Image</label><img src="url" alt="Some txt"> </p>
+                    <p><label for="ProductName">Name</label> <input id="prodName" type="text" name="ProductName" size="20" tabindex="1"></p>
+                    <p><label for="txtproductQuantity">Quantity</label> <input id="ProductQuantity" type="text" name="ProductQuantity" size="20" tabindex="1"></p>
+                    <p><label for="ProductPrice">Price</label> <input id="productPrice" name="ProductPrice" placeholder="" tabindex="1" type="text" size="20"></p>
+                    <p><label for="productDescription">Description</label> <input id="productDescription" name="ProductDescription" placeholder="" tabindex="1" type="text" size="20"></p>
+                    <p><label for="productSize">Size</label> <input id="productSize" name="ProductSize" placeholder="" tabindex="1" type="text" size="20"></p>
                     <p><input type="file" name ="file"/>
                     <p><input class="btn-primary" id="add" type="submit" name="submit" value="Add"  style="width: 100px"> 
                         <input class="btn-primary" id="Cancel" type="submit" name="submit" value="Cancel"  style="width: 100px"></p>
@@ -79,5 +77,6 @@
 
 
         </div>
-    </body>
+    </div>
+</body>
 </html>

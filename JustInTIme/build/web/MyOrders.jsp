@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/tables.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
@@ -63,7 +64,7 @@
     <div>
         <input type="hidden" name="action" value="details" />
     </div>
-    <table border="1" style="width:60%" align = "center">
+    <table border="1" id="table" align = "center">
 
         <tr>
             <th align = "center">Number</th>

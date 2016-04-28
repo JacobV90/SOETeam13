@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/tables.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
@@ -31,7 +32,7 @@
         </style>    
 
     </head>
-    <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div id="container" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div id="navbar-header" class="navbar-header">
@@ -46,7 +47,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <form id ="Manage" action="ModifyProduct" method="post">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul id="nav navbar-nav" class="nav navbar-nav">
+                    <ul id="navnavbar-nav" class="nav navbar-nav">
                         <li>
                             <a id="myaccount" href="#">My account</a>
                         </li>
@@ -64,7 +65,7 @@
                         </li>
                     </ul>
             </form>
-            <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
+            <ul id="navnavbar-navnavbar-right" class="nav navbar-nav navbar-right">
                 <li>
                     <a id="logout" href="index.jsp">Logout</a>
                 </li>
@@ -95,7 +96,7 @@
 
 <!-- Products ================================================== -->
 
-<table border="1" style="width:35%" align = "center">
+<table border="1" id="table" align = "center">
     <div>
         <input type="hidden" name="action" value="details" />
         <input type="hidden" name="filter" value="manager" />

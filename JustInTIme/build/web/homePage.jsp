@@ -35,7 +35,7 @@
     <body>
 
         <!-- Navigation -->
-        <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div id="container" class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div id="navbar-header" class="navbar-header">
@@ -84,7 +84,7 @@
         <div class="container">
 
             <!-- Jumbotron Header -->
-            <header id="jumbotron hero-spacer" class="jumbotron hero-spacer">
+            <header id="jumbotronhero-spacer" class="jumbotron hero-spacer">
                 <h1>Welcome to JustInTime</h1>
                 <p>You can find best and cheapest products here. Hope you have a good tour.</p>
             </header>
@@ -100,9 +100,9 @@
             <!-- /.row -->
 
             <!-- Page Features -->
-            <div id="row text-center" class="row text-center">
+            <div id="rowtext-center" class="row text-center">
 
-                <div id="col-md-3 col-sm-6 hero-feature" class="col-md-3 col-sm-6 hero-feature">
+                <div id="col-md-3col-sm-6 hero-feature" class="col-md-3 col-sm-6 hero-feature">
                     <div id="thumbnail" class="thumbnail">
                         <img src="http://placehold.it/800x500" alt="">
                         <div id="caption" class="caption">

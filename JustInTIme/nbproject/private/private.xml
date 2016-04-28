@@ -3,43 +3,46 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/css/tables.css</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Email.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ModifyProduct.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/AddProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/LogoutServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/xml/inActiveUsers.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/AdminServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/PODetails.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/CartBufferServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/images/img750412645893845115.jpeg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/POServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/test/source/ProductTest.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ManagerServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/ManagerProductPage.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ForgotPassword.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductPage.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/ModifyProduct.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/css/inline.css</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/PurchaseOrder.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/EmailVerified.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/Admin.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/build/web/WEB-INF/classes/xml/PurchaseOrders.xml</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/css/heroic-features.css</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/POBufferServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PurchaseOrder.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/PasswordControl.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/Cart.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/HomePage.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/css/bootstrap.min.css</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/signup.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/XMLManager.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/PurchaseOrderDetails.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ProductDetails.jsp</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/RegisterServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/Account.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/DBManager.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/ManagerProductPage.jsp</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/css/index_style.css</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/MyOrdersServlet.java</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/xml/PurchaseOrders.xml</file>
-            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/LoginServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/index.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/WEB-INF/web.xml</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/ProductServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Product.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/CartServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/SearchServlet.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/css/bootstrap.css</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/ManagerCart.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/source/Users.java</file>
+            <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/AdminActionServlet.java</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/images/bg.jpg</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/web/AddProduct.jsp</file>
             <file>file:/Users/jacobveal/NetBeansProjects/JustInTime/src/java/servlet/UploadServlet.java</file>

@@ -62,7 +62,7 @@
             <fieldset>
                 <label>Birthday</label>
                 <label class="month"> 
-                    <select class="select-style" name="BirthMonth">
+                    <select class="select-style" name="BirthMonth" tabindex="1">
                         <option value="">Month</option>
                         <option value="01">January</option>
                         <option value="02">February</option>

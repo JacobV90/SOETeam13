@@ -10,9 +10,28 @@
 <html>
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <style>
+            .floating-box {
+                display: inline-block;
+                max-width: 300px;
+                max-height:300px;
+                margin: 1em;
+            }
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+
+
+            .after-box {
+                border: 3px solid red; 
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
@@ -59,11 +78,15 @@
             <!-- /.container -->
         </nav>
 
-        <div>
-            <div align ="center" style="float:left">
-                <img src="images/${product.imageUrl}" alt = "Image not found" width ="500" height="350" style="float: left;">
+        <div align="center" style="height:100%">
+            <div class="floating-box">
+                <div id="thumbnail" >
+                    <img src="images/${product.imageUrl}" alt = "Image not found" class="img">
+                </div>
+            </div>
 
-                <div align ="center" style="float:right">
+            <div class="floating-box">
+                <div id="thumbnail"  >
 
                     <form id="productDescription" action = "CartServlet" method = "post">
                         <fieldset>  
@@ -87,9 +110,9 @@
                                 <input type="hidden" name="productNumber" value="${product.itemNo}" />
                                 <input type="hidden" name="action" value="addtocart" />
 
-                                <p><input class="btn-primary" id="addToCart" type="submit" name="addToCart" value="Add To Cart" style="width: 100px" onclick='javascript: checkQty();' > </p>
-                                <p>  <input class="btn-primary" id="Cancel" type="submit" name="Cancel" style="width: 100px" value="Cancel" ></p>
-                            </c:if>
+                                <p><input class="btn-primary" id="addToCart" type="submit" name="submit" value="addtocart" style="width: 100px" onclick='javascript: checkQty();' > </p>
+                                <p>  <input class="btn-primary" id="Cancel" type="submit" name="submit" style="width: 100px" value="Cancel" ></p>
+                                </c:if>
 
                         </fieldset>  
 
@@ -97,6 +120,7 @@
                 </div>
             </div>
         </div>
+
         <script type="text/javascript">
             function subtractQty() {
                 var value = document.getElementById("qty").value;

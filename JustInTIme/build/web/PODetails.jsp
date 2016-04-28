@@ -93,28 +93,25 @@
 
 
     <!-- Products ================================================== -->
-    <div align = "center">
-        <form action = "SearchServlet" method ="post">
-            <input type="text" name="Product">
-            <input type ="submit" value="Search">
-        </form>
-    </div>
-    <div style="text-align:center; max-height: 100px" >
+
+    <div style="text-align: center" class="container">
         <c:forEach var="item" items="${purchase.purchasedItems.productArray}">
             <div id="hero-feature" class="floating-box">
-                <div id="thumbnail" class="thumbnail">
-                    <img src="images/${item.imageUrl}" alt="image not fountd" class="img" height="200" width="200">
-                    <div id="caption" class="caption" style="height: 50%">
+                <div style="height:100%">
+                        <img src="images/${item.imageUrl}" alt="Image not found" style="height:50%">                            
                         <h3>${item.itemName}</h3>
                         <p>Quantity: ${item.itemCount}</p>
                         <p>Price:$ ${item.itemPrice}</p>
                         <p>${item.itemDescription}</p>
                         <p>Delivery Date: ${item.deliveryDate}</p>
-                    </div>
                 </div>
             </div>
+
         </c:forEach>
     </div>
+
+
+
 
 </body>
 </html>

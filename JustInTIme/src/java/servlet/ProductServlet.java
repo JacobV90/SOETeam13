@@ -43,32 +43,6 @@ import source.ProductContainer;
 @MultipartConfig
 public class ProductServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Product</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ModifyProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -131,6 +105,8 @@ public class ProductServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String email = (String) request.getSession().getAttribute("userEmail");
+        //String action = (String) request.getSession().getAttribute("userEmail");
+        
         ArrayList<String> values = parseRequest(request, response);
         //Part filePart = (Part) request.getPart("file");
 
@@ -152,7 +128,7 @@ public class ProductServlet extends HttpServlet {
         switch (action) {
             case "Add":
                 System.out.println(action);
-                Product product = new Product(values.get(0), Integer.valueOf(values.get(1)), Double.valueOf(values.get(2)), values.get(3), values.get(4));
+                Product product = new Product(values.get(0), Integer.valueOf(values.get(1)), Double.valueOf(values.get(2)), values.get(4),values.get(3));
 
                 product.setImageUrl(values.get(5));
 
@@ -167,18 +143,24 @@ public class ProductServlet extends HttpServlet {
             case "Delete":
                 System.out.println(action);
                 DBManager.initializeConnection();
-                //DBManager.deleteEntry("item", itemNum, "Item_No");
-                // DBManager.deleteEntry("itemaddedby", itemNum, "Item_No");
+                DBManager.deleteEntry("item", values.get(0), "Item_No");
+               //DBManager.deleteEntry("itemaddedby", itemNum, "Item_No");
                 DBManager.closeConnection();
                 break;
             case "Modify":
                 System.out.println(action);
                 DBManager.initializeConnection();
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Name", values.get(0));
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Cost", values.get(1));
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Qty", values.get(2));
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Size", values.get(3));
-                DBManager.updateEntry("item", "Item_No", "1", "Item_Desc", values.get(4));
+                String itemNo = values.get(0);
+                DBManager.updateEntry("item", "Item_No", itemNo, "Item_No", values.remove(0));
+                DBManager.updateEntry("item", "Item_No", itemNo, "Item_Name", values.remove(0));
+                DBManager.updateEntry("item", "Item_No", itemNo, "Item_Cost", values.remove(0));
+                DBManager.updateEntry("item", "Item_No", itemNo, "Item_Qty", values.remove(0));
+                DBManager.updateEntry("item", "Item_No", itemNo, "Item_Desc", values.remove(0));
+                
+                if(!values.isEmpty()){
+                    DBManager.updateEntry("item", "Item_No", itemNo, "Image_Url", values.remove(0));
+                }
+                
                 DBManager.closeConnection();
                 break;
 

@@ -250,5 +250,6 @@ public class Product implements Serializable {
         this.size = values.get(4);
         this.itemDescription = values.get(5);
         this.imageUrl = values.get(6);
+        this.deliveryDate = values.get(7);
     }
 }

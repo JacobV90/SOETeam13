@@ -20,6 +20,8 @@
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
+        <link href="css/tables.css" rel="stylesheet">
+
 
     </head>
     <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -64,9 +66,17 @@
 
 
     <!-- Admin ================================================== -->
-    <div  style="text-align: center; height: 400px">
-        <div class="floating-box">
-            <table border="1"  align = "center" >
+    <div align="center">
+        <div>
+            <h3>Users</h3>
+            <table border="1"  align = "center" id="table">
+                <colgroup>
+                    <col span="1" style="width: 25%; ">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 15%;">
+                </colgroup>
 
                 <tr>
                     <th align = "center">Email</th>
@@ -85,19 +95,20 @@
                 </c:forEach>
             </table>
         </div>
+        <div style="height: 50px" align="center">
+            <h3>Managers</h3>
+        </div>
+        <div >
+            <table border="1"  align = "center" id="table" >
 
-        <div class="floating-box" style="width:50px"></div>
-
-
-        <div class="floating-box">
-            <table border="1"  align = "center" >
-
+                <colgroup>
+                    <col span="1" style="width: 25%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 15%;">
+                </colgroup>
                 <tr>
-                    <th align = "center">Email</th>
-                    <th align = "center">First Name</th>
-                    <th align = "center">Last Name</th>
-                    <th align = "center">Phone Number</th>
-                    <th align = "center">Role</th>
 
                 </tr>
                 <c:forEach items="${managers}" var="user">
@@ -109,19 +120,19 @@
                 </c:forEach>
             </table>
         </div>
-
-        <div class="floating-box" style="width:50px"></div>
-
-
-        <div class="floating-box">
-            <table border="1"  align = "center" >
-
+        <div style="height: 50px" align="center">
+            <h3>Administrators</h3>
+        </div>
+        <div>
+            <table border="1"  align = "center" id="table">
+                <colgroup>
+                    <col span="1" style="width: 25%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 15%;">
+                </colgroup>
                 <tr>
-                    <th align = "center">Email</th>
-                    <th align = "center">First Name</th>
-                    <th align = "center">Last Name</th>
-                    <th align = "center">Phone Number</th>
-                    <th align = "center">Role</th>
 
                 </tr>
                 <c:forEach items="${admins}" var="user">
@@ -133,9 +144,11 @@
                 </c:forEach>
             </table>
         </div>
-        <div class="floating-box" style="width:50px"></div>
-        <div class="floating-box">
-            <table border="1"  align = "center" >
+        <div style="height: 50px" align="center">
+            <h3>Pending Role Requests</h3>
+        </div>
+        <div>
+            <table border="1"  align = "center" id="table">
 
                 <tr>
                     <th align = "center">Email</th>
@@ -148,34 +161,41 @@
                 <c:forEach items="${pending}" var="user">
                     <tr>
                         <c:set var="poNumflag" value="0"/>
+                        <c:set var="buttonflag" value="0"/>
                         <c:forEach items="${user}" var="value">
                             <c:if test="${poNumflag == '0'}">
                                 <c:set var="email" value="${value}"/>
                                 <c:set var="poNumflag" value="1"/>
+                                <c:set var="buttonflag" value="1"/>
                             </c:if>
                             <c:set var="role" value="${value}"/>
                             <c:if test="${role == 'Manager' || role == 'Administrator'}">
                                 <c:set var="Role" value="${role}"/>
                             </c:if>
-                                <td align = "center">${value}</td>
+                            <td align = "center">${value}</td>
                         </c:forEach>
-                        <td align ="center">
-                            <form action ="AdminActionServlet" method ="post">
-                                <input type="hidden" name="role" value="${Role}">
-                                <input type="hidden" name="user" value="${email}">
-                                <input type="submit" name="action" value="promote">
-                            </form>
-                        </td>
-                        <td align ="center">
-                            <form action ="AdminActionServlet" method ="post">
-                                <input type="hidden" name="role" value="${Role}">
-                                <input type="hidden" name="user" value="${email}">
-                                <input type="submit" name="action" value="demote">
-                            </form>
-                        </td>
+                        <c:if test="${buttonflag != '0'}">
+                            <td align ="center">
+                                <form action ="AdminActionServlet" method ="post">
+                                    <input type="hidden" name="role" value="${Role}">
+                                    <input type="hidden" name="user" value="${email}">
+                                    <input type="submit" name="action" value="promote">
+                                </form>
+                            </td>
+
+                            <td align ="center">
+                                <form action ="AdminActionServlet" method ="post">
+                                    <input type="hidden" name="role" value="${Role}">
+                                    <input type="hidden" name="user" value="${email}">
+                                    <input type="submit" name="action" value="demote">
+                                </form>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </table>
+        </div>
+        <div style="height: 50px" align="center">
         </div>
     </div>
 </body>

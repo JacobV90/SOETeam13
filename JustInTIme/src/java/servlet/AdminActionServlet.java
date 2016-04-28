@@ -89,7 +89,8 @@ public class AdminActionServlet extends HttpServlet {
         }
 
         DBManager.closeConnection();
-        request.getRequestDispatcher("/AdminServlet").forward(request, response);
+        //request.getRequestDispatcher("AdminServlet").forward(request, response);
+        response.sendRedirect("AdminServlet");
     }
 
     /**

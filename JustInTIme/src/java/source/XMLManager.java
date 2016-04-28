@@ -392,13 +392,12 @@ public class XMLManager {
                         System.out.println(nl3.getLength());
 
                         List<String> list = new ArrayList<>();
-                        for (int k = 0; k < nl3.getLength(); ++k) {
+                        for (int k = 0; k < nl3.getLength(); k++) {
                             System.out.println(nl3.item(k).getTextContent());
                             list.add(nl3.item(k).getTextContent());
                         }
                         product.createProduct(list);
-                        product.setDeliveryDate(list.get(list.size()-1));
-                        System.out.println(product.getImageUrl());
+                        //product.setDeliveryDate(list.get(k));
                         cart.addProduct(product);
 
                     }
