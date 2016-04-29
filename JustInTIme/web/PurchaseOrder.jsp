@@ -82,10 +82,12 @@
         <div class="container">
 
             <!-- Jumbotron Header -->
-            
+
             <header id="jumbotronhero-spacer" class="jumbotron hero-spacer">
                 <h1>Thanks for your purchase ${sessionScope.firstName}</h1>
                 <p>You successfully placed an order.</p>
+                <p>Your purchase order number is #${poNum} and estimated delivery date is ${delivery}.</p>
+
             </header>
 
         </div>

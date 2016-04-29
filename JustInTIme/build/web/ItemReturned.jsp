@@ -1,6 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-- 
+    Document   : Thanks
+    Created on : Mar 30, 2016, 12:30:55 PM
+    Author     : Owner
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
     <head>
 
         <meta charset="utf-8">
@@ -9,13 +15,20 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Home Page</title>
+        <title>Item Returned</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
     </head>
 
@@ -32,7 +45,7 @@
                         <span id="icon-bar" class="icon-bar"></span>
                         <span id="icon-bar" class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Hello, ${firstName}</a>
+                    <a class="navbar-brand">Hi, ${firstName}</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -41,12 +54,16 @@
                             <a id="myaccount" href="Account.jsp">My account</a>
                         </li>
                         <li>
-                            <a id="myorder" href="MyOrdersServlet">My orders</a>
+                            <a id="myorder" href="MyOrders.jsp">My order</a>
                         </li>
+                        <li>
+                            <a id="home" href="${pageContext.request.contextPath}/HomePage.jsp">Home</a>
+                        </li>
+
                     </ul>
                     <ul id="navnavbar-navnavbar-right" class="nav navbar-nav navbar-right">
                         <li>
-                            <a id="logout" href="CartBufferServlet">Cart</a>
+                            <a id="cart" href="CartBufferServlet">Cart</a>
                         </li>
                         <li>
                             <a id="logout" href="LogoutServlet">Logout</a>
@@ -57,28 +74,18 @@
             </div>
             <!-- /.container -->
         </nav>
-
         <!-- Page Content -->
-        <div id="search" class="search">
-            <form action = "SearchServlet" method ="post">
-                <input type="text" name="Product">
-                <input type ="submit" value="Search">
-            </form>
-        </div>
+
         <div class="container">
 
             <!-- Jumbotron Header -->
+            
             <header id="jumbotronhero-spacer" class="jumbotron hero-spacer">
-                <h1>Welcome to JustInTime</h1>
-                <p>Use our search bar to find the best products at the lowest prices.</p>
+                <h1>Your item has been returned ${sessionScope.firstName}</h1>
+                <p>Sorry it didn't work out :(</p>
             </header>
+
         </div>
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-
-    </body>
-
 </html>
+
+

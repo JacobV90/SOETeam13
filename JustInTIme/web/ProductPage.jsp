@@ -15,9 +15,11 @@
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
+        <link href="css/tables.css" rel="stylesheet">
+
 
     </head>
-    <nav id="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div id="container" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div id="navbar-header" class="navbar-header">
@@ -31,7 +33,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul id="nav navbar-nav" class="nav navbar-nav">
+                <ul id="navnavbar-nav" class="nav navbar-nav">
                     <li>
                         <a id="myaccount" href="#">My account</a>
                     </li>
@@ -42,14 +44,13 @@
                         <a id="myorder" href="#">My order</a>
                     </li>
                 </ul>
-                <ul id="nav navbar-nav navbar-right" class="nav navbar-nav navbar-right">
+                <ul id="navnavbar-navnavbar-right" class="nav navbar-nav navbar-right">
                     <li>
                         <a id="cart" href="CartBufferServlet">Cart</a>
                     </li>
                     <li>
                         <a id="logout" href="LogoutServlet">Logout</a>
                     </li>
-                </ul>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -65,7 +66,7 @@
             <input type ="submit" value="Search">
         </form>
     </div>
-    <table border="1" style="width:35%" align = "center">
+    <table border="1" style="width:35%" align = "center" id="table">
         <div>
             <input type="hidden" name="action" value="details" />
 
@@ -79,7 +80,7 @@
         </tr>
 
         <c:forEach items="${productList.productArray}" var="product">
-            
+
             <tr>
                 <c:url value="/ProductServlet" var = "productDetails">
                     <c:param name = "productNumber" value = "${product.itemNo}"/>

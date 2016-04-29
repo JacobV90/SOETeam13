@@ -10,24 +10,7 @@
 <html>
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <style>
-            .floating-box {
-                display: inline-block;
-                max-width: 300px;
-                max-height:300px;
-                margin: 1em;
-            }
 
-            img{
-                width: 100%;
-                height: 100%;
-            }
-
-
-            .after-box {
-                border: 3px solid red; 
-            }
-        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +18,8 @@
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
+        <link href="css/inline.css" rel="stylesheet">
+
         <title>Product Detail</title>
     </head>
     <body>
@@ -78,15 +63,14 @@
             <!-- /.container -->
         </nav>
 
-        <div align="center" style="height:100%">
-            <div class="floating-box">
-                <div id="thumbnail" >
-                    <img src="images/${product.imageUrl}" alt = "Image not found" class="img">
+        <div style="text-align: center" class="container">
+            <div id="hero-feature" >
+                <div style="height:350px">
+                    <img src="images/${product.imageUrl}" alt = "Image not found" style="height:100%">
                 </div>
             </div>
-
-            <div class="floating-box">
-                <div id="thumbnail"  >
+            <div id="hero-feature" >
+                <div style="height:100%">
 
                     <form id="productDescription" action = "CartServlet" method = "post">
                         <fieldset>  
@@ -101,12 +85,22 @@
                             </p>
                             <p><label for="productPrice">Price: </label> $<label for="txtproductNumber"><c:out value="${product.itemPrice}"/></label></p>
                             <p><label for="productPrice">Size: </label><label for="txtproductNumber"><c:out value="${product.size}"/></label></p>
-                            <p><label for="productDescription">Description: </label> <label for="txtproductNumber"><c:out value="${product.itemDescription}"/></label></p>
+                                <c:if test="${action.equals('return')}" >
+                                Reason for Return:<br>
+                                <input type="text" name="reason" style="height:100px; width:150px"><br>
+                            </c:if>
+                            <c:if test="${!action.equals('return')}" >
+                                <p><label for="productDescription">Description: </label> <label for="txtproductNumber"><c:out value="${product.itemDescription}"/></label></p>
+                                </c:if>
+                            <div style="height:10px"></div>
+                            <c:if test="${action.equals('return')}" >
+                                <input type="hidden" name="action" value="Return" />
+                                <input class="btn-primary" id="Cancel" type="submit" name="submit" style="width: 100px" value="Cancel" >
+                                <input class="btn-primary" id="Cancel" type="submit" name="submit" style="width: 100px" value="Return" >
 
+                            </c:if>
 
-
-
-                            <c:if test="${role.equals('User')}" >
+                            <c:if test="${role.equals('User') && !action.equals('return') }" >
                                 <input type="hidden" name="productNumber" value="${product.itemNo}" />
                                 <input type="hidden" name="action" value="addtocart" />
 

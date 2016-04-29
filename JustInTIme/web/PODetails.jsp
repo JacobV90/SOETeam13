@@ -11,24 +11,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            .floating-box {
-                display: inline-block;
-                width: 300px;
-                height: auto;
-                margin: 1em;
-            }
-
-            img{
-                max-width: 100%;
-                height: auto;
-            }
-
-
-            .after-box {
-                border: 3px solid red; 
-            }
-        </style>
 
         <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -49,6 +31,8 @@
 
         <!-- Custom CSS -->
         <link href="css/heroic-features.css" rel="stylesheet">
+        <link href="css/inline.css" rel="stylesheet">
+
 
     </head>
     <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -95,18 +79,23 @@
     <!-- Products ================================================== -->
 
     <div style="text-align: center" class="container">
+        <c:out value="${purchase.purchaseNumber}"></c:out>
         <c:forEach var="item" items="${purchase.purchasedItems.productArray}">
             <div id="hero-feature" class="floating-box">
                 <div style="height:100%">
-                        <img src="images/${item.imageUrl}" alt="Image not found" style="height:50%">                            
-                        <h3>${item.itemName}</h3>
-                        <p>Quantity: ${item.itemCount}</p>
-                        <p>Price:$ ${item.itemPrice}</p>
-                        <p>${item.itemDescription}</p>
-                        <p>Delivery Date: ${item.deliveryDate}</p>
+                    <img src="images/${item.imageUrl}" alt="Image not found" style="height:50%">                            
+                    <h3>${item.itemName}</h3>
+                    <p>Quantity: ${item.itemCount}</p>
+                    <p>Price:$ ${item.itemPrice}</p>
+                    <p>${item.itemDescription}</p>
+                    <p>Delivery Date: ${item.deliveryDate}</p>
+                    <form action="ReturnServlet" method="post" >
+                        <input type="hidden" name="itemNum" value="${item.itemNo}">
+                        <input type="hidden" name="poNum" value="${purchase.purchaseNumber}">
+                        <input type="submit" name="return" value="Return">
+                    </form>
                 </div>
             </div>
-
         </c:forEach>
     </div>
 

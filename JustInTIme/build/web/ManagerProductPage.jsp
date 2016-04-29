@@ -96,42 +96,76 @@
 
 <!-- Products ================================================== -->
 
-<table border="1" id="table" align = "center">
-    <div>
-        <input type="hidden" name="action" value="details" />
-        <input type="hidden" name="filter" value="manager" />
+<div align="center">
+    <h4>Products</h4>
+    <table border="1" id="table" align = "center">
+        <div>
+            <input type="hidden" name="action" value="details" />
+            <input type="hidden" name="filter" value="manager" />
 
-    </div
+        </div
 
 
-    <tr>
-        <th align = "center">Product Name</th>
-        <th align = "center">Product Number</th>
-        <th align = "center">Product Price</th>
-        <th align = "center">Product Availability</th>
-        <th align = "center">Product Size</th>
-        <th align = "center">Product Description</th>
-    </tr>
-
-    <c:forEach items="${productList.productArray}" var="product">
-        <c:url value="/ProductServlet" var = "productDetails">
-            <c:param name = "productNumber" value = "${product.itemNo}"/>
-            <c:param name = "action" value = "details"/>
-        </c:url>
         <tr>
-            <td align = "center"><a href="${productDetails}">${product.itemName}</td>
-            <td align = "center">#${product.itemNo}</td>
-            <td align = "center">$${product.itemPrice}</td>
-            <td align = "center">${product.itemCount}</td>
-            <td align = "center">${product.size}</td>
-            <td align = "center">${product.itemDescription}</td>
+            <th align = "center">Product Name</th>
+            <th align = "center">Product Number</th>
+            <th align = "center">Product Price</th>
+            <th align = "center">Product Availability</th>
+            <th align = "center">Product Size</th>
+            <th align = "center">Product Description</th>
         </tr>
 
-    </c:forEach>
+        <c:forEach items="${productList.productArray}" var="product">
+            <c:url value="/ProductServlet" var = "productDetails">
+                <c:param name = "productNumber" value = "${product.itemNo}"/>
+                <c:param name = "action" value = "details"/>
+            </c:url>
+            <tr>
+                <td align = "center"><a href="${productDetails}">${product.itemName}</td>
+                <td align = "center">#${product.itemNo}</td>
+                <td align = "center">$${product.itemPrice}</td>
+                <td align = "center">${product.itemCount}</td>
+                <td align = "center">${product.size}</td>
+                <td align = "center">${product.itemDescription}</td>
+            </tr>
 
-</table>
+        </c:forEach>
+
+    </table>
+</div>
+<div style="height:25px"></div>
+<div align="center">
+
+    <h4>Returns</h4>
+    <table border="1" id="table" align = "center">
+        <div>
+            <input type="hidden" name="action" value="details" />
+            <input type="hidden" name="filter" value="manager" />
+
+        </div
 
 
+        <tr>
+            <th align = "center">Purchase Order</th>
+            <th align = "center">Item Number</th>
+            <th align = "center">User Email</th>
+            <th align = "center">Reason for Return</th>
+        </tr>
 
+        <c:forEach items="${returns}" var="item">
+
+            <tr>
+                <td align = "center">${item[0]}</td>
+                <td align = "center">${item[1]}</td>
+                <td align = "center">${item[2]}</td>
+                <td align = "center">${item[4]}</td>
+            </tr>
+            
+        </c:forEach>
+
+    </table>
+
+
+</div>
 </body>
 </html>

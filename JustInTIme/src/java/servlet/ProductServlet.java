@@ -7,19 +7,9 @@ package servlet;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.MessagingException;
-import javax.mail.Part;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -71,9 +61,7 @@ public class ProductServlet extends HttpServlet {
 
                         //File image = new File(product.getImageUrl());
                         //byte[] imageBytes = Files.readAllBytes(image.toPath());
-
-                       // response.setContentLength(imageBytes.length);
-                       
+                        // response.setContentLength(imageBytes.length);
                         //response.getOutputStream().write(imageBytes);
                         //request.setAttribute("image", image.getName());
                         //System.out.println(image.getName());
@@ -105,30 +93,16 @@ public class ProductServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String email = (String) request.getSession().getAttribute("userEmail");
-        //String action = (String) request.getSession().getAttribute("userEmail");
-        
-        ArrayList<String> values = parseRequest(request, response);
-        //Part filePart = (Part) request.getPart("file");
 
-        /*//Grab parameters from previous page
-        String name = request.getParameter("ProductName");
-        String description = request.getParameter("ProductDescription");
-        String action = request.getParameter("submit");
-        String itemNum = request.getParameter("itemNum");
-        String price = request.getParameter("ProductPrice");
-        String size = request.getParameter("ProductSize");
-        String count = request.getParameter("ProductQuantity");
-        String imageUrl = (String) request.getSession().getAttribute("file");
-        request.setAttribute("imageUrl", imageUrl);*/
+        ArrayList<String> values = parseRequest(request, response);
+
         String action = values.get(values.size() - 1);
-        //System.out.println(email);
-        //System.out.println(imageUrl);
 
         //determines which type of database query execution to perform
         switch (action) {
             case "Add":
                 System.out.println(action);
-                Product product = new Product(values.get(0), Integer.valueOf(values.get(1)), Double.valueOf(values.get(2)), values.get(4),values.get(3));
+                Product product = new Product(values.get(0), Integer.valueOf(values.get(1)), Double.valueOf(values.get(2)), values.get(4), values.get(3));
 
                 product.setImageUrl(values.get(5));
 
@@ -144,7 +118,7 @@ public class ProductServlet extends HttpServlet {
                 System.out.println(action);
                 DBManager.initializeConnection();
                 DBManager.deleteEntry("item", values.get(0), "Item_No");
-               //DBManager.deleteEntry("itemaddedby", itemNum, "Item_No");
+                //DBManager.deleteEntry("itemaddedby", itemNum, "Item_No");
                 DBManager.closeConnection();
                 break;
             case "Modify":
@@ -156,27 +130,32 @@ public class ProductServlet extends HttpServlet {
                 DBManager.updateEntry("item", "Item_No", itemNo, "Item_Cost", values.remove(0));
                 DBManager.updateEntry("item", "Item_No", itemNo, "Item_Qty", values.remove(0));
                 DBManager.updateEntry("item", "Item_No", itemNo, "Item_Desc", values.remove(0));
-                
-                if(!values.isEmpty()){
+
+                if (!values.isEmpty()) {
                     DBManager.updateEntry("item", "Item_No", itemNo, "Image_Url", values.remove(0));
                 }
-                
+
                 DBManager.closeConnection();
+                break;
+            case "Return":
+                String itemNum = values.get(0);
+                String poNum = (String) request.getSession().getAttribute("returnPONum");
+                Product item = (Product) request.getSession().getAttribute("product");
+                ArrayList<String> array = new ArrayList<>();
+                array.add(poNum);
+                array.add(itemNum);
+                array.add(item.getDeliveryDate());
+                array.add(values.get(5));
+
+                DBManager.initializeConnection();
+                DBManager.insertEntry("returned_items", array);
+                DBManager.closeConnection();
+
                 break;
 
         }
         response.sendRedirect("ManagerServlet");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
     private ArrayList<String> parseRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -199,14 +178,13 @@ public class ProductServlet extends HttpServlet {
 
                 if (fi.isFormField()) {
                     values.add(fi.getString());
-                    System.out.println(fi.getString());
+                    System.out.println("Parse Request: " + fi.getString());
 
                 } else {
                     // Get the uploaded file parameters
                     ServletContext servlet = request.getServletContext();
                     File uploadDir = new File(servlet.getRealPath("/images/").toString());
                     File temp = File.createTempFile("img", ".jpg", uploadDir);
-                    System.out.println(request.getContextPath());
                     values.add(temp.getName());
                     fi.write(temp);
                 }

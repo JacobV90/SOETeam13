@@ -53,10 +53,6 @@
         <servlet-class>servlet.MyOrdersServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>servlet.UploadServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PurchaseOrderDetails</servlet-name>
         <servlet-class>servlet.PurchaseOrderDetails</servlet-class>
     </servlet>
@@ -67,6 +63,18 @@
     <servlet>
         <servlet-name>AdminActionServlet</servlet-name>
         <servlet-class>servlet.AdminActionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReturnServlet</servlet-name>
+        <servlet-class>servlet.ReturnServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ItemReturnServlet</servlet-name>
+        <servlet-class>servlet.ItemReturnServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAccountServlet</servlet-name>
+        <servlet-class>servlet.EditAccountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -121,10 +129,6 @@
         <url-pattern>/MyOrdersServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/UploadServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>PurchaseOrderDetails</servlet-name>
         <url-pattern>/PurchaseOrderDetails</url-pattern>
     </servlet-mapping>
@@ -135,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>AdminActionServlet</servlet-name>
         <url-pattern>/AdminActionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReturnServlet</servlet-name>
+        <url-pattern>/ReturnServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemReturnServlet</servlet-name>
+        <url-pattern>/ItemReturnServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAccountServlet</servlet-name>
+        <url-pattern>/EditAccountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,18 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<title>Product</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	    <!-- Bootstrap Core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <title>Product</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-	    <!-- Custom CSS -->
-	    <link href="css/heroic-features.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="css/heroic-features.css" rel="stylesheet">
 
-</head>
+    </head>
     <nav id="navbarnavbar-inversenavbar-fixed-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div id="container" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -61,43 +61,45 @@
 
 
 
-<!-- Profile ================================================== -->
-	<div align="center">
-		<p class="confirmold" id="confirmold"><label for="password">Enter the current password</p>
-		<input type="password" id="currentpassword" name="password" required=""> 
-		<p class="resetpwd" id="resetpwd"><label for="password">Enter new password</p>
-		<input type="password" id="newpassword" name="password" required="">
-		<p class="confirmpwd" id="confrimpwd"><label for="password">Confirm new password</p>
-		<input type="password" id="repassword" name="password" required="">
-		<p class="currentphone" id="currentphone"><label for="currentphone">Your current phone number:</p>
-		<p class="newphone" id="newphone"><label for="newphone">Enter your new phone number</p>
-		<input id="phone" name="phone" placeholder="phone number" required="required" type="text"> <br>
+    <!-- Profile ================================================== -->
+    <div align="center">
 
-                <fieldset>
-                 <label>Enter your Birthday</label><br>
-                  <label class="month"> 
-                  <select class="select-style" name="BirthMonth">
-                  <option value="">Month</option>
-                  <option  value="01">January</option>
-                  <option value="02">February</option>
-                  <option value="03" >March</option>
-                  <option value="04">April</option>
-                  <option value="05">May</option>
-                  <option value="06">June</option>
-                  <option value="07">July</option>
-                  <option value="08">August</option>
-                  <option value="09">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12" >December</option>
-                  </label>
-                 </select>    
-                <label>Day<input class="birthday" maxlength="2" name="BirthDay"  placeholder="Day" required=""></label>
-                <label>Year <input class="birthyear" maxlength="4" name="BirthYear" placeholder="Year" required=""></label>
-               </fieldset>
+        <form action="EditAccountServlet" method="post">
+            <p class="confirmold" id="confirmold"><label for="password">Enter the current password</p>
+            <input type="password" id="currentpassword" name="oldPW" required=""> 
+            <p class="resetpwd" id="resetpwd"><label for="password">Enter new password</p>
+            <input type="password" id="newpassword" name="newPW1" required="">
+            <p class="confirmpwd" id="confrimpwd"><label for="password">Confirm new password</p>
+            <input type="password" id="repassword" name="newPW2" required="">
+            <p class="currentphone" id="currentphone"><label for="currentphone">Your current phone number:</p>
+            <p class="newphone" id="newphone"><label for="newphone">Enter your new phone number</p>
+            <input id="phone" name="phone" placeholder="phone number" required="required" type="text"> <br>
 
-                    <p><input class="button" id="confirm" type="submit" name="submit" value="Confirm"> 
-                       <input class="button" id="Cancel" type="submit" name="submit" value="Cancel"></p>
-</div>
+            <fieldset>
+                <label>Enter your Birthday</label><br>
+                <label class="month"> 
+                    <select class="select-style" name="BirthMonth">
+                        <option value="">Month</option>
+                        <option  value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03" >March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12" >December</option>
+                    </select>    
+                    <label>Day<input class="birthday" maxlength="2" name="BirthDay"  placeholder="Day" required=""></label>
+                    <label>Year <input class="birthyear" maxlength="4" name="BirthYear" placeholder="Year" required=""></label>
+            </fieldset>
+
+            <p><input class="button" id="confirm" type="submit" name="submit" value="Confirm"> 
+                <input class="button" id="Cancel" type="submit" name="submit" value="Cancel"></p>
+        </form>
+    </div>
 </body>
 </html>

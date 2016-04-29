@@ -328,7 +328,8 @@ public class XMLManager {
 
                 int i = 0;
                 for (String value : item.getProduct()) {
-
+                    
+                    System.out.println("XML Manager add purchase order: "+value);
                     Element el = document.createElement("Value");
                     el.setTextContent(value);
                     product.appendChild(el);
@@ -382,24 +383,21 @@ public class XMLManager {
                     ProductContainer cart = new ProductContainer();
 
                     NodeList nl2 = el.getElementsByTagName("Product");
-                    System.out.println(nl2.getLength());
 
                     for (int i = 0; i < nl2.getLength(); ++i) {
 
                         Element el3 = (Element) nl2.item(i);
                         Product product = new Product();
                         NodeList nl3 = el3.getElementsByTagName("Value");
-                        System.out.println(nl3.getLength());
 
                         List<String> list = new ArrayList<>();
-                        for (int k = 0; k < nl3.getLength(); k++) {
-                            System.out.println(nl3.item(k).getTextContent());
+                        for (int k = 0; k < nl3.getLength(); ++k) {
+                            System.out.println("XML Manger, get purchase ordder: "+nl3.item(k).getTextContent());
                             list.add(nl3.item(k).getTextContent());
                         }
                         product.createProduct(list);
                         //product.setDeliveryDate(list.get(k));
                         cart.addProduct(product);
-
                     }
                     purchase.setPurchasedItems(cart);
 

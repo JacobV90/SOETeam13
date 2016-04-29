@@ -21,7 +21,6 @@ import source.XMLManager;
  */
 public class PurchaseOrderDetails extends HttpServlet {
 
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -34,45 +33,28 @@ public class PurchaseOrderDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Purchase Order Details Servlet:");
 
         String poNum = request.getParameter("details");
-        System.out.println(poNum);
+
+        System.out.println("Purchase Order Number: " + poNum);
+
         PurchaseOrder purchase = XMLManager.getPurchaseOrder(poNum);
 
         for (Product item : purchase.getPurchasedItems().getProductArray()) {
-            
-            System.out.println("Delivery Date: "+item.getDeliveryDate());
-            for(String value: item.getProduct()){
-            
-                System.out.println(value);
+
+            System.out.println("<<<<<------>>>>>:");
+
+            for (String value : item.getProduct()) {
+
+                System.out.println("Value from XML:" + value);
             }
         }
+
+        purchase.setPurchaseNumber(poNum);
         request.getSession().setAttribute("purchase", purchase);
         request.getRequestDispatcher("/PODetails.jsp").forward(request, response);
 
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
